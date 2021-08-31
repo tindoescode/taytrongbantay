@@ -24,8 +24,8 @@ Taytrongbantay sử dụng nextjs để có thể chạy frontend và backend tr
 ## 2.2. Chức năng cần hoàn thiện
 ### 2.2.1. Backend - Nextjs
 - [x] Đăng nhập - Đăng ký 
-- [x] Đăng bài - Sửa bài - Xoá bài
-- [x] Làng - COMING SOON
+- [ ] Đăng bài - Sửa bài - Xoá bài
+- [ ] Làng - COMING SOON
   - [ ] Danh sách các nhóm nhỏ trong làng
     - [ ] Hiển thị thông tin các nhóm nhỏ
   - [ ] Tham gia các nhóm nhỏ
