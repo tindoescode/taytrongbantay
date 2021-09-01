@@ -22,7 +22,11 @@ const handler = async (req, res) => {
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
         console.log(`[Login] ${user.username} đăng nhập thành công`);
         
-        return res.status(200).json({status: 'ok', token});
+        var result = {status: 'ok', token, user};
+
+        delete result.user.password;
+        
+        return res.status(200).json(result);
     }
 
     catch(error) {

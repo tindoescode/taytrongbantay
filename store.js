@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 let store
 
 const initialState = {
+  user: null,
   lastUpdate: 0,
   light: false,
   count: 0,
@@ -12,6 +13,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'ON_LOGIN': 
+      return {
+        ...state,
+        user: action.user
+      }
     case 'TICK':
       return {
         ...state,

@@ -36,6 +36,22 @@ var user = new Schema({
     type: String,
     enum: ['admin', 'user', 'mod'],
     default: 'user'
+  },
+  level: {
+    type: Number,
+    default: 1
+  },
+  lastLogin: {
+    type: Date,
+    default: Date.now
+  },
+  isOnline: {
+    type: Boolean,
+    default: false
+  },
+  status: {
+    type: String,
+    default: 'Vào tường mình rồi thì kết bạn đi chứ' 
   }
 },
   { collection: 'users' }

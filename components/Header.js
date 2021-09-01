@@ -3,9 +3,13 @@ import React, { useState, useRef, useEffect} from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import Router from 'next/router';
+import { useDispatch, useSelector } from 'react-redux'
 
 function Header() {
-    let [loginMenu, setLoginMenu] = useState(false)
+    let [loginMenu, setLoginMenu] = useState(false);
+    let user = useSelector((state) => state.user);
+
+    const dispatch = useDispatch()
 
     let toggleLoginMenu = () => {
         setLoginMenu(!loginMenu);
@@ -32,6 +36,11 @@ function Header() {
 
             toggleLoginMenu();
 
+            dispatch({
+                type: 'ON_LOGIN',
+                user: res.data.user
+            });
+
             toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
 
         }
@@ -48,7 +57,7 @@ function Header() {
 
     }, []);
 
-    return (
+    return (<>
         <div className="Header shadow-md md:justify-around relative">
             <div className="flex-grow md:flex-grow-0 ml-2">
                 <Link href="/">
@@ -151,6 +160,9 @@ function Header() {
                 `
             }</style>
         </div>
+
+        { user && <div className="flex justify-center p-2 bg-green-200"><p>Bạn đã đăng nhập với {user.username}</p></div>}
+        </>
     )
 }
 
