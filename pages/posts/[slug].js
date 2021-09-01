@@ -8,7 +8,7 @@ export default function SinglePost({ data }) {
   return (
     <div>
       <Head>
-        <title>Taytrongbantay - Posts</title>
+        <title>{title} - Taytrongbantay</title>
         <meta name="description" content="Taytrongbantay" />
       </Head>
 
