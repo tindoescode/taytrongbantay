@@ -6,7 +6,7 @@ module.exports = {
     baseUrl: 'https://taytrongbantay.vercel.app'
   },
   images: {
-    domains: ['i.imgur.com', 'www.taytrongbantay.com'],
+    domains: ['i.imgur.com', 'www.taytrongbantay.com', 'taytrongbantay.com'],
   },  
 
 }
