@@ -20,6 +20,7 @@ function Header() {
       let username = inputName.current.value;
       let password = inputPassword.current.value;
   
+      if(!(username && password)) throw 'Hãy nhập đầy đủ các trường'
       axios.post('/api/login', { username, password }).then((res) => {
         if(res.status === 200) {
             if(res.data.error) throw res.data.error;
