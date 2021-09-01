@@ -29,6 +29,13 @@ var post = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Post',
     default: null
+  },
+  slug: {
+    type: String,
+    required: function() {
+      return this.slug.length > 10;
+    },
+    unique: true
   }
   
 },

@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Taytrongbantay</title>
+        <title>Tay trong bàn tay - Trang chủ</title>
         <meta name="description" content="Taytrongbantay" />
       </Head>
       

@@ -1,10 +1,14 @@
+import axios from 'axios';
 import React, { useState, useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import convertToSlug from '../../utils/convertToSlug';
+import Router from 'next/router';
 
 export default function NewPost () {
   const editorRef = useRef();
   const titleRef = useRef();
   const [slug, setSlug] = useState('');
+  const [content, setContent] = useState('');
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { CKEditor, InlineEditor } = editorRef.current || {};
   
@@ -23,6 +27,27 @@ export default function NewPost () {
 
   const onSlugChange = (e) => {
     setSlug(e.target.value);
+  }
+
+  const onPostSubmit = (e) => {
+    e.preventDefault();
+    
+    let token = localStorage.getItem('token');
+    let title = titleRef.current.value;
+    let tags = 'none'; 
+
+    axios.post('/api/posts/new-post', { content, title, tags, slug }, { 
+        headers: { 'Authorization': `Bearer ${token}` }, 
+    }).then((res) => {
+      console.log(res.data);
+
+      if(res.data.title === title) {
+        toast('Bài viết đã lên sóng🤗');
+
+        Router.push(`/posts/${slug}`);
+      }
+    })
+    
   }
 
   return <>
@@ -167,11 +192,12 @@ export default function NewPost () {
         }}  
       onReady={editor => {
         // You can store the "editor" and use when it is needed.
-        console.log('Editor is ready to use!', editor)
+        // console.log('Editor is ready to use!', editor)
       }}
       onChange={(event, editor) => {
         const data = editor.getData()
-        console.log({ event, editor, data })
+
+        setContent(data);
       }}
     />
   ) : (
@@ -182,7 +208,7 @@ export default function NewPost () {
     <div className="flex justify-end">
         <button 
             className="p-4 bg-green-300 text-white mt-3 hover:bg-green-500 transition ease-in"
-            onClick={() => {}}
+            onClick={onPostSubmit}
             >
             Đăng bài
         </button>
