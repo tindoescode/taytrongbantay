@@ -20,7 +20,7 @@ export default function SinglePost({ data }) {
         <div className="ck-content container shadow-md p-2">
         <div className="md:grid grid-cols-4 gap-4">
           <div className="flex flex-col divide-y-2 divide-yellow-500">
-            <Image layout="responsive" width="50" height="50" alt={"Ảnh của " + author.username} src={author.avatar} className="rounded m-5 shadow-xl"></Image>
+            <Image unoptimized="true" layout="responsive" width="50" height="50" alt={"Ảnh của " + author.username} src={author.avatar} className="rounded m-5 shadow-xl"></Image>
             <h3 className="text-center text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
               {author.username}
             </h3>
