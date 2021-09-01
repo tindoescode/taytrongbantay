@@ -11,6 +11,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^3.0.2",
     "@hieubda/ckeditor5-build-with-htmlembed": "file:ckeditor5-build-with-htmlembed-master",
+    "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "jslint": "^0.12.1",
@@ -19,7 +20,10 @@
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-toastify": "^8.0.2"
+    "react-redux": "^7.2.4",
+    "react-toastify": "^8.0.2",
+    "redux": "^4.1.1",
+    "redux-devtools-extension": "^2.13.9"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.3",

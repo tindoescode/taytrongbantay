@@ -44,8 +44,8 @@ export default function Home() {
       </div>
       <div className="bg-green-300 rounded-md shadow-sm col-span-2">
         {
-          posts.map((post) => {
-            return <PostCard title={post.title} description={post.description} thumbnail={post.thumbnail} />
+          posts.map((post, index) => {
+            return <PostCard key={index} title={post.title} description={post.description} thumbnail={post.thumbnail} />
           })
         }
       </div>
