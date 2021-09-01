@@ -106,7 +106,7 @@ function Header() {
                 }
 
                 .Header--logo {
-                    background: url(http://localhost:3000/images/LOGO-TTBT2.png) no-repeat;
+                    background: url(/images/LOGO-TTBT2.png) no-repeat;
                     width: 40px;
                     height: 40px;
                     background-size: cover;
