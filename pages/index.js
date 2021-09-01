@@ -4,6 +4,20 @@ import Link from 'next/link'
 import PostCard from '../components/PostCard'
 
 export default function Home() {
+  const posts = [
+    {
+      title: "BẢN TIN KHỐI THIẾU NIÊN QUÝ II/2021",
+      description: "Đây là nơi cập nhật liên tục các hoạt động của Khối Thiếu Niên trong Quý II/2021, bao gồm các kì trại, chương trình huấn luyện, Thánh Kinh Hè Thiếu Niên và nhiều chương trình khác. Mời các anh chị cùng theo dõi!",
+      thumbnail: "https://taytrongbantay.com/images/47"
+    },
+    {
+      title: "THÁNH KINH HÈ THIẾU NIÊN 2021",
+      description: "Trước tình hình dịch bệnh diễn biến phức tạp, ảnh hưởng không nhỏ đến sinh hoạt của Hội thánh Chúa tại Việt Nam, Khối Thiếu niên - Ủy ban Thanh Thiếu Nhi TLH cậy ơn Chúa triển khai khóa học Thánh Kinh Hè 2021 cho các em thiếu niên như sau:",
+      thumbnail: "https://www.taytrongbantay.com/images/41"
+
+    }
+  ]
+
   return (
     <div>
       <Head>
@@ -28,9 +42,12 @@ export default function Home() {
       </div>
 
       </div>
-      <div className="bg-green-500 rounded-md shadow-sm col-span-2">
-        <PostCard />
-        <PostCard />
+      <div className="bg-green-300 rounded-md shadow-sm col-span-2">
+        {
+          posts.map((post) => {
+            return <PostCard title={post.title} description={post.description} thumbnail={post.thumbnail} />
+          })
+        }
       </div>
 
       </div>

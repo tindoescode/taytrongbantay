@@ -7,7 +7,10 @@ import jwt from 'jsonwebtoken';
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     try {
-      var { content, title, tags } = req.body;
+      var { content, title, tags, slug } = req.body;
+
+      if(!(content && title && tags && slug)) throw "Missing parametter."
+
       const token = req.headers['authorization'].slice(7); // remove Bearer
       const user = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -16,6 +19,7 @@ const handler = async (req, res) => {
         title,
         tags,
         author: user.id,
+        slug
       })
 
       console.log(`[POST] Post ${title} created.`, post);

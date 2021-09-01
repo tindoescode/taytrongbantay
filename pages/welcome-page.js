@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -9,7 +10,10 @@ export default function Home() {
       </Head>
 
       <main>
-       <p>Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘</p>
+       <p className="text-center">Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘
+       <Link href="/"><a><h2 className="font-bold">Về trang chủ</h2></a></Link>
+       
+       </p>
       </main>
     </div>
   )

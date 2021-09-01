@@ -27,6 +27,7 @@ function Header() {
             console.log('Login successfully!');
 
             localStorage.setItem('token', res.data.token);
+
             Router.push('/welcome-page');
 
             toggleLoginMenu();
@@ -37,12 +38,14 @@ function Header() {
       }).catch(error => {
         toast.error(error);
     })
-
     }
 
 
     useEffect(() => {
         console.log("page initial render");
+
+        
+
     }, []);
 
     return (

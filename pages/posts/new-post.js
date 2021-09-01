@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
+import convertToSlug from '../../utils/convertToSlug';
 
 export default function NewPost () {
-  const editorRef = useRef()
-  const [editorLoaded, setEditorLoaded] = useState(false)
-  const { CKEditor, InlineEditor } = editorRef.current || {}
-
+  const editorRef = useRef();
+  const titleRef = useRef();
+  const [slug, setSlug] = useState('');
+  const [editorLoaded, setEditorLoaded] = useState(false);
+  const { CKEditor, InlineEditor } = editorRef.current || {};
+  
   useEffect(() => {
     editorRef.current = {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
@@ -14,11 +17,27 @@ export default function NewPost () {
     setEditorLoaded(true)
   }, [])
 
+  const onTitleChange = (e) => {
+    setSlug(convertToSlug(e.target.value));
+  }
+
+  const onSlugChange = (e) => {
+    setSlug(e.target.value);
+  }
+
   return <>
   <div className="flex flex-col">
-    {/* <label for="title">Tiêu đề</label> */}
-    <input id="title" className="p-3 border border-green-400 block mb-2" type="text" placeholder="Tiêu đề"></input>
+    <label htmlFor="title" className="p-2 bg-green-400 text-white font-bold">Tiêu đề</label>
+    <input onChange={onTitleChange} id="title" ref={titleRef} className="w-full p-3 border border-green-400 block mb-2" type="text" placeholder="Tiêu đề"></input>
   </div>
+
+  <div className="flex flex-col">
+    <label htmlFor="slug" className="p-2 bg-green-400 text-white font-bold">Đường dẫn (slug)</label>
+    <input value={slug} id="slug" onChange={onSlugChange} className="p-3 border border-green-400 block mb-2" type="text" placeholder="Đường dẫn"></input>
+  </div>
+
+  <div className="flex flex-col">
+  <label className="p-2 bg-green-400 text-white font-bold">Nội dung</label>
 
   {
   editorLoaded ? (
@@ -159,6 +178,7 @@ export default function NewPost () {
     <div>Editor loading</div>  
   )
   }
+  </div>
     <div className="flex justify-end">
         <button 
             className="p-4 bg-green-300 text-white mt-3 hover:bg-green-500 transition ease-in"
