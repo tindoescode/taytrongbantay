@@ -13,6 +13,7 @@
     "@hieubda/ckeditor5-build-with-htmlembed": "file:ckeditor5-build-with-htmlembed-master",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "jslint": "^0.12.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.3",
     "next": "11.1.2",

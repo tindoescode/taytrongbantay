@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       
       <main className={styles.main}>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="md:grid grid-cols-3 gap-4">
       <div className="rounded-md shadow-sm">
 
       <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">
@@ -21,10 +21,10 @@ export default function Home() {
         <div className="p-2 hover:bg-gray-600 hover:text-white transition"><Link href=""><a>Sự kiện</a></Link></div>
       </div>
 
-      <div className="bg-gray-100 round-md shadow-md mt-3 hover:shadow-xl transition ease-in-out duration-300">
+      <div className="bg-gray-100 round-md shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
         <h2 className="text-xl p-2">Phím tắt</h2>
-        <div className="p-2 hover:bg-gray-600 hover:text-white transition"><Link href=""><a>Quản lý chuyên mục</a></Link></div>
-        <div className="p-2 hover:bg-gray-600 hover:text-white transition"><Link href="/posts/new-post"><a>Đăng bài nhanh</a></Link></div>
+        <Link href=""><a><div className="p-2 hover:bg-gray-600 hover:text-white transition">Quản lý chuyên mục</div></a></Link>
+        <Link href="/posts/new-post"><a><div className="p-2 hover:bg-gray-600 hover:text-white transition">Đăng bài nhanh</div></a></Link>
       </div>
 
       </div>

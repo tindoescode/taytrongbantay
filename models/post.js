@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 var post = new Schema({
-  author_id: {
-    type: String,
+  author: {
+    type: Schema.Types.ObjectId,
     required: true,
     ref: 'User'
   },
@@ -15,12 +15,21 @@ var post = new Schema({
   content: {
     type: String,
     required: true,
-    unique: true,
   },
-  tag: {
+  tags: {
     type: String,
     required: true
   },
+  time: {
+    type: Date,
+    default: Date().now
+  },
+
+  parent: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post',
+    default: null
+  }
   
 },
   { collection: 'posts' }

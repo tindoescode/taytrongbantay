@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Router from 'next/router';
 
-function Header() {    
+function Header() {
     let [loginMenu, setLoginMenu] = useState(false)
 
     let toggleLoginMenu = () => {
@@ -13,34 +13,33 @@ function Header() {
 
     let inputName = useRef(null);
     let inputPassword = useRef(null);
-  
+
     let loginBtnClicked = (e) => {
       e.preventDefault();
-  
       let username = inputName.current.value;
       let password = inputPassword.current.value;
-  
+
       if(!(username && password)) throw 'Hãy nhập đầy đủ các trường'
       axios.post('/api/login', { username, password }).then((res) => {
         if(res.status === 200) {
             if(res.data.error) throw res.data.error;
-        
+
             console.log('Login successfully!');
-    
+
             localStorage.setItem('token', res.data.token);
             Router.push('/welcome-page');
-    
+
             toggleLoginMenu();
-    
+
             toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
-            
+
         }
       }).catch(error => {
         toast.error(error);
     })
-  
+
     }
-  
+
 
     useEffect(() => {
         console.log("page initial render");
@@ -50,7 +49,7 @@ function Header() {
         <div className="Header shadow-md md:justify-around relative">
             <div className="flex-grow md:flex-grow-0 ml-2">
                 <Link href="/">
-                    <a><div className="Header--logo"></div></a>
+                    <a><div className="Header--logo" /></a>
                 </Link>
             </div>
 
@@ -65,19 +64,32 @@ function Header() {
                         && 
                         
                         <div 
-                            className={`rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'}`} 
+                            className={`login-form rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'}`} 
                             style={{top: '3.1rem'}}>
+                            
+                            <div className="flex items-center space-between justify-end">
+                            <label htmlFor="username" className="text-black mr-2">
+                                Tên đăng nhập
+                            </label>
                             <input ref={inputName} 
                                 name="username" 
-                                className="p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập" autoComplete="off"></input>
-                            <input 
-                                ref={inputPassword}
-                                name="password" 
-                                type="password"
-                                className="p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>
+                                className="rounded p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập" autoComplete="off"></input>
+                            </div>
+
+                            <div className="flex items-center space-between justify-end">
+                            <label htmlFor="username" className="text-black mr-2">
+                                Mật khẩu
+                            </label>
+                                                        <input 
+                                                            ref={inputPassword}
+                                                            name="password" 
+                                                            type="password"
+                                                            className="rounded p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>    
+                            </div>
+
                             <button 
                                 onClick={loginBtnClicked}
-                                className="p-2 bg-green-300 hover:bg-green-500 text-white transition">Đăng nhập</button>
+                                className="rounded p-2 bg-green-300 hover:bg-green-500 text-white transition">Đăng nhập</button>
 
                             <p className="text-black">Bạn chưa có tài khoản? <Link href="/register">
                                 <a className="font-bold hover:text-green-700 transition">Đăng ký ngay!</a>
@@ -124,6 +136,14 @@ function Header() {
 
                 .Navbar--item::first-child {
                     margin-right: 10px;
+                }
+
+                .login-form {
+                    top: -100%;
+                }
+
+                .login-form--active {
+                    top: 0;
                 }
                 `
             }</style>
