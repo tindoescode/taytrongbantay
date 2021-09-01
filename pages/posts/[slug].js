@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
     const { slug } = context.params;
 
     // Fetch data from external API
-    const res = await axios.get(`http://localhost:3000/api/posts/${slug}`);
+    const res = await axios.get(`/api/posts/${slug}`);
     const data = res.data
 
     console.log(data)
