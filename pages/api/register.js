@@ -7,7 +7,8 @@ import User from '../../models/user';
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     // Check if name, email or password is provided
-    const { username, name, email, password } = req.query;
+    const { username, name, email, password } = req.body;
+
     if (username && name && email && password) {
         try {
           // Hash password to store it in DB
@@ -27,7 +28,7 @@ const handler = async (req, res) => {
           // Handle error when field duplicate
 
           console.log(error.message);
-          return res.status(500).send(error);
+          return res.status(200).send(error);
         }
       } else {
         res.status(422).send({error: 'data_incomplete'});

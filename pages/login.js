@@ -2,6 +2,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import { useRef } from 'react';
 import Router from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   let inputName = useRef(null);
@@ -15,10 +16,15 @@ export default function Home() {
 
     axios.post('/api/login', { username, password }).then((res) => {
       if(res.status === 200) {
-        console.log('Login successfully!');
-
-        localStorage.setItem('token', res.data.token);
-        Router.push('/welcome-page');
+        try {  
+          console.log('Đăng nhập thành công!');
+  
+          localStorage.setItem('token', res.data.token);
+          Router.push('/welcome-page');
+        }
+        catch(err) {
+          toast.error(err.message);
+        }
       }
     })
 
