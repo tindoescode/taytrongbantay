@@ -22,16 +22,21 @@ function Header() {
   
       axios.post('/api/login', { username, password }).then((res) => {
         if(res.status === 200) {
-          console.log('Login successfully!');
-  
-          localStorage.setItem('token', res.data.token);
-          Router.push('/welcome-page');
-
-          toggleLoginMenu();
-
-          toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
+            if(res.data.error) throw res.data.error;
+        
+            console.log('Login successfully!');
+    
+            localStorage.setItem('token', res.data.token);
+            Router.push('/welcome-page');
+    
+            toggleLoginMenu();
+    
+            toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
+            
         }
-      })
+      }).catch(error => {
+        toast.error(error);
+    })
   
     }
   
@@ -59,7 +64,7 @@ function Header() {
                         && 
                         
                         <div 
-                            className={`flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'}`} 
+                            className={`rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'}`} 
                             style={{top: '3.1rem'}}>
                             <input ref={inputName} 
                                 name="username" 
@@ -67,6 +72,7 @@ function Header() {
                             <input 
                                 ref={inputPassword}
                                 name="password" 
+                                type="password"
                                 className="p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>
                             <button 
                                 onClick={loginBtnClicked}
@@ -92,6 +98,7 @@ function Header() {
                     display: flex;
                     align-items: center;
                     z-index: 100;
+                    selection: none;
                 }
 
                 .Header a {

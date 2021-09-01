@@ -7,6 +7,14 @@ var user = new Schema({
     required: true,
     unique: true,
   },
+  avatar: {
+    type: String, 
+    default: 'https://i.stack.imgur.com/l60Hf.png'
+  },
+  gender: {
+    type: String,
+    enum: ['male', 'female'],
+  },
   name: {
     type: String,
     required: true,
@@ -25,8 +33,9 @@ var user = new Schema({
     default: Date.now
   },
   admin: {
-    type: Number,
-    default: 0
+    type: String,
+    enum: ['admin', 'user', 'mod'],
+    default: 'user'
   }
 },
   { collection: 'users' }

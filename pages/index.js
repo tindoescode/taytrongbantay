@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       
       <main className={styles.main}>
-      <div class="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4">
       <div className="rounded-md shadow-sm">
 
       <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">

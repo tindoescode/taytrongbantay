@@ -8,25 +8,25 @@ const handler = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        if(!(username && password)) throw { error: 'Please fill in the username and password' }
+        if(!(username && password)) throw { error: 'Hãy nhập tên tài khoản và mật khẩu' }
 
         const user = await User.findOne({ username: username }).lean();
     
         if(!user) {
-            throw { message: 'User not found' }
+            throw { message: 'Nick name không tồn tại.' }
         }
 
-        if(!await bcrypt.compare(password, user.password)) throw { message: 'Password is incorrect' }
+        if(!await bcrypt.compare(password, user.password)) throw { message: 'Mật khẩu không chính xác' }
         
         // Login successfully
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
-        console.log(`[Login] ${user.username} logged in successfully`);
+        console.log(`[Login] ${user.username} đăng nhập thành công`);
         
         return res.status(200).json({status: 'ok', token});
     }
 
     catch(error) {
-        res.status(500).json({error: error.message})
+        res.status(200).json({error: error.message})
     }
 
   }

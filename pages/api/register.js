@@ -7,9 +7,9 @@ import User from '../../models/user';
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     // Check if name, email or password is provided
-    const { username, name, email, password } = req.body;
+    const { username, name, email, password, gender } = req.body;
 
-    if (username && name && email && password) {
+    if (username && name && email && password && gender) {
         try {
           // Hash password to store it in DB
           var passwordhash = await bcrypt.sign(password);
@@ -20,6 +20,8 @@ const handler = async (req, res) => {
             username,
             email,
             password: passwordhash,
+            gender,
+            avatar: gender == 'male' ? 'https://i.imgur.com/b51E0eg.jpg' : 'https://i.imgur.com/StTiSj8.jpg'
           });
 
           console.log(`[NEW USER] User ${name} created.`);

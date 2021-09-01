@@ -10,6 +10,7 @@ export default function Home() {
   let inputRePassword = useRef(null);
   let inputUsername = useRef(null);
   let inputEmail = useRef(null);
+  let inputGender = useRef(null);
 
 
   let loginBtnClicked = (e) => {
@@ -21,16 +22,16 @@ export default function Home() {
       let email = inputEmail.current.value;
       let password = inputPassword.current.value;
       let rePassword = inputRePassword.current.value;
+      let gender = inputGender.current.value;
   
-      if(!(username && name && email && password && rePassword)) throw "Xin hãy điền đủ các trường.";
+      if(!(username && name && email && password && rePassword && gender)) throw "Xin hãy điền đủ các trường.";
       if(password !== rePassword) throw "Mật khẩu được nhập lại không chính xác!";
 
-      axios.post('/api/register', { username, name, email, password }).then((res) => {
+      axios.post('/api/register', { username, name, email, password, gender }).then((res) => {
         if(res.status == 200) {
           if(res.data.code == 11000) {
             if(Object.keys(res.data.keyValue)[0] == 'email') throw 'Email đã được đăng ký';
             if(Object.keys(res.data.keyValue)[0] == 'username') throw 'Username đã được đăng ký';
-
           }
 
           toast.info('Đăng ký thành công, đang tự động đăng nhập...');
@@ -68,7 +69,10 @@ export default function Home() {
             <input className="p-2 ring-green-200 ring-1" autoComplete="off" name="email" placeholder="Email: " type="text" ref={inputEmail} />
             <input className="p-2 ring-green-200 ring-1" autoComplete="off" name="password" placeholder="Mật khẩu" type="password" ref={inputPassword} />
             <input className="p-2 ring-green-200 ring-1" autoComplete="off" name="password" placeholder="Nhập lại mật khẩu" type="password" ref={inputRePassword} />
-
+            <select ref={inputGender} className="p-2 ring-green-200 ring-1">
+              <option value="male">Nam</option>
+              <option value="female">Nữ</option>
+            </select>
             <div className="flex items-center">
             <input type="checkbox" className="mr-2" id="agree" />
             <label htmlFor="agree" className="">Tớ đồng ý với những điều khoản của Taytrongbantay!</label>
