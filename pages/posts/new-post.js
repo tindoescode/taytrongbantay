@@ -39,8 +39,6 @@ export default function NewPost () {
     axios.post('/api/posts/new-post', { content, title, tags, slug }, { 
         headers: { 'Authorization': `Bearer ${token}` }, 
     }).then((res) => {
-      console.log(res.data);
-
       if(res.data.title === title) {
         toast('Bài viết đã lên sóng🤗');
 
@@ -54,7 +52,7 @@ export default function NewPost () {
   }
 
   return <>
-  <div className="md:grid grid-cols-3 gap-4">
+  <div className="md:grid grid-cols-3 gap-4 mb-2">
   <div className="flex flex-col">
     <div className="flex flex-col">
       <label htmlFor="title" className="p-2 bg-green-400 text-white font-bold">Tiêu đề</label>

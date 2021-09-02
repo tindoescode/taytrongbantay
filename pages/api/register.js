@@ -24,7 +24,7 @@ const handler = async (req, res) => {
             avatar: gender == 'male' ? 'https://i.imgur.com/b51E0eg.jpg' : 'https://i.imgur.com/StTiSj8.jpg'
           });
 
-          console.log(`[NEW USER] User ${name} created.`);
+          console.log(`[NEW USER] User ${name} đã được tạo.`);
           return res.status(200).send(user);
         } catch (error) {
           // Handle error when field duplicate

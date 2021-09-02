@@ -24,7 +24,7 @@ const handler = async (req, res) => {
         
         setCookie(res, 'access_token', token);
 
-        console.log(`[Login] ${user.username} đăng nhập thành công`);
+        console.log(`[LOGIN] Người dùng ${user.username} đã đăng nhập`);
         
         var result = {status: 'ok', token, user};
 

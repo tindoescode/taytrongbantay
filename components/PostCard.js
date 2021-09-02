@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
+import Skeleton from 'react-loading-skeleton';
 
 const PostCard = ( { href = '#', title, description, category = "Tổng hợp", thumbnail = "https://taxreform.dof.gov.ph/wp-content/uploads/2019/07/no-thumbnail-medium.png" } ) => {
   return (
@@ -11,9 +12,9 @@ const PostCard = ( { href = '#', title, description, category = "Tổng hợp", 
           <img className="h-48 w-full object-cover md:w-48" src={thumbnail} alt="thumbnail text" />
         </div>
         <div className="p-8">
-          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{category}</div>
-          <Link href={href}><a className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{title}</a></Link>
-          <p className="mt-2 text-gray-500">{description}</p>
+          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{category || <Skeleton />}</div>
+          <Link href={href}><a className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{title || <Skeleton /> }</a></Link>
+          <p className="mt-2 text-gray-500">{description || <Skeleton />}</p>
         </div>
       </div>
     </div>

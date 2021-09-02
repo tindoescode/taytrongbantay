@@ -4,7 +4,6 @@ const connectDB = handler => async (req, res) => {
   if (mongoose.connections[0].readyState) {
     // Use current db connection
 
-    console.log('Use current db connection')
     return handler(req, res);
   }
   // Use new db connection
@@ -12,8 +11,7 @@ const connectDB = handler => async (req, res) => {
     useNewUrlParser: true
   });
 
-  console.log('Use new db connection')
-
+  console.log('[INFO] Kết nối với CSDL Mongodb thành công!')
   return handler(req, res);
 };
 

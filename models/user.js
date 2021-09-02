@@ -52,6 +52,10 @@ var user = new Schema({
   status: {
     type: String,
     default: 'Vào tường mình rồi thì kết bạn đi chứ' 
+  },
+  reputation: {
+    type: Number,
+    default: 0,
   }
 },
   { collection: 'users' }
