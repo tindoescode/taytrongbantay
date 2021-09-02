@@ -58,7 +58,7 @@ function Header() {
     }, []);
 
     return (<>
-        <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white">
+        <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
             <div className="flex-grow md:flex-grow-0 ml-2">
                 <Link href="/">
                     <a><div className="Header--logo" /></a>

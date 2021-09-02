@@ -12,7 +12,7 @@ export default function NewPosts() {
       axios.get('/api/posts/').then(res => {
         setPosts(res.data);
       }).catch(err => console.log(err));
-    }, 1500);
+    }, 300);
 
   }, [])
 

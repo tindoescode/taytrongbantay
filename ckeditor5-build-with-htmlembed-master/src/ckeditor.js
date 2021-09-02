@@ -43,6 +43,18 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
+
+// import Emoji from '@phudak/ckeditor5-emoji/src/emoji';
+// import EmojiPeople from "@phudak/ckeditor5-emoji/src/emoji-people";
+// import EmojiNature from "@phudak/ckeditor5-emoji/src/emoji-nature";
+// import EmojiFood from "@phudak/ckeditor5-emoji/src/emoji-food";
+// import EmojiActivity from "@phudak/ckeditor5-emoji/src/emoji-activity";
+// import EmojiObjects from "@phudak/ckeditor5-emoji/src/emoji-objects";
+// import EmojiPlaces from "@phudak/ckeditor5-emoji/src/emoji-places";
+// import EmojiSymbols from "@phudak/ckeditor5-emoji/src/emoji-symbols";
+// import EmojiFlags from "@phudak/ckeditor5-emoji/src/emoji-flags";
+
+
 export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
@@ -88,7 +100,17 @@ ClassicEditor.builtinPlugins = [
 	SpecialCharactersCurrency,
 	SpecialCharactersLatin,
 	SpecialCharactersMathematical,
-	SpecialCharactersText
+	SpecialCharactersText,
+
+	// Emoji,
+	// EmojiPeople,
+	// EmojiNature,
+	// EmojiPlaces,
+	// EmojiFood,
+	// EmojiActivity,
+	// EmojiObjects,
+	// EmojiSymbols,
+	// EmojiFlags,
 ];
 
 
@@ -107,6 +129,7 @@ ClassicEditor.defaultConfig = {
 			'superscript',
 			'blockquote',
 			'specialcharacters',
+			// 'emoji',
 			'|',
 			'fontfamily',
 			'fontsize',

@@ -23,7 +23,7 @@ export default function SinglePost({ data }) {
             <Image unoptimized="true" layout="responsive" width="50" height="50" alt={"Ảnh của " + author.username} src={author.avatar} className="rounded m-5 shadow-xl"></Image>
 
             <h3 className="flex items-center justify-center flex-col text-center text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
-              <img className="block -mb-4" width="30" src="/images/level/50.png"></img>
+              <img className="block -mb-4" width="30" src="/images/level/50.png" alt="level 50"></img>
               {author.username} 
             </h3>
 
