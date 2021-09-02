@@ -15,8 +15,6 @@ const handler = async (req, res) => {
 
   try {
     var post = await Post.findOne({slug}).populate('author', 'level isOnline status username avatar gender admin');
-
-    // console.log(post, author)
   }
   catch(e) {
     res.status(500).json({error: e.message});

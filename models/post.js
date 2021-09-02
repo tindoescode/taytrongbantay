@@ -40,6 +40,10 @@ var post = new Schema({
       return this.slug.length > 10;
     },
     unique: true
+  },
+  thumbnail: {
+    type: String,
+    default: '/images/no-thumbnail-medium.png'
   }
   
 },
