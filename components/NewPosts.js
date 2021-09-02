@@ -20,7 +20,7 @@ export default function NewPosts() {
         <Title>Bài mới</Title>
         <div className="p-2">
           {posts && posts.map((post, index) => {
-            return <PostCard key={index} href={'/posts/' + post.slug} title={post.title} description={post.description} />
+            return <PostCard thumbnail={post.thumbnail} key={index} href={'/posts/' + post.slug} title={post.title} description={post.description} />
           })}
           {!posts && 
           

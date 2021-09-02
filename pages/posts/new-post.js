@@ -188,6 +188,13 @@ export default function NewPost () {
                         'mergeTableCells'
                     ]
                 },
+                // fontFamily: {
+                //   options: [
+                //       'default',
+                //       'Ubuntu, Arial, sans-serif',
+                //       'Ubuntu Mono, Courier New, Courier, monospace'
+                //   ]
+                // },
                 htmlEmbed: {
                     showPreviews: true
                 },

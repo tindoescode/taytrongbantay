@@ -12,6 +12,8 @@ const handler = async (req, res) => {
 
   try {
     var posts = await Post.find({ $orderby: { time: -1 } }).limit(15).populate('author', 'level isOnline status username avatar gender admin');
+  
+    // console.log(posts)
   }
   catch(e) {
     res.status(500).json({error: e.message});

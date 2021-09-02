@@ -5,6 +5,8 @@ import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton';
 
 const PostCard = ( { href = '#', title, description, category = "Tổng hợp", thumbnail = "https://taxreform.dof.gov.ph/wp-content/uploads/2019/07/no-thumbnail-medium.png" } ) => {
+  console.log(thumbnail)
+
   return (
     <div className="max-w-md mx-auto my-5 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
       <div className="md:flex items-center">

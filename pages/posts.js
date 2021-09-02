@@ -30,7 +30,7 @@ export default function Home() {
         <div className="col-span-2 shadow-md ring-1 ring-green-200">
           <Title style="purple">Bài mới</Title>
           {posts.map((post, index) => {
-            return <PostCard key={index} href={process.env.baseUrl + '/posts/' + post.slug} title={post.title} description={post.description} />
+            return <PostCard thumbnail={post.thumbnail} key={index} href={process.env.baseUrl + '/posts/' + post.slug} title={post.title} description={post.description} />
           })}
         </div>
         </div>
