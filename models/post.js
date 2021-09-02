@@ -10,11 +10,15 @@ var post = new Schema({
   },
   title: {
     type: String,
-    required: true,
+    required: function() {
+      return this.slug.length > 20;
+    },    
   },
   content: {
     type: String,
-    required: true,
+    required: function() {
+      return this.slug.length > 50;
+    },
   },
   tags: {
     type: String,
@@ -22,7 +26,7 @@ var post = new Schema({
   },
   time: {
     type: Date,
-    default: Date().now
+    default: Date.now
   },
 
   parent: {

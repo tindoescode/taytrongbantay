@@ -2,6 +2,7 @@ import connectDB from '../../middleware/mongodb';
 import bcrypt from '../../middleware/bcrypt';
 import User from '../../models/user';
 import jwt from 'jsonwebtoken';
+import { setCookie } from '../../utils/cookies';
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
@@ -10,7 +11,7 @@ const handler = async (req, res) => {
 
         if(!(username && password)) throw { error: 'Hãy nhập tên tài khoản và mật khẩu' }
 
-        const user = await User.findOne({ username: username }).lean();
+        const user = await User.findOne({ username: username.toLowerCase() }).lean();
     
         if(!user) {
             throw { message: 'Nick name không tồn tại.' }
@@ -20,6 +21,9 @@ const handler = async (req, res) => {
         
         // Login successfully
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
+        
+        setCookie(res, 'access_token', token);
+
         console.log(`[Login] ${user.username} đăng nhập thành công`);
         
         var result = {status: 'ok', token, user};

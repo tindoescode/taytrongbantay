@@ -46,6 +46,9 @@ export default function NewPost () {
 
         Router.push(`/posts/${slug}`);
       }
+      else {
+        toast(`Lỗi: ${res.data.error}`)
+      }
     })
     
   }
@@ -193,6 +196,9 @@ export default function NewPost () {
       onReady={editor => {
         // You can store the "editor" and use when it is needed.
         // console.log('Editor is ready to use!', editor)
+        const data = editor.getData()
+
+        setContent(data);
       }}
       onChange={(event, editor) => {
         const data = editor.getData()

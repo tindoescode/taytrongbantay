@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link'
-import PostCard from '../components/PostCard'
+import NewPosts from '../components/NewPosts'
 
 export default function Home() {
   const posts = [
@@ -31,8 +31,6 @@ export default function Home() {
 
       <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">
         <h2 className="text-xl p-2">Chuyên mục</h2>
-        <div className="p-2 hover:bg-gray-600 hover:text-white transition"><Link href=""><a>Lời Chúa mỗi ngày</a></Link></div>
-        <div className="p-2 hover:bg-gray-600 hover:text-white transition"><Link href=""><a>Sự kiện</a></Link></div>
       </div>
 
       <div className="bg-gray-100 round-md shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
@@ -42,12 +40,8 @@ export default function Home() {
       </div>
 
       </div>
-      <div className="bg-green-300 rounded-md shadow-sm col-span-2">
-        {
-          posts.map((post, index) => {
-            return <PostCard key={index} title={post.title} description={post.description} thumbnail={post.thumbnail} />
-          })
-        }
+      <div className="rounded-md shadow-sm col-span-2">
+        <NewPosts />
       </div>
 
       </div>
