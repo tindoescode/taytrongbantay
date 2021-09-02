@@ -42,7 +42,7 @@ export default function NewPost () {
       if(res.data.title === title) {
         toast('Bài viết đã lên sóng🤗');
 
-        Router.push(`/posts/${slug}`);
+        Router.push(`/posts/${slug}`, { shallow: true } );
       }
       else {
         toast(`Lỗi: ${res.data.error}`)

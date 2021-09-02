@@ -15,7 +15,9 @@ const PostCard = ( { href = '#', title, description, category = "Tổng hợp", 
         </div>
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{category || <Skeleton />}</div>
-          <Link href={href}><a className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{title || <Skeleton /> }</a></Link>
+          <Link href={href} shallow={true}>
+            <a className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{title || <Skeleton /> }</a>
+          </Link>
           <p className="mt-2 text-gray-500">{description || <Skeleton />}</p>
         </div>
       </div>
