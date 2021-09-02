@@ -1,4 +1,4 @@
-- [1. Giới thiệu dự](#1-giới-thiệu-dự)
+- [1. Giới thiệu dự án](#1-giới-thiệu-dự)
   - [1.1. Công nghệ](#11-công-nghệ)
     - [1.1.1. Backend](#111-backend)
     - [1.1.2. Frontend](#112-frontend)
@@ -7,7 +7,7 @@
   - [2.2. Chức năng cần hoàn thiện](#22-chức-năng-cần-hoàn-thiện)
     - [2.2.1. Backend - Nextjs](#221-backend---nextjs)
 
-# 1. Giới thiệu dự 
+# 1. Giới thiệu dự án
 Website live: https://taytrongbantay.vercel.app
 ## 1.1. Công nghệ
 Taytrongbantay sử dụng nextjs để có thể chạy frontend và backend trên cùng một máy, hỗ trợ trang tĩnh, server rendering cho các bài blog nhằm cải thiện SEO.
