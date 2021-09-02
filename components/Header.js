@@ -76,7 +76,7 @@ function Header() {
                         && 
                         
                         <div 
-                            className={`login-form rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'}`} 
+                            className={`login-form rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'} right-0`} 
                             style={{top: '3.1rem'}}>
                             
                             <div className="flex items-center space-between justify-end">
