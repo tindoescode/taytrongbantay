@@ -10,12 +10,18 @@ const Layout = ({ children }) => {
         <>
         <Head>
             <title>My App</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+            <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap" rel="stylesheet" />
+
         </Head>
         
         <Header />
-        <div className="container max-w-6xl p-2 mx-auto mt-10 bg-white rounded-md bg-opacity-20">
+        
+        <div className="container max-w-6xl p-2 mx-auto mt-12 bg-white rounded-md bg-opacity-20">
             {children}
         </div>
+
         <Footer />
         <ToastContainer />
         </>

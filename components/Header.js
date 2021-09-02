@@ -58,7 +58,7 @@ function Header() {
     }, []);
 
     return (<>
-        <div className="Header shadow-md md:justify-around relative">
+        <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white">
             <div className="flex-grow md:flex-grow-0 ml-2">
                 <Link href="/">
                     <a><div className="Header--logo" /></a>
@@ -66,7 +66,7 @@ function Header() {
             </div>
 
             <div className="Navbar mr-2">
-                <div className="Navbar--item hover:bg-green-300 hover:text-white transition">
+                <div className="Navbar--item hover:bg-green-300 hover:text-white transition relative">
                     <svg onClick={() => toggleLoginMenu()} xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person" viewBox="-2 -5 20 20" preserveAspectRatio="xMidYMid slice">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
                     </svg>
@@ -83,7 +83,8 @@ function Header() {
                             <label htmlFor="username" className="text-black mr-2">
                                 Tên đăng nhập
                             </label>
-                            <input ref={inputName} 
+                            <input 
+                                ref={inputName} 
                                 name="username" 
                                 className="rounded p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập" autoComplete="off"></input>
                             </div>
@@ -118,14 +119,7 @@ function Header() {
             </div>
 
             <style jsx>{
-                `.Header {
-                    box-sizing: border-box;
-                    display: flex;
-                    align-items: center;
-                    z-index: 100;
-                    selection: none;
-                }
-
+                `
                 .Header a {
                     display: block;
                 }

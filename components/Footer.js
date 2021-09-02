@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 function Footer() {
     return (
-        <div className="Footer mx-20 mb-5 fixed bottom-0 italic font-light">
-            Phiên bản thử nghiệm không chính thức Taytrongbantay
+        <div className="w-screen bg-green-100 p-1 fixed bottom-0 italic font-light">
+            Taytrongbantay, bản thử nghiệm không chính thức 
         </div>
     )
 }

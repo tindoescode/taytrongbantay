@@ -8,7 +8,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Tay trong bàn tay - Trang chủ</title>
-        <meta name="description" content="Taytrongbantay" />
+        <meta name="description" content="Taytrongbantay" />        
       </Head>
       
       <main className={styles.main}>

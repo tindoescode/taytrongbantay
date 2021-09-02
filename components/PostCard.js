@@ -8,8 +8,8 @@ const PostCard = ( { href = '#', title, description, category = "Tổng hợp", 
   console.log(thumbnail)
 
   return (
-    <div className="max-w-md mx-auto my-5 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-      <div className="md:flex items-center">
+    <div className="max-w-md mx-auto my-2 bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div className="md:flex items-center p-2">
         <div className="md:flex-shrink-0 flex items-center m-2 rounded ring-1 ring-green-200">
           <img className="h-48 w-full object-cover md:w-48" src={thumbnail} alt="thumbnail text" />
         </div>
