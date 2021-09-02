@@ -16,7 +16,7 @@ export default function NewPosts() {
 
   }, [])
 
-  return (<div className="col-span-2 shadow-md ring-1 ring-green-200 bg-gray-300" style={{minHeight: '200px'}}>
+  return (<div className="col-span-2 shadow-md ring-1 ring-green-200 bg-gray-100" style={{minHeight: '200px'}}>
         <Title>Bài mới</Title>
         <div className="p-2">
           {posts && posts.map((post, index) => {
