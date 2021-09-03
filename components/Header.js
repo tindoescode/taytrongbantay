@@ -72,9 +72,9 @@ function Header() {
 
   
   const checkLoginState = async (authResponse) => {
-    let access_token = authResponse.access_token;
+    let { accessToken } = authResponse
 
-    var response = await axios.post('/api/auth/facebook', { token: authResponse.access_token });
+    var response = await axios.post('/api/auth/facebook', { token: accessToken });
     
     console.log('fbID', response.user.facebookId);
     if(authResponse.userId === response.user.facebookId) {
