@@ -144,7 +144,9 @@ function Header() {
                 
                 <button 
                   className="rounded shadow facebook p-2 text-white" 
-                  onClick={FB.login((response) => {
+                  onClick={FB.login((res) => {
+                    console.log(res)
+
                     axios.post('/api/auth/facebook', { token: res.authResponse.access_token })
       
                     .then((response) => {
