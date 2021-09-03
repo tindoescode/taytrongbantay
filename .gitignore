@@ -33,3 +33,5 @@ next.config.js
 
 # vercel
 .vercel
+
+.vercel

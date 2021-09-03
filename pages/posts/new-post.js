@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import convertToSlug from '../../utils/convertToSlug';
 import Router from 'next/router';
 import UploadInput from '../../components/UploadInput';
+import { Widget } from "@uploadcare/react-widget";
 
 export default function NewPost() {
   const editorRef = useRef();
@@ -31,36 +32,10 @@ export default function NewPost() {
   }
   // Thumbnail upload handler
   const uploadToClient = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const i = e.target.files[0];
-
-      setThumbnail(i);
-      setCreateObjectURL(URL.createObjectURL(i));
-    }
+    console.log(e)
+    setThumbnail(e.originalUrl);
+    setCreateObjectURL(URL.createObjectURL(e.originalUrl));
   }
-
-  const uploadToServer = async (event) => {
-    toast('Upload mất khoảng 30s, xin vui lòng chờ😁😁')
-    
-    const data = new FormData();
-
-    data.append("file", thumbnail);
-    
-    const response = await axios.post("/api/posts/upload-thumbnail", data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      }
-    });
-
-    if(response.data.hasOwnProperty('data') && response.data.data.link.length > 0) {
-      setThumbnail(response.data.data.link)
-
-      toast('Upload thumbnail thành công, do là dùng api imgur.com nên bạn thao tác chậm thôi nhé!😊😊')
-    }
-    else {
-      toast(<p>Upload ảnh thumbnail thất bại<br/>(Lý do: {response.data.error}) 😥😣</p>)
-    }
-  };
 
   const onSlugChange = (e) => {
     setSlug(e.target.value);
@@ -105,8 +80,8 @@ export default function NewPost() {
           <label htmlFor="slug" className="p-2 bg-green-400 text-white font-bold">Thumbnail</label>
           <div className="shadow w-full p-3 border border-green-400 mb-2 flex flex-col items-center">
             <img src={createObjectURL} className="max-w-full rounded-xl p-2" />
-            <UploadInput onChange={uploadToClient} />
-            <input type="submit" className="mt-2 p-2 bg-pink-300 hover:bg-pink-400 text-white" onClick={uploadToServer} value="Upload file" />
+            {/* <UploadInput onChange={uploadToClient} /> */}
+            <Widget publicKey="533d4b8f6a11de77ba81" onChange={uploadToClient} clearable />
           </div>
         </div>
 
