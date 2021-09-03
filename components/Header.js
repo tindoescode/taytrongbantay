@@ -79,7 +79,7 @@ function Header() {
     console.log(response)
     console.log('fbID', response.data.user.facebookId);
     if(authResponse.userId == response.data.user.facebookId) {
-      let user = response.user;
+      let user = response.data.user;
       dispatch({
         type: 'ON_LOGIN',
         user
