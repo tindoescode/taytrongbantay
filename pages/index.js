@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import Link from 'next/link'
 import NewPosts from '../components/NewPosts'
 
@@ -11,7 +10,7 @@ export default function Home() {
         <meta name="description" content="Taytrongbantay" />        
       </Head>
       
-      <main className={styles.main}>
+      <main>
       <div className="md:grid grid-cols-3 gap-4">
       <div className="rounded-md shadow-sm">
 

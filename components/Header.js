@@ -49,34 +49,31 @@ function Header() {
   }
 
   useEffect(() => {
-    if (!user) {
-      // TODO: Check the cookie
-      axios.get('/api/user/getdata').then(res => {
-        if (!res.data.hasOwnProperty('user')) throw "Chưa đăng nhập"
+    // TODO: Check the cookie
+    axios.get('/api/user/getdata').then(res => {
+      if (!res.data.hasOwnProperty('user')) throw "Chưa đăng nhập"
 
-        let user = res.data.user;
-        dispatch({
-          type: 'ON_LOGIN',
-          user
-        });
+      let user = res.data.user;
+      dispatch({
+        type: 'ON_LOGIN',
+        user
+      });
 
-        toast(`Chúc ${user.name} có một ngày vui vẻ!`)
-      }).then(() => {
-        console.log("user loaded");
-      }).catch(error => {
-        console.log(error);
-      })
-    }
+      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+    }).then(() => {
+      console.log("user loaded");
+    }).catch(error => {
+      console.log(error);
+    })
 
     console.log("page initial render");
-
   }, []);
 
   return (<>
     <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
       <div className="flex-grow md:flex-grow-0 ml-2">
         <Link href="/">
-          <a><div className="Header--logo" /></a>
+          <a href="/"><div className="Header--logo" /></a>
         </Link>
       </div>
 
@@ -93,7 +90,7 @@ function Header() {
 
             {
               loginMenu && !user &&
-              <>
+              <form>
                 <div className="flex items-center space-between justify-end">
                   <label htmlFor="username" className="text-black mr-2">
                     Tên đăng nhập
@@ -123,7 +120,7 @@ function Header() {
                   <a className="font-bold hover:text-green-700 transition">Đăng ký ngay!</a>
                 </Link>
                 </p>
-              </>
+              </form>
             }
 
             {
