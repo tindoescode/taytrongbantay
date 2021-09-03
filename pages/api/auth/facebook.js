@@ -31,13 +31,13 @@ const handler = async (req, res) => {
     // Login
     if(existUser) {
       // Chuyển sang đăng nhập
-      const access_token = jwt.sign({ id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
+      const ttbt_token = jwt.sign({ id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
 
-      setCookie(res, 'access_token', access_token);
+      setCookie(res, 'ttbt_token', ttbt_token);
 
       console.log(`[LOGIN] Người dùng ${existUser.username} đã đăng nhập`);
       
-      var result = {status: 'ok', access_token, user: existUser};
+      var result = {status: 'ok', ttbt_token, user: existUser};
 
       delete result.user.password;
       
@@ -62,13 +62,13 @@ const handler = async (req, res) => {
             avatar: gender == 'male' ? 'https://i.imgur.com/b51E0eg.jpg' : 'https://i.imgur.com/StTiSj8.jpg'
           });
 
-          const access_token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
+          const ttbt_token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
 
-          setCookie(res, 'access_token', access_token);
+          setCookie(res, 'ttbt_token', ttbt_token);
 
           console.log(`[NEW USER] User ${name} đã được tạo (with facebook).`);
           
-          let rs = {status: 'ok', access_token, user};
+          let rs = {status: 'ok', ttbt_token, user};
 
           delete rs.user.password;
           

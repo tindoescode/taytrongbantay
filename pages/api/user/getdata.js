@@ -7,7 +7,7 @@ import User from '../../../models/UserModel';
 const handler = async (req, res) => {
   if (req.method === 'GET') {
     try {
-      var token = readCookie(req.headers.cookie, 'access_token');
+      var token = readCookie(req.headers.cookie, 'ttbt_token');
 
       if(!token) throw "Vui lòng đăng nhập trước.";
 

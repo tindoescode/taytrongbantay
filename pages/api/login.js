@@ -24,7 +24,7 @@ const handler = async (req, res) => {
         // Login successfully
         const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
         
-        setCookie(res, 'access_token', token);
+        setCookie(res, 'ttbt_token', token);
 
         console.log(`[LOGIN] Người dùng ${user.username} đã đăng nhập`);
         

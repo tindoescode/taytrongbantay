@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import readCookie from '../utils/readCookie'
   
 const requireAuth = handler => (req, res) => {
-    var token = readCookie(req.headers.cookie, 'access_token');
+    var token = readCookie(req.headers.cookie, 'ttbt_token');
 
     if(!token) res.status(403).json({error: 'Not authorized'});
     let user = jwt.verify(token, process.env.JWT_SECRET);
