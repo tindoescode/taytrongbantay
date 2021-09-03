@@ -146,24 +146,30 @@ function Header() {
                   className="rounded shadow facebook p-2 text-white" 
                   onClick={() => FB.login((res) => {
                     console.log(res)
+                    
+                    FB.getLoginStatus(function(res) {
+                        // statusChangeCallback(response);
+                        axios.post('/api/auth/facebook', { token: access_tres.authResponse.access_token }) //res.authResponse.access_token      
+                        .then((response) => {
+                          // console.log('fbID', response.user.facebookId);
 
-                    axios.post('/api/auth/facebook', { token: 'abc' }) //res.authResponse.access_token
-      
-                    .then((response) => {
-                      console.log('fbID', response.user.facebookId);
-                      if(res.authResponse.userId === response.user.facebookId) {
-                        let user = response.user;
-                        dispatch({
-                          type: 'ON_LOGIN',
-                          user
-                        });
-                  
-                        toast(`Chúc ${user.name} có một ngày vui vẻ!`)
-                      }
-                      else {
-                        toast.error(`Đăng nhập thất bại!`)
-                      }
-                    })
+                          if(res.authResponse.userId === response.user.facebookId) {
+                            let user = response.user;
+                            dispatch({
+                              type: 'ON_LOGIN',
+                              user
+                            });
+                      
+                            toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+                          }
+                          else {
+                            toast.error(`Đăng nhập thất bại!`)
+                          }
+                        })
+
+                      });
+                    
+
                   }, { scope: 'email,gender' })}>
                   Log In With Facebook
                 </b>
