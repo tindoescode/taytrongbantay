@@ -13,6 +13,8 @@ const handler = async (req, res) => {
 
         const user = await User.findOne({ username: username.toLowerCase() }).lean();
     
+        if(user.password == '0') throw { error: 'Tài khoản này chỉ có thể đăng nhập bằng facebook' }
+
         if(!user) {
             throw { message: 'Nick name không tồn tại.' }
         }

@@ -59,6 +59,10 @@ var user = new Schema({
   reputation: {
     type: Number,
     default: 0,
+  },
+  facebookId: {
+    type: Number,
+    default: 0
   }
 },
   { collection: 'users' }

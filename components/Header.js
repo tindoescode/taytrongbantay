@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 function Header() {
   let [loginMenu, setLoginMenu] = useState(false);
@@ -69,6 +70,34 @@ function Header() {
     console.log("page initial render");
   }, []);
 
+  
+  const checkLoginState = async (res) => {
+    console.log('checkLoginState', res);
+
+    const response = await axios.post('/api/auth/facebook', { token: res.authResponse.access_token })
+
+    if(res.authResponse.userId === response.user.facebookId) {
+      let user = response.user;
+      dispatch({
+        type: 'ON_LOGIN',
+        user
+      });
+
+      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+    }
+    else {
+      toast.error(`Đăng nhập thất bại!`)
+      
+    }
+
+  }
+
+  const facebookLoginButtonCLick = (e) => {
+    e.preventDefault();
+
+    FB.login(checkLoginState, { scope: 'email,gender' })
+  }
+
   return (<>
     <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
       <div className="flex-grow md:flex-grow-0 ml-2">
@@ -120,6 +149,11 @@ function Header() {
                   <a className="font-bold hover:text-green-700 transition">Đăng ký ngay!</a>
                 </Link>
                 </p>
+                
+                <button className="rounded shadow facebook p-2 text-white" onClick={facebookLoginButtonCLick}>
+                  Log In With Facebook
+                </button>
+                  
               </form>
             }
 
@@ -157,6 +191,12 @@ function Header() {
 
       <style jsx>{
         `
+                .facebook {
+                  background: #548AE1;
+                }
+                .facebook:hover {
+                  background: #0E52B0;
+                }
                 .Header a {
                     display: block;
                 }
