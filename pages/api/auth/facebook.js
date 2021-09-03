@@ -39,7 +39,7 @@ const handler = async (req, res) => {
       
       var result = {status: 'ok', access_token, user: existUser};
 
-      delete result.existUser.password;
+      delete result.user.password;
       
       res.status(200).json(result);
 
