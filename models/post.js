@@ -44,6 +44,10 @@ var post = new Schema({
   thumbnail: {
     type: String,
     default: '/images/no-thumbnail-medium.png'
+  },
+  description: {
+    type: String,
+    default: '',
   }
   
 },

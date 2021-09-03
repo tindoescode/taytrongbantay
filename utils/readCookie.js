@@ -1,4 +1,6 @@
 function readCookie(cookies, n) {
+    if(!cookies) return
+
     var c = cookies.split('; '),
         i = c.length - 1,
         C;
