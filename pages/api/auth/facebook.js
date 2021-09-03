@@ -68,11 +68,11 @@ const handler = async (req, res) => {
 
           console.log(`[NEW USER] User ${name} đã được tạo (with facebook).`);
           
-          var result = {status: 'ok', access_token, user};
+          let rs = {status: 'ok', access_token, user};
 
-          delete result.user.password;
+          delete rs.user.password;
           
-          return res.status(200).json(result);
+          return res.status(200).json(rs);
 
         } catch (error) {
           // Handle error when field duplicate
