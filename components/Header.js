@@ -99,11 +99,11 @@ function Header() {
   const facebookLoginButtonCLick = async (e) => {
     e.preventDefault();
 
-    const test = await new Promise(FB.login(() => {}, { scope: 'email,gender' }))
+    const { authResponse } = await new Promise(FB.login({ scope: 'email,gender' }))
 
-    console.log(test)
+    console.log(authResponse)
     
-    console.log(await checkLoginState())
+    console.log(await checkLoginState(authResponse))
   }
 
   return (<>
