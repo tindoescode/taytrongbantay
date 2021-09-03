@@ -23,9 +23,7 @@ export default function NewPosts() {
             return <PostCard thumbnail={post.thumbnail} key={index} href={'/posts/' + post.slug} title={post.title} description={post.description} />
           })}
           {!posts && 
-          
             <Skeleton count={3} height={150} />
-          
           }
         </div>
 

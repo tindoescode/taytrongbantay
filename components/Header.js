@@ -8,15 +8,14 @@ import { useDispatch, useSelector } from 'react-redux'
 function Header() {
     let [loginMenu, setLoginMenu] = useState(false);
     let user = useSelector((state) => state.user);
+    let inputName = useRef(null);
+    let inputPassword = useRef(null);
 
     const dispatch = useDispatch()
 
     let toggleLoginMenu = () => {
         setLoginMenu(!loginMenu);
     }
-
-    let inputName = useRef(null);
-    let inputPassword = useRef(null);
 
     let loginBtnClicked = (e) => {
       e.preventDefault();
@@ -49,11 +48,27 @@ function Header() {
     })
     }
 
-
     useEffect(() => {
-        console.log("page initial render");
+        if(!user) {
+            // TODO: Check the cookie
+            axios.get('/api/user/getdata').then(res => {
+                if(!res.data.hasOwnProperty('user')) throw "Chưa đăng nhập"
 
+                let user = res.data.user;
+                dispatch({
+                    type: 'ON_LOGIN',
+                    user
+                });
+
+                toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+            }).then(() => {
+                console.log("user loaded");
+            }).catch(error => {
+                console.log(error);
+            })
+        }
         
+        console.log("page initial render");
 
     }, []);
 
@@ -66,19 +81,19 @@ function Header() {
             </div>
 
             <div className="Navbar mr-2">
-                <div className="Navbar--item hover:bg-green-300 hover:text-white transition relative">
-                    <svg onClick={() => toggleLoginMenu()} xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person" viewBox="-2 -5 20 20" preserveAspectRatio="xMidYMid slice">
+                <div className="Navbar--item hover:bg-green-300 hover:text-white transition md:relative">
+                    <a onClick={() => toggleLoginMenu()}><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-person" viewBox="-2 -5 20 20" preserveAspectRatio="xMidYMid slice">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                    { 
-                        loginMenu 
-                        
-                        && 
-                        
-                        <div 
-                            className={`login-form rounded-md flex absolute flex-col border bg-gray-200 p-2 shadow-sm select-none box-border transition-all ${loginMenu === false ? 'h-0' : 'h-auto'} right-0`} 
-                            style={{top: '3.1rem'}}>
-                            
+                    </svg></a>
+                    <div 
+                        className={`xs:mx-2 md:mx-0 login-form rounded-md flex absolute ` + 
+                        `flex-col border bg-gray-200 shadow-sm select-none` + 
+                        `box-border transition-all h-0 ${loginMenu === false ? '' : 'h-auto p-2'} right-0`} 
+                        style={{top: '3.1rem'}}>
+
+                        {
+                            loginMenu && !user && 
+                            <>
                             <div className="flex items-center space-between justify-end">
                             <label htmlFor="username" className="text-black mr-2">
                                 Tên đăng nhập
@@ -93,11 +108,11 @@ function Header() {
                             <label htmlFor="username" className="text-black mr-2">
                                 Mật khẩu
                             </label>
-                                                        <input 
-                                                            ref={inputPassword}
-                                                            name="password" 
-                                                            type="password"
-                                                            className="rounded p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>    
+                            <input 
+                                ref={inputPassword}
+                                name="password" 
+                                type="password"
+                                className="rounded p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>    
                             </div>
 
                             <button 
@@ -108,8 +123,33 @@ function Header() {
                                 <a className="font-bold hover:text-green-700 transition">Đăng ký ngay!</a>
                             </Link>
                             </p>
-                        </div>
-                    }
+                            </>
+                        }
+
+                        {
+                           loginMenu && user && <div className="flex items-center">
+                               <img src={user.avatar} alt={user.name} width={30} className="mr-2"></img>
+                               <div className="text-black w-80 justify-self-end">
+                                   <h2>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="inline h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M9.243 3.03a1 1 0 01.727 1.213L9.53 6h2.94l.56-2.243a1 1 0 111.94.486L14.53 6H17a1 1 0 110 2h-2.97l-1 4H15a1 1 0 110 2h-2.47l-.56 2.242a1 1 0 11-1.94-.485L10.47 14H7.53l-.56 2.242a1 1 0 11-1.94-.485L5.47 14H3a1 1 0 110-2h2.97l1-4H5a1 1 0 110-2h2.47l.56-2.243a1 1 0 011.213-.727zM9.03 8l-1 4h2.938l1-4H9.031z" clipRule="evenodd" />
+                                        </svg>
+                                       {user.username} / {user.name}
+                                    </h2>
+                                   <h2>
+                                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                                        </svg>
+                                        {user.admin} { user.admin == 'admin' ? <>
+                                        | <Link href="#"><a>Quản trị</a></Link>
+                                        </> : ''}
+                                   </h2>
+                                    <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link>                                   
+                               </div>
+                               
+                           </div>
+                        }
+                    </div>
                 </div>
                 <div className="Navbar--item hover:bg-green-300 hover:text-white transition">
                     <svg xmlns="http://www.w3.org/2000/svg" onClick={() => toast('Chức năng sắp ra mắt!')} fill="currentColor" className="bi bi-suit-heart stroke-1" viewBox="-2 -5 20 20" preserveAspectRatio="xMidYMid slice">

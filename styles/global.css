@@ -1,13 +1,17 @@
+a:hover {
+    font-weight: bold;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
 /*
  * CKEditor 5 (v29.2.0) content styles.
  * Generated on Wed, 01 Sep 2021 10:18:00 GMT.
  * For more information, check out https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/content-styles.html
  */
 
- body {
-    font-family: 'Inter', sans-serif;
- }
- 
  :root {
     --ck-color-image-caption-background: hsl(0, 0%, 97%);
     --ck-color-image-caption-text: hsl(0, 0%, 20%);
@@ -188,6 +192,7 @@
     margin: 0 auto;
     max-width: 100%;
     min-width: 100%;
+    padding: 2;
 }
 /* ckeditor5-image/theme/image.css */
 .ck-content .image-inline {

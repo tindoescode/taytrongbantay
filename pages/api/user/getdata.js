@@ -1,19 +1,33 @@
 import connectDB from '../../../middleware/mongodb';
 import jwt from 'jsonwebtoken';
+import readCookie from '../../../utils/readCookie';
+import User from '../../../models/UserModel';
+
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
     try {
-      const token = req.headers['authorization'].slice(7); // remove Bearer
-      var user = jwt.verify(token, process.env.JWT_SECRET);
+      var token = readCookie(req.headers.cookie, 'access_token');
 
-      res.status(200).json(user);
+      if(!token) throw "Vui lòng đăng nhập trước.";
+
+      var { username } = jwt.verify(token, process.env.JWT_SECRET);
+
+      if(!username) throw "Invalid cookie";
+      
+      const user = await User.findOne({ username: username.toLowerCase() }).lean();
+
+      delete user.password;
+
+      res.status(200).json({user: user});
     }
     catch(e) {
-      res.status(500).json({error: e.message});
+      res.status(200).json({ error: e });
     }
   }
-  res.status(200).json('not support');
+  else {
+    res.status(200).json('not support');
+  }
 } 
 
 export default connectDB(handler);

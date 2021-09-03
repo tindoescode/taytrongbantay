@@ -2,7 +2,7 @@
 
 import connectDB from '../../middleware/mongodb';
 import bcrypt from '../../middleware/bcrypt';
-import User from '../../models/user';
+import User from '../../models/UserModel';
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
@@ -17,7 +17,7 @@ const handler = async (req, res) => {
           // Create new user
           var user = await User.create({
             name,
-            username,
+            username: username.toLowerCase(),
             email,
             password: passwordhash,
             gender,

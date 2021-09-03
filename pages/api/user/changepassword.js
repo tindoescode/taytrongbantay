@@ -1,6 +1,6 @@
 // import connectDB from '../../../middleware/mongodb';
 // import bcrypt from '../../../middleware/bcrypt';
-// import User from '../../../models/user';
+// import User from '../../../models/UserModel';
 // import jwt from 'jsonwebtoken';
 
 // const handler = async (req, res) => {

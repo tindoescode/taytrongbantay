@@ -1,6 +1,6 @@
 import connectDB from '../../middleware/mongodb';
 // import bcrypt from '../../middleware/bcrypt';
-import User from '../../models/user';
+import User from '../../models/UserModel';
 import Post from '../../models/post'
 
 const handler = async (req, res) => {
@@ -11,19 +11,17 @@ const handler = async (req, res) => {
   }
 
   try {
-    var posts = await Post.find({ $orderby: { time: -1 } }).limit(15).populate('author', 'level isOnline status username avatar gender admin');
+    var posts = await Post.find({}).sort({time: 'desc'}).limit(10).populate('author', 'level isOnline status username avatar gender admin');
   
     // console.log(posts)
-  }
-  catch(e) {
-    res.status(500).json({error: e.message});
-  }
-  finally {
+
     res.status(200).json( 
       posts, 
     );
   }
-
+  catch(e) {
+    res.status(200).json({error: e.message});
+  }
 } 
 
 export default connectDB(handler);

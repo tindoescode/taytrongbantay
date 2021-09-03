@@ -1,16 +1,5 @@
 import jwt from 'jsonwebtoken';
-
-function readCookie(cookies, n){
-    var c = cookies.split('; '),
-        i = c.length - 1,
-        C;
-  
-    for(; i>=0; i--){
-       C = c[i].split('=');
-       if(C[0] == n) return C[1];
-    }
-  }
-  
+import readCookie from '../utils/readCookie'
   
 const requireAuth = handler => (req, res) => {
     var token = readCookie(req.headers.cookie, 'access_token');
