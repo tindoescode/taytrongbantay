@@ -144,7 +144,7 @@ function Header() {
                 
                 <b 
                   className="rounded shadow facebook p-2 text-white" 
-                  onClick={FB.login((res) => {
+                  onClick={() => FB.login((res) => {
                     console.log(res)
 
                     axios.post('/api/auth/facebook', { token: 'abc' }) //res.authResponse.access_token
