@@ -147,7 +147,7 @@ function Header() {
                   onClick={FB.login((res) => {
                     console.log(res)
 
-                    axios.post('/api/auth/facebook', { token: res.authResponse.access_token })
+                    axios.post('/api/auth/facebook', { token: 'abc' }) //res.authResponse.access_token
       
                     .then((response) => {
                       console.log('fbID', response.user.facebookId);
