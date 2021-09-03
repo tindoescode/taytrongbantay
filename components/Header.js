@@ -149,7 +149,7 @@ function Header() {
                     
                     FB.getLoginStatus(function(res) {
                         // statusChangeCallback(response);
-                        axios.post('/api/auth/facebook', { token: access_tres.authResponse.access_token }) //res.authResponse.access_token      
+                        axios.post('/api/auth/facebook', { token: res.authResponse.access_token }) //res.authResponse.access_token      
                         .then((response) => {
                           // console.log('fbID', response.user.facebookId);
 
