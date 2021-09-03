@@ -8,12 +8,9 @@ export default function NewPosts() {
   let [posts, setPosts] = useState();
 
   useEffect(() => {
-    setTimeout(() => {
-      axios.get('/api/posts/').then(res => {
-        setPosts(res.data);
-      }).catch(err => console.log(err));
-    }, 300);
-
+    axios.get('/api/posts/').then(res => {
+      setPosts(res.data);
+    }).catch(err => console.log(err));
   }, [])
 
   return (<div className="col-span-2 shadow-md ring-1 ring-green-200 bg-gray-100" style={{ minHeight: '200px' }}>
