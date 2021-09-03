@@ -4,6 +4,7 @@ import connectDB from '../../../middleware/mongodb';
 import requireAuth from '../../../middleware/requireAuth';
 import Post from '../../../models/post'
 import jwt from 'jsonwebtoken';
+import readCookie from '../../../utils/readCookie'
 
 const handler = async (req, res) => {
   if (req.method === 'POST') {
