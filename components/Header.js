@@ -71,23 +71,39 @@ function Header() {
   }, []);
 
   
-  // const checkLoginState = async (res) => {
-  //   // console.log('checkLoginState', res);
-  //   // console.log('access_token', res);
-  //   let access_token = res.authResponse.access_token;
+  const checkLoginState = async (res) => {
+    // console.log('checkLoginState', res);
+    // console.log('access_token', res);
+    let access_token = res.authResponse.access_token;
 
-  //   setTimeout(() => {
-  //     console.log('Timeout', res, res.authResponse, res.authResponse.access_token);
+      console.log('Timeout', res, res.authResponse, res.authResponse.access_token);
 
+    var response = await axios.post('/api/auth/facebook', { token: res.authResponse.access_token });
+    
+    console.log('fbID', response.user.facebookId);
+    if(res.authResponse.userId === response.user.facebookId) {
+      let user = response.user;
+      dispatch({
+        type: 'ON_LOGIN',
+        user
+      });
 
-  //     })
-  //   }, 4000)
-  // }
+      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+    }
+    else {
+      toast.error(`Đăng nhập thất bại!`)
+    }
 
-  const facebookLoginButtonCLick = (e) => {
+  }
+
+  const facebookLoginButtonCLick = async (e) => {
     e.preventDefault();
 
-    FB.login(checkLoginState, { scope: 'email,gender' })
+    const test = await new Promise(FB.login(() => {}, { scope: 'email,gender' }))
+
+    console.log(test)
+    
+    console.log(await checkLoginState())
   }
 
   return (<>
@@ -142,37 +158,11 @@ function Header() {
                 </Link>
                 </p>
                 
-                <b 
+                <button 
                   className="rounded shadow facebook p-2 text-white" 
-                  onClick={() => FB.login((res) => {
-                    console.log(res)
-                    
-                    FB.getLoginStatus(function(res) {
-                        // statusChangeCallback(response);
-                        axios.post('/api/auth/facebook', { token: res.authResponse.access_token }) //res.authResponse.access_token      
-                        .then((response) => {
-                          // console.log('fbID', response.user.facebookId);
-
-                          if(res.authResponse.userId === response.user.facebookId) {
-                            let user = response.user;
-                            dispatch({
-                              type: 'ON_LOGIN',
-                              user
-                            });
-                      
-                            toast(`Chúc ${user.name} có một ngày vui vẻ!`)
-                          }
-                          else {
-                            toast.error(`Đăng nhập thất bại!`)
-                          }
-                        })
-
-                      });
-                    
-
-                  }, { scope: 'email,gender' })}>
+                  onClick={facebookLoginButtonCLick}>
                   Log In With Facebook
-                </b>
+                </button>
                   
               </form>
             }
