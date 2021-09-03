@@ -13,9 +13,7 @@ export const config = {
 const handler = async (req, res) => {
   if (req.method === 'POST') {
     try {
-      if(!req.body) {
-        throw "No image"
-      }
+      
       var path = null;
       const form = new formidable.IncomingForm();
       form.uploadDir = "./public/upload/";
@@ -29,13 +27,14 @@ const handler = async (req, res) => {
         let data = new FormData();
 
         data.append('image', fs.createReadStream(path));
+        data.append('album', 'wah8Tm3s9FxI091') //Mtlwn3U
 
+        // console.log(data)
         var config = {
           method: 'post',
           url: 'https://api.imgur.com/3/image',
           headers: { 
             'Authorization': 'Client-ID 66c0f32e27effa9', 
-            'Cookie': 'IMGURSESSION=9a694f0962bcbb1fab4118c765ee00e9; _nc=1', 
             ...data.getHeaders()
           },
           data : data
@@ -43,12 +42,14 @@ const handler = async (req, res) => {
         
         axios(config)
         .then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
 
           res.status(200).json(response.data)
         })
         .catch(function (error) {
-          console.log(error);
+          // console.log(error.code);
+
+          res.status(200).json(error.data)
         })
         .finally(() => {
           fs.unlinkSync(path)
