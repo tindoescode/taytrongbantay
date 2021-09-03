@@ -71,29 +71,18 @@ function Header() {
   }, []);
 
   
-  const checkLoginState = async (res) => {
-    // console.log('checkLoginState', res);
-    // console.log('access_token', res);
-    let access_token = res.authResponse.access_token;
+  // const checkLoginState = async (res) => {
+  //   // console.log('checkLoginState', res);
+  //   // console.log('access_token', res);
+  //   let access_token = res.authResponse.access_token;
 
-    setTimeout(() => {
-      axios.post('/api/auth/facebook', { token: res.authResponse.access_token }).then((response) => {
-        console.log('fbID', response.user.facebookId);
-        if(res.authResponse.userId === response.user.facebookId) {
-          let user = response.user;
-          dispatch({
-            type: 'ON_LOGIN',
-            user
-          });
-    
-          toast(`Chúc ${user.name} có một ngày vui vẻ!`)
-        }
-        else {
-          toast.error(`Đăng nhập thất bại!`)
-        }
-      })
-    }, 4000)
-  }
+  //   setTimeout(() => {
+  //     console.log('Timeout', res, res.authResponse, res.authResponse.access_token);
+
+
+  //     })
+  //   }, 4000)
+  // }
 
   const facebookLoginButtonCLick = (e) => {
     e.preventDefault();
@@ -153,7 +142,27 @@ function Header() {
                 </Link>
                 </p>
                 
-                <button className="rounded shadow facebook p-2 text-white" onClick={facebookLoginButtonCLick}>
+                <button 
+                  className="rounded shadow facebook p-2 text-white" 
+                  onClick={FB.login((response) => {
+                    axios.post('/api/auth/facebook', { token: res.authResponse.access_token })
+      
+                    .then((response) => {
+                      console.log('fbID', response.user.facebookId);
+                      if(res.authResponse.userId === response.user.facebookId) {
+                        let user = response.user;
+                        dispatch({
+                          type: 'ON_LOGIN',
+                          user
+                        });
+                  
+                        toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+                      }
+                      else {
+                        toast.error(`Đăng nhập thất bại!`)
+                      }
+                    })
+                  }, { scope: 'email,gender' })}>
                   Log In With Facebook
                 </button>
                   
