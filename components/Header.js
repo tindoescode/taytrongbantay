@@ -141,7 +141,7 @@ function Header() {
                       | <Link href="#"><a>Quản trị</a></Link>
                     </> : ''}
                   </h2>
-                  <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link>
+                  <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link> | <Link href="/api/logout"><a>Đăng xuất</a></Link>
                 </div>
 
               </div>

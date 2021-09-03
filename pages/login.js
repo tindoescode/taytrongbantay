@@ -4,10 +4,20 @@ import { useRef } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 export default function Home() {
   let inputName = useRef(null);
   let inputPassword = useRef(null);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user)
+
+  useEffect(() => {
+    if(user) {
+      Router.push('/');
+    }
+  }, [])
 
   let loginBtnClicked = (e) => {
     e.preventDefault();
@@ -21,11 +31,9 @@ export default function Home() {
 
           console.log('Login successfully!');
 
-          localStorage.setItem('token', res.data.token);
+          // localStorage.setItem('token', res.data.token);
 
-          Router.push('/welcome-page');
-
-          toggleLoginMenu();
+          console.log(res.data.user)
 
           dispatch({
               type: 'ON_LOGIN',
@@ -34,8 +42,10 @@ export default function Home() {
 
           toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
 
+          Router.push('/welcome-page');
       }
     }).catch(error => {
+      console.log(error)
       toast.error(error);
     })
 
