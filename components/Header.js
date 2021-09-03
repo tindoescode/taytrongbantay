@@ -142,7 +142,7 @@ function Header() {
                 </Link>
                 </p>
                 
-                <button 
+                <b 
                   className="rounded shadow facebook p-2 text-white" 
                   onClick={FB.login((res) => {
                     console.log(res)
@@ -166,7 +166,7 @@ function Header() {
                     })
                   }, { scope: 'email,gender' })}>
                   Log In With Facebook
-                </button>
+                </b>
                   
               </form>
             }
