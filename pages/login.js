@@ -16,16 +16,26 @@ export default function Home() {
 
     axios.post('/api/login', { username, password }).then((res) => {
       if(res.status === 200) {
-        try {  
-          console.log('Đăng nhập thành công!');
-  
+          if(res.data.error) throw res.data.error;
+
+          console.log('Login successfully!');
+
           localStorage.setItem('token', res.data.token);
+
           Router.push('/welcome-page');
-        }
-        catch(err) {
-          toast.error(err.message);
-        }
+
+          toggleLoginMenu();
+
+          dispatch({
+              type: 'ON_LOGIN',
+              user: res.data.user
+          });
+
+          toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
+
       }
+    }).catch(error => {
+      toast.error(error);
     })
 
   }
