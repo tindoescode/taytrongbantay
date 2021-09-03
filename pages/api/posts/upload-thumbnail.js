@@ -52,7 +52,7 @@ const handler = async (req, res) => {
           res.status(200).json(error.data)
         })
         .finally(() => {
-          fs.unlinkSync(path)
+          // fs.unlinkSync(path)
         })
         
   
