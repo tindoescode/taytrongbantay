@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/test.js": {
+    "api/posts/upload-thumbnail.js": {
       "includeFiles": "public/upload/**"
     }
   }
