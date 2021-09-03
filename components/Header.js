@@ -77,7 +77,7 @@ function Header() {
     var response = await axios.post('/api/auth/facebook', { token: accessToken });
     
     console.log('fbID', response.user.facebookId);
-    if(authResponse.userId === response.user.facebookId) {
+    if(authResponse.userId == response.user.facebookId) {
       let user = response.user;
       dispatch({
         type: 'ON_LOGIN',
