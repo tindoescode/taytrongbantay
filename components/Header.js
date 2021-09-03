@@ -71,27 +71,27 @@ function Header() {
   }, []);
 
   
-  const checkLoginState = async (res) => {
+  const checkLoginState = (res) => {
     console.log('checkLoginState', res);
     console.log('access_token', res.authResponse.access_token);
 
-    const response = await axios.post('/api/auth/facebook', { token: res.authResponse.access_token })
+    axios.post('/api/auth/facebook', { token: res.authResponse.access_token }).then((response) => {
+      console.log('fbID', response.user.facebookId);
+      if(res.authResponse.userId === response.user.facebookId) {
+        let user = response.user;
+        dispatch({
+          type: 'ON_LOGIN',
+          user
+        });
+  
+        toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+      }
+      else {
+        toast.error(`Đăng nhập thất bại!`)
+      }
+    })
 
-    console.log('fbID', response.user.facebookId);
 
-    if(res.authResponse.userId === response.user.facebookId) {
-      let user = response.user;
-      dispatch({
-        type: 'ON_LOGIN',
-        user
-      });
-
-      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
-    }
-    else {
-      toast.error(`Đăng nhập thất bại!`)
-      
-    }
 
   }
 
