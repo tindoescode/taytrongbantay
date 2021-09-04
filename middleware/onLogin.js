@@ -1,6 +1,6 @@
 import nookies from 'nookies'
 import { toast } from 'react-toastify'
-import Router from 'next/router'
+// import Router from 'next/router'
 
 const onLogin = (dispatch, toggleLoginMenu) => (res) => {
   if (res.status === 200) {
@@ -24,8 +24,7 @@ const onLogin = (dispatch, toggleLoginMenu) => (res) => {
     });
 
     toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
-
-    Router.push('/welcome-page');
+    // Router.push('/welcome-page');
   }
 }
 
