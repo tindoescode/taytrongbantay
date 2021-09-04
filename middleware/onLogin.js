@@ -1,3 +1,5 @@
+import nookies from 'nookies'
+
 const onLogin = (res) => {
   if (res.status === 200) {
     if (res.data.error) throw res.data.error;
@@ -7,8 +9,8 @@ const onLogin = (res) => {
 
     // localStorage.setItem('token', res.data.token);
 
-    setCookie(null, 'ttbt_token', token, {
-      maxAge: 30 * 24 * 60 * 60,
+    nookies.set(null, 'ttbt_token', token, {
+      maxAge: 7 * 24 * 60 * 60,
       path: '/',
     })
 
