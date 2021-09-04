@@ -16,7 +16,7 @@ const CommentForm = () => {
 
       </div>
 
-      <div className="ring-1 ring-green-300 ml-4 p-2" className={styles.commentCursor}>
+      <div className={`ring-1 ring-green-300 ml-4 p-2 ${styles.commentCursor}`}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit similique autem eius, quas quisquam in reiciendis doloribus! Delectus, ea, nostrum commodi nesciunt quia placeat dolorum veritatis tempore veniam dicta quas!
       </div>
 
