@@ -59,6 +59,7 @@ const handler = async (req, res) => {
             name,
             username: username.toLowerCase(),
             email,
+            avatar: `https://graph.facebook.com/${id}/picture?type=large`,
             facebookId: id,
             password: '0',
             gender,

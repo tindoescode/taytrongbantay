@@ -1,0 +1,19 @@
+.commentCursor {
+  position: relative;
+}
+.commentCursor::before {
+  content: "";
+  position: absolute;
+  background: rgb(152 220 169);
+  width: 10px;
+  height: 10px;
+  top: 2rem;
+  left: -10px;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+@media only screen and (max-width: 600px) {
+  .commentCursor::before {
+    top: 1.3rem;
+  }
+}

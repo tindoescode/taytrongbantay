@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
     <TopProgressBar />
     <Header />
 
-    <div className="container max-w-6xl p-2 mx-auto my-12 bg-white rounded-md bg-opacity-20">
+    <div className="max-w-6xl p-2 mx-auto my-12 bg-white rounded-md bg-opacity-20">
       <div className="rounded mb-4 flex justify-center p-2 bg-green-200">
         {user && <p>Bạn đã đăng nhập với {user.username}</p>
           || <p>Bạn chưa đăng nhập, hãy chọn <Link href="/login"><a><b>đăng nhập</b></a></Link>, hoặc <Link href="/register"><a><b>đăng ký</b></a></Link> để sử dụng hết tính năng của taytrongbantay nhé.</p>}

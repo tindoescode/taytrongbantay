@@ -2,6 +2,8 @@ import axios from 'axios';
 import Head from 'next/head';
 import { Markup } from 'interweave';
 import Image from 'next/image'
+import Title from '../../components/Title';
+import CommentForm from '../../components/posts/CommentForm';
 
 export default function SinglePost({ data }) {
   var { title, content, author } = data
@@ -35,6 +37,12 @@ export default function SinglePost({ data }) {
         </div>
         </div>
       </main>
+
+      {/* Comment section */}
+      <Title>Bình luận</Title>
+      <div className="Comment">
+        <CommentForm />
+      </div>
     </div>
   )
 }
