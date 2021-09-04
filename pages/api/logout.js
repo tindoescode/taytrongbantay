@@ -14,7 +14,7 @@ const handler = async (req, res) => {
 
       if(!username) throw "Invalid cookie";
       
-      nookies.set(null, 'ttbt_token', token, {
+      nookies.set(null, 'ttbt_token', '', {
         maxAge: -1,
         path: '/',
       })
@@ -23,6 +23,10 @@ const handler = async (req, res) => {
     }
     catch(e) {
       res.status(200).json(e);
+    }
+    finally {
+      res.status(200).redirect('/');
+      
     }
   }
   else {
