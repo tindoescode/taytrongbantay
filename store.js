@@ -6,9 +6,6 @@ let store
 
 const initialState = {
   user: null,
-  lastUpdate: 0,
-  light: false,
-  count: 0,
 }
 
 const reducer = (state = initialState, action) => {
@@ -18,27 +15,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: action.user
       }
-    case 'TICK':
+    case 'ON_LOGOUT': {
       return {
         ...state,
-        lastUpdate: action.lastUpdate,
-        light: !!action.light,
+        user: null
       }
-    case 'INCREMENT':
-      return {
-        ...state,
-        count: state.count + 1,
-      }
-    case 'DECREMENT':
-      return {
-        ...state,
-        count: state.count - 1,
-      }
-    case 'RESET':
-      return {
-        ...state,
-        count: initialState.count,
-      }
+    }
     default:
       return state
   }

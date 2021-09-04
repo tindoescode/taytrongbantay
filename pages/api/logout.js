@@ -21,7 +21,7 @@ const handler = async (req, res) => {
     // catch(e) {
     //   console.log(e);
     // }
-    res.status(200).send('ok')
+    res.status(200).json({code: '200', status: 'ok'})
   }
   else {
     res.status(200).json('not support');

@@ -75,6 +75,18 @@ function Header() {
     await checkLoginState(authResponse)
   }
 
+  const handleLogoutBtn = async (e) => {
+    e.preventDefault();
+
+    const { data } = await axios.get('/api/logout');
+    
+    if(data.code == 200) {
+      dispatch({
+        type: 'ON_LOGOUT'
+      });
+    }
+  }
+
   return (<>
     <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
       <div className="flex-grow md:flex-grow-0 ml-2">
@@ -154,7 +166,7 @@ function Header() {
                       | <Link href="#"><a>Quản trị</a></Link>
                     </> : ''}
                   </h2>
-                  <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link> | <Link href="/api/logout"><a>Đăng xuất</a></Link>
+                  <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link> | <button onClick={handleLogoutBtn}>Đăng xuất</button>
                 </div>
 
               </div>
