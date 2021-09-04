@@ -13,7 +13,6 @@ const handler = async (req, res) => {
 
       if(!(content && title && tags && slug && description)) throw "Xin hãy nhập đủ các trường."
 
-      // const token = req.headers['authorization'].slice(7); // remove Bearer
       var token = readCookie(req.headers.cookie, 'ttbt_token');
 
       console.log('debug', token, process.env.JWT_SECRET)
