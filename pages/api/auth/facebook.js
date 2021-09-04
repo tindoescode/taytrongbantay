@@ -4,7 +4,7 @@ import connectDB from '../../../middleware/mongodb';
 import User from '../../../models/UserModel';
 import axios from 'axios'
 import jwt from 'jsonwebtoken'
-// import { setCookie } from '../../../utils/cookies'
+import { setCookie } from 'nookies'
 
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
@@ -33,7 +33,10 @@ const handler = async (req, res) => {
       // Chuyển sang đăng nhập
       const ttbt_token = jwt.sign({ id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
 
-      // setCookie(res, 'ttbt_token', ttbt_token);
+      setCookie({res}, 'ttbt_token', ttbt_token, {
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+      });
 
       console.log(`[LOGIN] Người dùng ${existUser.username} đã đăng nhập`);
       
@@ -64,7 +67,10 @@ const handler = async (req, res) => {
 
           const ttbt_token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
 
-          // setCookie(res, 'ttbt_token', ttbt_token);
+          setCookie({res}, 'ttbt_token', ttbt_token, {
+            maxAge: 60 * 60 * 24 * 7,
+            path: '/',
+          });
 
           console.log(`[NEW USER] User ${name} đã được tạo (with facebook).`);
           
