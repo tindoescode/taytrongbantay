@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import readCookie from '../../utils/readCookie';
-import User from '../../models/UserModel';
 import nookies from 'nookies'
 
 const handler = async (req, res) => {
@@ -18,16 +17,11 @@ const handler = async (req, res) => {
         maxAge: -1,
         path: '/',
       })
-
-      res.status(200).redirect('/');
     }
     catch(e) {
-      res.status(200).json(e);
+      console.log(e);
     }
-    finally {
-      res.status(200).redirect('/');
-      
-    }
+    res.status(200).redirect('/');
   }
   else {
     res.status(200).json('not support');
