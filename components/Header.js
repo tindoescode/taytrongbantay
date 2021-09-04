@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import onLogin from '../middleware/onLogin';
 
 function Header() {
