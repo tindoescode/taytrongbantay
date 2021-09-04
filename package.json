@@ -18,6 +18,7 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cookies": "^0.8.0",
+    "form-data": "^4.0.0",
     "interweave": "^12.8.0",
     "jslint": "^0.12.1",
     "jsonwebtoken": "^8.5.1",
