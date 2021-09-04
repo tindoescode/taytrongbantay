@@ -1,6 +1,7 @@
 import nookies from 'nookies'
+import { toast } from 'react-toastify'
 
-const onLogin = (res) => {
+const onLogin = (res, dispatch, toggleLoginMenu) => {
   if (res.status === 200) {
     if (res.data.error) throw res.data.error;
 

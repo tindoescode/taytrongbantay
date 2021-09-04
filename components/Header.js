@@ -24,7 +24,7 @@ function Header() {
     let password = inputPassword.current.value;
 
     if (!(username && password)) throw 'Hãy nhập đầy đủ các trường'
-    axios.post('/api/login', { username, password }).then(onLogin).catch(error => {
+    axios.post('/api/login', { username, password }).then(onLogin(res, dispatch, toggleLoginMenu)).catch(error => {
       toast.error(error);
     })
   }
@@ -59,13 +59,7 @@ function Header() {
     console.log(response)
     console.log('fbID', response.data.user.facebookId);
     if(authResponse.userID == response.data.user.facebookId) {
-      let user = response.data.user;
-      dispatch({
-        type: 'ON_LOGIN',
-        user
-      });
-
-      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
+      onLogin(response, dispatch, toggleLoginMenu);
     }
     else {
       toast.error(`Đăng nhập thất bại!`)
