@@ -19,7 +19,7 @@ export default function SinglePost({ data }) {
         <div className="p-2 bg-green-100 text-center text-xl">
             { title }
         </div>
-        <div className="ck-content container shadow-md p-2">
+        <div className="ck-content shadow-md p-2">
         <div className="md:grid grid-cols-6 gap-4">
         <div className="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
             <img className="w-20 md:w-60 rounded shadow-xl" alt={"Ảnh của " + author.username} src={author.avatar} />
