@@ -57,7 +57,7 @@ function Header() {
     console.log(response)
     console.log('fbID', response.data.user.facebookId);
     if(authResponse.userID == response.data.user.facebookId) {
-      onLogin(response, dispatch, toggleLoginMenu);
+      onLogin(dispatch, toggleLoginMenu)(response);
     }
     else {
       toast.error(`Đăng nhập thất bại!`)
