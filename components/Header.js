@@ -24,7 +24,7 @@ function Header() {
     let password = inputPassword.current.value;
 
     if (!(username && password)) throw 'Hãy nhập đầy đủ các trường'
-    axios.post('/api/login', { username, password }).then(onLogin(res, dispatch, toggleLoginMenu)).catch(error => {
+    axios.post('/api/login', { username, password }).then(onLogin(dispatch, toggleLoginMenu)).catch(error => {
       toast.error(error);
     })
   }
@@ -39,8 +39,6 @@ function Header() {
         type: 'ON_LOGIN',
         user
       });
-
-      toast(`Chúc ${user.name} có một ngày vui vẻ!`)
     }).then(() => {
       console.log("user loaded");
     }).catch(error => {

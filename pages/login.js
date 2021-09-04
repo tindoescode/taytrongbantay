@@ -26,7 +26,7 @@ export default function Home() {
     let username = inputName.current.value;
     let password = inputPassword.current.value;
 
-    axios.post('/api/login', { username, password }).then(onLogin(res, dispatch, toggleLoginMenu)).catch(error => {
+    axios.post('/api/login', { username, password }).then(onLogin(dispatch, () => {})).catch(error => {
       console.log(error)
       toast.error(error);
     })
