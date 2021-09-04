@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Router from 'next/router';
 import { toast } from 'react-toastify';
 import Title from '../components/Title';
+import onLogin from '../middleware/onLogin';
 
 export default function Home() {
   let inputName = useRef(null);
@@ -39,14 +40,7 @@ export default function Home() {
         }
       }).then(() => {
         // Automaticially login
-        axios.post('/api/login', { username, password }).then((res) => {
-          if(res.status === 200) {
-            toast.success('Bạn đã được đăng nhập tự động.');
-    
-            localStorage.setItem('token', res.data.token);
-            Router.push('/welcome-page');
-          }
-        })
+        axios.post('/api/login', { username, password }).then(onLogin)
       }).catch(error => {
         toast.error(error);
       })

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import onLogin from '../middleware/onLogin';
 
 export default function Home() {
   let inputName = useRef(null);
@@ -25,26 +26,7 @@ export default function Home() {
     let username = inputName.current.value;
     let password = inputPassword.current.value;
 
-    axios.post('/api/login', { username, password }).then((res) => {
-      if(res.status === 200) {
-          if(res.data.error) throw res.data.error;
-
-          console.log('Login successfully!');
-
-          // localStorage.setItem('token', res.data.token);
-
-          console.log(res.data.user)
-
-          dispatch({
-              type: 'ON_LOGIN',
-              user: res.data.user
-          });
-
-          toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
-
-          Router.push('/welcome-page');
-      }
-    }).catch(error => {
+    axios.post('/api/login', { username, password }).then(onLogin).catch(error => {
       console.log(error)
       toast.error(error);
     })

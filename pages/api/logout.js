@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import readCookie from '../../utils/readCookie';
 import User from '../../models/UserModel';
-import { setCookie } from '../../utils/cookies';
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
@@ -14,10 +13,10 @@ const handler = async (req, res) => {
 
       if(!username) throw "Invalid cookie";
       
-      setCookie(res, 'ttbt_token', '', {
-        maxAge: -1,
-        path: '/api',
-      });
+      // setCookie(res, 'ttbt_token', '', {
+      //   maxAge: -1,
+      //   path: '/api',
+      // });
 
       res.status(200).redirect('/');
     }

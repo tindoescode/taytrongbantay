@@ -5,6 +5,7 @@ import axios from 'axios';
 import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import onLogin from '../middleware/onLogin';
 
 function Header() {
   let [loginMenu, setLoginMenu] = useState(false);
@@ -24,27 +25,7 @@ function Header() {
     let password = inputPassword.current.value;
 
     if (!(username && password)) throw 'Hãy nhập đầy đủ các trường'
-    axios.post('/api/login', { username, password }).then((res) => {
-      if (res.status === 200) {
-        if (res.data.error) throw res.data.error;
-
-        console.log('Login successfully!');
-
-        localStorage.setItem('token', res.data.token);
-
-        Router.push('/welcome-page');
-
-        toggleLoginMenu();
-
-        dispatch({
-          type: 'ON_LOGIN',
-          user: res.data.user
-        });
-
-        toast("Mừng cậu đã đăng nhập thành công! Bọn tớ rất vui được đón tiếp cậu.🥰😘");
-
-      }
-    }).catch(error => {
+    axios.post('/api/login', { username, password }).then(onLogin).catch(error => {
       toast.error(error);
     })
   }
@@ -54,7 +35,7 @@ function Header() {
     axios.get('/api/user/getdata').then(res => {
       if (!res.data.hasOwnProperty('user')) throw "Chưa đăng nhập"
 
-      let user = res.data.user;
+      let { user } = res.data;
       dispatch({
         type: 'ON_LOGIN',
         user
@@ -100,7 +81,7 @@ function Header() {
 
     console.log(authResponse)
     
-    console.log(await checkLoginState(authResponse))
+    await checkLoginState(authResponse)
   }
 
   return (<>
