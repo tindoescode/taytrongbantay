@@ -1,33 +1,65 @@
-import Router from "next/router"
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
-import Title from '../../components/Title'
-import ContentWrapper from '../../components/ContentWrapper'
+import Title from "../../components/Title";
+import ContentWrapper from "../../components/ContentWrapper";
+import Input from "../../components/Input";
+import TextArea from "../../components/TextArea";
+import Button from "../../components/Button";
+import Form from "../../components/Form";
+import Router from "next/router";
+import { useEffect, useState } from "react";
+import { createNewCategory, fetchCategory } from "../../lib/admin";
+import axios from "axios";
+import Link from "next/link";
 
 const AdminPanel = () => {
-    const user = useSelector(state => state.user)
+  const [categories, setCat] = useState([]);
 
-    useEffect(() => {
-        if(!user || !['admin', 'mod'].includes(user.admin)) { Router.push('/'); return }
-    }, []) // eslint-disable-line
+  useEffect(() => {
+    axios.get("/api/user/getdata").then((res) => {
+      if (!res.data.isLoggedIn || res.data?.admin != "admin") {
+        Router.push("/");
+      }
+    });
 
-    return (
-        <div className="AdminPanel md:grid grid-cols-4">
-            <Title style="pink">Tạo chuyên mục</Title>
-            <ContentWrapper style="pink">
-                <div>
+    fetchCategory(setCat);
+  }, []);
 
-                </div>
-            </ContentWrapper>
+  return (
+    <div className="AdminPanel md:grid grid-cols-6">
+      <div className="col-span-2">
+        <Title style="pink">Tạo chuyên mục</Title>
+        <ContentWrapper style="pink">
+          <Form onSubmit={createNewCategory(setCat)} className="flex flex-col">
+            <label>Tên chuyên mục:</label>
+            <Input style="pink" placeholder="Thông báo" name="name" />
+            <label>Slug (URL):</label>
+            <Input style="pink" name="slug" />
+            <label>Mô tả:</label>
+            <TextArea style="pink" name="description" />
+            <Button>Tạo</Button>
+          </Form>
+        </ContentWrapper>
+      </div>
 
-            <Title>Quản lý chuyên mục</Title>
-            <ContentWrapper>
-                <div>
-                    Chuyen muc 1
-                </div>
-            </ContentWrapper>
-        </div>
-    )
-}
+      <div className="col-span-2">
+        <Title>Quản lý chuyên mục</Title>
+        <ContentWrapper>
+          {categories.map((category, index) => (
+            <div key={category.slug}>
+              <Link href={`/category/${category.slug}`}>
+                <a>
+                  {category.name} ({category.slug})
+                </a>
+              </Link>
+              &nbsp;
+              <a>[Sửa]</a>
+              &nbsp;
+              <a>[Xóa]</a>
+            </div>
+          ))}
+        </ContentWrapper>
+      </div>
+    </div>
+  );
+};
 
-export default AdminPanel
+export default AdminPanel;

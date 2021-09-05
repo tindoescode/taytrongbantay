@@ -5,20 +5,18 @@ import Router from 'next/router';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import onLogin from '../middleware/onLogin';
 
 export default function Home() {
+  const user = useSelector(state => state.user)
+
+  if(user) {
+    Router.push('/');
+  }
+
   let inputName = useRef(null);
   let inputPassword = useRef(null);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
-
-  useEffect(() => {
-    if(user) {
-      Router.push('/');
-    }
-  }, [user])
 
   let loginBtnClicked = (e) => {
     e.preventDefault();
@@ -26,7 +24,8 @@ export default function Home() {
     let username = inputName.current.value;
     let password = inputPassword.current.value;
 
-    axios.post('/api/login', { username, password }).then(onLogin(dispatch, () => {})).catch(error => {
+    axios.post('/api/login', { username, password })
+    .then(onLogin(dispatch, () => {})).catch(error => {
       console.log(error)
       toast.error(error);
     })

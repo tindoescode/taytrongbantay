@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 const onLogin = (dispatch, toggleLoginMenu) => (res) => {
   if (res.status === 200) {
     if (res.data.error) throw res.data.error;
+    if(!res.data.user) throw 'Tên đăng nhập hoăc mật khẩu không hợp lệ'
 
     console.log('Login successfully!');
 

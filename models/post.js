@@ -48,6 +48,11 @@ var post = new Schema({
   description: {
     type: String,
     default: '',
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    default: null,
   }
   
 },

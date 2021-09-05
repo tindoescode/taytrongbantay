@@ -1,19 +1,25 @@
 import Head from 'next/head';
 import axios from 'axios';
 import { useRef } from 'react';
-import Router from 'next/router';
 import { toast } from 'react-toastify';
 import Title from '../components/Title';
 import onLogin from '../middleware/onLogin';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  let inputName = useRef(null);
-  let inputPassword = useRef(null);
-  let inputRePassword = useRef(null);
-  let inputUsername = useRef(null);
-  let inputEmail = useRef(null);
-  let inputGender = useRef(null);
+  const user = useSelector(state => state.user)
 
+  if(user) {
+    Router.push('/');
+  }
+
+  let inputName = useRef(null)
+  let inputPassword = useRef(null)
+  let inputRePassword = useRef(null)
+  let inputUsername = useRef(null)
+  let inputEmail = useRef(null)
+  let inputGender = useRef(null)
+  let dispatch = useDispatch()
 
   let loginBtnClicked = (e) => {
     e.preventDefault();
@@ -40,7 +46,8 @@ export default function Home() {
         }
       }).then(() => {
         // Automaticially login
-        axios.post('/api/login', { username, password }).then(onLogin)
+        axios.post('/api/login', { username, password })
+        .then(onLogin(dispatch, () => {}))
       }).catch(error => {
         toast.error(error);
       })

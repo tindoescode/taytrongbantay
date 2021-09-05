@@ -1,33 +1,28 @@
-import connectDB from '../../../middleware/mongodb';
-import jwt from 'jsonwebtoken';
-import readCookie from '../../../utils/readCookie';
-import User from '../../../models/UserModel';
-
+import connectDB from "../../../middleware/mongodb";
+import jwt from "jsonwebtoken";
+import readCookie from "../../../utils/readCookie";
+import User from "../../../models/UserModel";
 
 const handler = async (req, res) => {
-  if (req.method === 'GET') {
-    try {
-      var token = readCookie(req.headers.cookie, 'ttbt_token');
+  try {
+    var token = readCookie(req.headers.cookie, "ttbt_token");
 
-      if(!token) throw "Vui lòng đăng nhập trước.";
+    if (!token) throw "Vui lòng đăng nhập trước.";
 
-      var { username } = jwt.verify(token, process.env.JWT_SECRET);
+    var { username } = jwt.verify(token, process.env.JWT_SECRET);
 
-      if(!username) throw "Invalid cookie";
-      
-      const user = await User.findOne({ username: username.toLowerCase() }).lean();
+    if (!username) throw "invalid_request";
 
-      delete user.password;
+    const user = await User.findOne({
+      username: username.toLowerCase(),
+    }).lean();
 
-      res.status(200).json({user: user});
-    }
-    catch(e) {
-      res.status(200).json({ error: e });
-    }
+    delete user.password;
+
+    res.json({ isLoggedIn: true, ...user });
+  } catch (e) {
+    res.json({ isLoggedIn: false, reason: e });
   }
-  else {
-    res.status(200).json('not support');
-  }
-} 
+};
 
 export default connectDB(handler);

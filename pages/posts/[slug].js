@@ -27,7 +27,6 @@ export default function SinglePost({ data }) {
             <h3 className="flex-grow md:flex-grow-0 flex items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
               <img className="inline-block" width="30" src="/images/level/50.png" alt="level 50"></img>
               {author.username} 
-              <p className="text-xs">&lt;{author.status}&gt;</p>
             </h3>
 
           </div>

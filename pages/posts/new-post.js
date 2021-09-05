@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import convertToSlug from '../../utils/convertToSlug';
 import Editor from '../../components/CKEditor';
@@ -8,21 +8,18 @@ import { Widget } from "@uploadcare/react-widget";
 import { useSelector } from 'react-redux';
 
 export default function NewPost() {
-  const editorRef = useRef();
+  const user = useSelector(state => state.user)
+
+  if(!user) {
+    Router.push('/login')
+  }
+
   const titleRef = useRef();
   const descRef = useRef();
   const [slug, setSlug] = useState('');
   const [description, setDesc] = useState('');
   const [content, setContent] = useState('');
   const [thumbnail, setThumbnail] = useState(null);
-  const user = useSelector(state => state.user)
-
-  useEffect(() => {
-    if(!user) {
-      Router.push('/')
-      return
-    }
-  }, []) // eslint-disable-line
 
   const onTitleChange = (e) => {
     setSlug(convertToSlug(e.target.value));
@@ -85,7 +82,7 @@ export default function NewPost() {
 
       <div className="flex flex-col col-span-2">
         <label className="p-2 bg-green-400 text-white font-bold">Nội dung</label>
-        <Editor setContent={setContent}/>
+        <Editor setContent={setContent} />
 
         <div className="flex flex-col">
           <label htmlFor="title" className="p-2 bg-green-400 text-white font-bold mt-4">Mô tả</label>

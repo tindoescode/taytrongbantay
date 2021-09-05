@@ -1,27 +1,28 @@
-import connectDB from '../../middleware/mongodb';
+import connectdb from "../../middleware/mongodb";
 // import bcrypt from '../../middleware/bcrypt';
-import User from '../../models/UserModel';
-import Post from '../../models/post'
+import user from "../../models/UserModel";
+import post from "../../models/post";
 
 const handler = async (req, res) => {
-  if (req.method !== 'GET') {
-    res.status(403).json('Wrong method');
+  if (req.method !== "GET") {
+    res.status(403).json("wrong method");
 
     return;
   }
 
   try {
-    var posts = await Post.find({}).sort({time: 'desc'}).limit(10).populate('author', 'level isOnline status username avatar gender admin');
-  
+    var posts = await post
+      .find({})
+      .sort({ time: "desc" })
+      .limit(10)
+      .populate("author", "level isonline status username avatar gender admin");
+
     // console.log(posts)
 
-    res.status(200).json( 
-      posts, 
-    );
+    res.status(200).json(posts);
+  } catch (e) {
+    res.status(200).json({ error: e.message });
   }
-  catch(e) {
-    res.status(200).json({error: e.message});
-  }
-} 
+};
 
-export default connectDB(handler);
+export default connectdb(handler);
