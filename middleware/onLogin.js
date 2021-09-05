@@ -1,17 +1,16 @@
-import nookies from 'nookies'
 import { toast } from 'react-toastify'
 
 const onLogin = (dispatch, toggleLoginMenu) => (res) => {
   if (res.status === 200) {
     if (res.data.error) throw res.data.error;
 
-    let { ttbt_token } = res.data
     console.log('Login successfully!');
 
-    nookies.set(null, 'ttbt_token', ttbt_token, {
-      maxAge: 7 * 24 * 60 * 60,
-      path: '/',
-    })
+    // let { ttbt_token } = res.data
+    // nookies.set(null, 'ttbt_token', ttbt_token, {
+    //   maxAge: 7 * 24 * 60 * 60,
+    //   path: '/',
+    // })
 
     toggleLoginMenu();
 

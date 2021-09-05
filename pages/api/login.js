@@ -22,9 +22,9 @@ const handler = async (req, res) => {
         if(!await bcrypt.compare(password, user.password)) throw { message: 'Mật khẩu không chính xác' }
         
         // Login successfully
-        const token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
+        const ttbt_token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
         
-        setCookie({res}, 'ttbt_token', token, {
+        setCookie({res}, 'ttbt_token', ttbt_token, {
           maxAge: 60 * 60 * 24 * 7,
           path: '/',
         })

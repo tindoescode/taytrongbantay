@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux'
 import onLogin from '../middleware/onLogin';
 
@@ -88,7 +87,7 @@ function Header() {
   }
 
   return (<>
-    <div className="flex shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
+    <div className="flex items-center shadow-md md:justify-around fixed w-screen top-0 bg-white z-50">
       <div className="ml-2">
         <Link href='/'>
           <a><div className="Header--logo" /></a>
@@ -109,7 +108,7 @@ function Header() {
             {
               loginMenu && !user &&
               <form>
-                <div className="flex items-center space-between justify-end">
+                <div className="flex items-center justify-end">
                   <label htmlFor="username" className="text-black mr-2">
                     Tên đăng nhập
                   </label>
@@ -119,7 +118,7 @@ function Header() {
                     className="rounded p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập"></input>
                 </div>
 
-                <div className="flex items-center space-between justify-end">
+                <div className="flex items-center justify-end">
                   <label htmlFor="username" className="text-black mr-2">
                     Mật khẩu
                   </label>
@@ -193,10 +192,10 @@ function Header() {
                 }
 
                 .Header--logo {
-                    background: url(/images/LOGO-TTBT2.png) no-repeat;
-                    width: 40px;
-                    height: 40px;
-                    background-size: cover;
+                  background: url(/images/LOGO-TTBT2.png) no-repeat;
+                  width: 40px;
+                  height: 40px;
+                  background-size: cover;
                 }
                 
                 .Navbar {
