@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import convertToSlug from "../../utils/convertToSlug";
 import Editor from "../../components/CKEditor";
 import Router from "next/router";
 import { Widget } from "@uploadcare/react-widget";
-import { useSelector } from "react-redux";
 
 export default function NewPost() {
   const titleRef = useRef();
@@ -17,7 +16,7 @@ export default function NewPost() {
 
   useEffect(() => {
     axios.get("/api/user/getdata").then((res) => {
-      if (!res.data.isLoggedIn || res.data?.admin != "admin") {
+      if (!res.data.isLoggedIn || !['admin', 'mod'].includes[res.data?.admin]) {
         Router.push("/");
       }
     });
