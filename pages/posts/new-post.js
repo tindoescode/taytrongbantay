@@ -16,7 +16,7 @@ export default function NewPost() {
 
   useEffect(() => {
     axios.get("/api/user/getdata").then((res) => {
-      if (!res.data.isLoggedIn || !['admin', 'mod'].includes[res.data?.admin]) {
+      if (!res.data.isLoggedIn || !["admin", "mod"].includes(res.data?.admin)) {
         Router.push("/");
       }
     });
