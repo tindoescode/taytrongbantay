@@ -9,5 +9,7 @@ module.exports = {
       responsive: ['relative']
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }

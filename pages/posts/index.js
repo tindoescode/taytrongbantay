@@ -1,6 +1,7 @@
+
 import Head from 'next/head';
-import Title from '../components/Title';
-import NewPosts from '../components/NewPosts';
+import Title from '../../components/Title';
+import NewPosts from '../../components/NewPosts';
 
 export default function Home() {
   return (
@@ -13,11 +14,10 @@ export default function Home() {
       <main>
         <div className="md:grid grid-cols-3 gap-4">
         <div className="">
-
+            <p>Left grid</p>
         </div>
 
         <div className="col-span-2 shadow-md ring-1 ring-green-200">
-          <Title style="purple">Bài mới</Title>
           <NewPosts />
         </div>
         </div>

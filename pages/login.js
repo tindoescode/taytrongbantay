@@ -18,7 +18,7 @@ export default function Home() {
     if(user) {
       Router.push('/');
     }
-  }, [])
+  }, [user])
 
   let loginBtnClicked = (e) => {
     e.preventDefault();

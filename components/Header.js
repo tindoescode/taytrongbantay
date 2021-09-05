@@ -101,9 +101,9 @@ function Header() {
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
           </svg></a>
           <div
-            className={`xs:mx-2 md:mx-0 login-form rounded-md flex absolute ` +
+            className={`mx-1 md:mx-0 login-form rounded-md flex absolute ` +
               `flex-col border bg-gray-200 shadow-sm select-none` +
-              `box-border transition-all h-0 ${loginMenu === false ? '' : 'h-auto p-2'} right-0`}
+              `box-border transition-all duration-1000 ease h-0 ${loginMenu === false ? 'h-0' : 'h-auto p-2'} right-0`}
             style={{ top: '3.1rem' }}>
 
             {
@@ -116,7 +116,7 @@ function Header() {
                   <input
                     ref={inputName}
                     name="username"
-                    className="rounded p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập" autoComplete="off"></input>
+                    className="rounded p-2 mt-2 ring-1 ring-green-500 text-black" placeholder="Tên đăng nhập"></input>
                 </div>
 
                 <div className="flex items-center space-between justify-end">
@@ -127,7 +127,7 @@ function Header() {
                     ref={inputPassword}
                     name="password"
                     type="password"
-                    className="rounded p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu" autoComplete="off"></input>
+                    className="rounded p-2 my-2 ring-1 ring-green-500 text-black" placeholder="Mật khẩu"></input>
                 </div>
 
                 <button
@@ -163,7 +163,7 @@ function Header() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                     </svg>
                     {user.admin} {user.admin == 'admin' ? <>
-                      | <Link href="#"><a>Quản trị</a></Link>
+                      | <Link href="/admin"><a>Quản trị</a></Link>
                     </> : ''}
                   </h2>
                   <Link href="#"><a>Đổi mật khẩu</a></Link> | <Link href="#"><a>Cài đặt</a></Link> | <button onClick={handleLogoutBtn}>Đăng xuất</button>
