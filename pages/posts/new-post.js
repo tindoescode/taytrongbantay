@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import convertToSlug from '../../utils/convertToSlug';
 import Router from 'next/router';
-import UploadInput from '../../components/UploadInput';
 import { Widget } from "@uploadcare/react-widget";
+import { useSelector } from 'react-redux';
 
 export default function NewPost() {
   const editorRef = useRef();
@@ -17,8 +17,14 @@ export default function NewPost() {
   const [thumbnail, setThumbnail] = useState(null);
   const [createObjectURL, setCreateObjectURL] = useState(null);
   const { CKEditor, InlineEditor } = editorRef.current || { };
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
+    if(!user) {
+      Router.push('/')
+      return
+    }
+    
     editorRef.current = {
       // CKEditor: require('@ckeditor/ckeditor5-react'), // depricated in v3
       CKEditor: require('@ckeditor/ckeditor5-react').CKEditor, // v3+
