@@ -34,7 +34,7 @@ export default function CategoryView() {
   return (
     <div>
       <Head>
-        <title>{category?.name} - Taytrongbantay</title>
+        <title>{category?.name || 'Loading...'} - Taytrongbantay</title>
         <meta name="description" content="Taytrongbantay" />
       </Head>
 
@@ -43,15 +43,16 @@ export default function CategoryView() {
           {category?.name}
         </div>
         <ContentWrapper>
-        {posts.map((post) => {
-          return (
-            <Link key={post.slug} href={`/posts/${post.slug}`}>
-              <a>
-                <div className="">{post.title}</div>
-              </a>
-            </Link>
-          );
-        })}
+          {posts &&
+            posts.map((post) => {
+              return (
+                <Link key={post.slug} href={`/posts/${post.slug}`}>
+                  <a>
+                    <div className="">{post.title}</div>
+                  </a>
+                </Link>
+              );
+            })}
         </ContentWrapper>
       </main>
     </div>
