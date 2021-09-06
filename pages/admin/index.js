@@ -49,24 +49,25 @@ const AdminPanel = () => {
       <div className="col-span-2">
         <Title>Quản lý chuyên mục</Title>
         <ContentWrapper>
-          {categories.map((category, index) => (
-            <Item key={category.slug}>
-              <Link href={`/category/${category.slug}`}>
-                <a>
-                  {category.name} ({category.slug})
+          {categories &&
+            categories.map((category, index) => (
+              <Item key={category.slug}>
+                <Link href={`/category/${category.slug}`}>
+                  <a>
+                    {category.name} ({category.slug})
+                  </a>
+                </Link>
+                &nbsp;
+                <a
+                  onClick={openModal}
+                  data-category={index}
+                  data-action="edit"
+                  className="font-bold"
+                >
+                  [Sửa]
                 </a>
-              </Link>
-              &nbsp;
-              <a
-                onClick={openModal}
-                data-category={index}
-                data-action="edit"
-                className="font-bold"
-              >
-                [Sửa]
-              </a>
-            </Item>
-          ))}
+              </Item>
+            ))}
         </ContentWrapper>
       </div>
 
