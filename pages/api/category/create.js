@@ -12,7 +12,6 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     try {
       var { name, parent, description, slug } = req.body;
-      console.log(name, parent, description, slug);
 
       if (!name) throw "Xin hãy nhập đủ các trường.";
 
@@ -33,7 +32,7 @@ const handler = async (req, res) => {
       console.log(`[CATEGORY] Cat ${name} created.`, cat);
     } catch (e) {
       var error = e;
-      console.log(e);
+      console.log('category error', e);
       res.status(200).json({ error: e });
     } finally {
       if (!error) res.status(200).json(cat);

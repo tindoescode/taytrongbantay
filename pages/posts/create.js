@@ -9,7 +9,10 @@ import { Widget } from "@uploadcare/react-widget";
 export default function NewPost() {
   const titleRef = useRef();
   const descRef = useRef();
+  const categoryRef = useRef();
   const [slug, setSlug] = useState("");
+  const [category, setCategory] = useState("");
+  const [categories, setCats] = useState([]);
   const [description, setDesc] = useState("");
   const [content, setContent] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
@@ -19,6 +22,10 @@ export default function NewPost() {
       if (!res.data.isLoggedIn || !["admin", "mod"].includes(res.data?.admin)) {
         Router.push("/");
       }
+    });
+
+    axios.get("/api/category").then((res) => {
+      setCats(res.data);
     });
   }, []);
 
@@ -36,6 +43,10 @@ export default function NewPost() {
     setSlug(e.target.value);
   };
 
+  const onCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
   const onPostSubmit = (e) => {
     e.preventDefault();
 
@@ -45,8 +56,8 @@ export default function NewPost() {
 
     axios
       .post(
-        "/api/posts/new-post",
-        { content, title, tags, slug, thumbnail, description },
+        "/api/posts/create",
+        { content, title, tags, slug, thumbnail, description, category },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -114,6 +125,28 @@ export default function NewPost() {
                 clearable
               />
             </div>
+          </div>
+
+          <div className="flex flex-col">
+            <label
+              htmlFor="title"
+              className="p-2 bg-green-400 text-white font-bold"
+            >
+              Chuyên mục
+            </label>
+            <select
+              ref={categoryRef}
+              className="bg-white shadow w-full p-3 border border-green-400 block mb-2"
+              onChange={onCategoryChange}
+            >
+              {categories.map((category) => {
+                return (
+                  <option value={category._id} key={category._id}>
+                    {category.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
         </div>
 

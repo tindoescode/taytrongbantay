@@ -23,6 +23,10 @@ const AdminPanel = () => {
     fetchCategory(setCat);
   }, []);
 
+  const openModal = (e) => {
+    console.log(e.target.dataset);
+  };
+
   return (
     <div className="AdminPanel md:grid grid-cols-6">
       <div className="col-span-2">
@@ -51,9 +55,9 @@ const AdminPanel = () => {
                 </a>
               </Link>
               &nbsp;
-              <a>[Sửa]</a>
-              &nbsp;
-              <a>[Xóa]</a>
+              <a onClick={openModal} data-category={index} data-action="edit">
+                [Sửa]
+              </a>
             </div>
           ))}
         </ContentWrapper>

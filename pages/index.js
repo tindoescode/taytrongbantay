@@ -1,8 +1,18 @@
+import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import NewPosts from "../components/NewPosts";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  let [categories, setCats] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/category/").then((res) => {
+      setCats(res.data);
+    });
+  }, []);
+
   return (
     <div>
       <Head>
@@ -15,6 +25,17 @@ export default function Home() {
           <div className="rounded-md shadow-sm">
             <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">
               <h2 className="text-xl p-2">Chuyên mục</h2>
+              {categories.map((category) => {
+                return (
+                  <Link key={category._id} href={`/category/${category.slug}`}>
+                    <a>
+                      <div className="p-2 hover:bg-gray-600 hover:text-white transition">
+                        {category.name}
+                      </div>
+                    </a>
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="bg-gray-100 round-md shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
@@ -26,7 +47,7 @@ export default function Home() {
                   </div>
                 </a>
               </Link>
-              <Link href="/posts/new-post">
+              <Link href="/posts/create">
                 <a>
                   <div className="p-2 hover:bg-gray-600 hover:text-white transition">
                     Đăng bài
