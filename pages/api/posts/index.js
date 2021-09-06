@@ -30,10 +30,10 @@ const handler = async (req, res) => {
       .sort({ time: "desc" })
       .limit(limit)
       .populate([
-        {
-          path: "author",
-          select: "level isonline username name avatar gender admin",
-        },
+        // {
+        //   path: "author",
+        //   select: "level isonline username name avatar gender admin",
+        // },
         {
           path: "category",
         },
