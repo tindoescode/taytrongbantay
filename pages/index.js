@@ -25,7 +25,7 @@ export default function Home() {
           <div className="rounded-md shadow-sm">
             <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">
               <h2 className="text-xl p-2">Chuyên mục</h2>
-              {categories.map((category) => {
+              {categories && categories.map((category) => {
                 return (
                   <Link key={category._id} href={`/category/${category.slug}`}>
                     <a>
