@@ -19,7 +19,9 @@ const handler = async (req, res) => {
 
     delete user.password;
 
-    res.json({ isLoggedIn: true, ...user });
+    const result = { isLoggedIn: true, ...user };
+
+    res.json(result);
   } catch (e) {
     res.json({ isLoggedIn: false, reason: e });
   }

@@ -3,12 +3,14 @@ import ContentWrapper from "../../components/ContentWrapper";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
 import Button from "../../components/Button";
+import Item from "../../components/Item";
 import Form from "../../components/Form";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { createNewCategory, fetchCategory } from "../../lib/admin";
 import axios from "axios";
 import Link from "next/link";
+import Modal from "../../components/Modal";
 
 const AdminPanel = () => {
   const [categories, setCat] = useState([]);
@@ -48,20 +50,27 @@ const AdminPanel = () => {
         <Title>Quản lý chuyên mục</Title>
         <ContentWrapper>
           {categories.map((category, index) => (
-            <div key={category.slug}>
+            <Item key={category.slug}>
               <Link href={`/category/${category.slug}`}>
                 <a>
                   {category.name} ({category.slug})
                 </a>
               </Link>
               &nbsp;
-              <a onClick={openModal} data-category={index} data-action="edit">
+              <a
+                onClick={openModal}
+                data-category={index}
+                data-action="edit"
+                className="font-bold"
+              >
                 [Sửa]
               </a>
-            </div>
+            </Item>
           ))}
         </ContentWrapper>
       </div>
+
+      {/* <Modal /> */}
     </div>
   );
 };
