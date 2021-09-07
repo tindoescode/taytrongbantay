@@ -32,15 +32,15 @@ const AdminPanel = () => {
   return (
     <div className="AdminPanel md:grid grid-cols-6">
       <div className="col-span-2">
-        <Title style="pink">Tạo chuyên mục</Title>
-        <ContentWrapper style="pink">
+        <Title>Tạo chuyên mục</Title>
+        <ContentWrapper>
           <Form onSubmit={createNewCategory(setCat)} className="flex flex-col">
             <label>Tên chuyên mục:</label>
-            <Input style="pink" placeholder="Thông báo" name="name" />
+            <Input placeholder="Thông báo" name="name" />
             <label>Slug (URL):</label>
-            <Input style="pink" name="slug" />
+            <Input name="slug" />
             <label>Mô tả:</label>
-            <TextArea style="pink" name="description" />
+            <TextArea name="description" />
             <Button>Tạo</Button>
           </Form>
         </ContentWrapper>

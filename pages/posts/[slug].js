@@ -6,11 +6,17 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import CommentForm from "../../components/posts/CommentForm";
 import { useSelector } from "react-redux";
+import FacebookLoading from "../../components/FacebookLoading";
 
-export default function SinglePost({ data }) {
-  var { title, content, author } = data;
+export default function SinglePost({ data: { title, content, author } }) {
   const user = useSelector((state) => state.user);
 
+  if (!title)
+    return (
+      <p className="flex items-center justify-center text-lg">
+        Loading... <FacebookLoading />
+      </p>
+    );
   return (
     <div>
       <Head>
@@ -70,7 +76,12 @@ export async function getServerSideProps(context) {
 
   // Fetch data from external API
   const res = await axios.get(`${process.env.baseUrl}/api/posts/${slug}`);
-  const data = res.data;
+
+  const { data } = res;
+
+  if (!data) {
+    return { notFound: true };
+  }
 
   // Pass data to the page via props
   return { props: { data } };

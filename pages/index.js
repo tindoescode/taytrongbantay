@@ -4,6 +4,7 @@ import Link from "next/link";
 import NewPosts from "../components/NewPosts";
 import { useEffect, useState } from "react";
 import FacebookLoading from "../components/FacebookLoading";
+import Title from "../components/Title";
 import Skeleton from "react-loading-skeleton";
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
                   );
                 })}
 
-              {!categories && <Skeleton count={3} height={50}/>}
+              {!categories && <Skeleton count={3} height={50} />}
             </div>
 
             <div className="bg-gray-100 round-md shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
@@ -67,7 +68,10 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div className="rounded-md shadow-sm col-span-2">
+
+          <div className="col-span-2">
+            <Title>Bài mới</Title>
+            <div className="rounded-md shadow-sm"></div>
             <NewPosts />
           </div>
         </div>
