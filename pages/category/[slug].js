@@ -1,10 +1,11 @@
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import Title from "../../components/Title";
+// import Title from "../../components/Title";
 import ContentWrapper from "../../components/ContentWrapper";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import FacebookLoading from "../../components/FacebookLoading";
 
 export default function CategoryView() {
   let [category, setCategory] = useState(null);
@@ -53,7 +54,9 @@ export default function CategoryView() {
               return (
                 <Link key={post.slug} href={`/posts/${post.slug}`}>
                   <a>
-                    <div className="">{post.title}</div>
+                    <div className="divide-y divide-yellow-500">
+                      {post.title}
+                    </div>
                   </a>
                 </Link>
               );
