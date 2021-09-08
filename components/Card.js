@@ -43,4 +43,4 @@ const Card = ({
   );
 };
 
-export default PostCard;
+export default Card;
