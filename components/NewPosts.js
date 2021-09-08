@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PostCard from "../components/PostCard";
+import Card from "./Card";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 
@@ -24,7 +24,7 @@ export default function NewPosts() {
         {posts &&
           posts.map((post, index) => {
             return (
-              <PostCard
+              <Card
                 thumbnail={post.thumbnail}
                 key={index}
                 href={"/posts/" + post.slug}

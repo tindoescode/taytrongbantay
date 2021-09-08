@@ -30,11 +30,16 @@ export default function CategoryView() {
     }
   }, [router.query]);
 
-  if (!category || !posts) return <p>Loading..</p>;
+  if (!category || !posts)
+    return (
+      <p className="flex items-center justify-center text-lg">
+        Loading... <FacebookLoading />
+      </p>
+    );
   return (
     <div>
       <Head>
-        <title>{category?.name || 'Loading...'} - Taytrongbantay</title>
+        <title>{category?.name || "Loading..."} - Taytrongbantay</title>
         <meta name="description" content="Taytrongbantay" />
       </Head>
 

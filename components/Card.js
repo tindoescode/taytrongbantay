@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 
-const PostCard = ({
+const Card = ({
   href = "#",
   title,
   description,
