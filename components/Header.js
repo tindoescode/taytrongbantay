@@ -28,7 +28,7 @@ const NavbarItem = styled.div`
   &:first-of-type {
     margin-right: 10px;
   }
-  ${tw`hover:bg-green-300 hover:text-white transition md:relative`};
+  ${tw`hover:bg-green-300 hover:text-white transition `};
 `;
 // .NavbarItem svg {
 //   min-height: 70%;

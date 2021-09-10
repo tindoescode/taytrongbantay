@@ -1,4 +1,4 @@
-![alt text](./images/ttbt_cover.jpg)
+![taytrongbantay banner](./images/ttbt_cover.jpg)
 
 - [1. Giới thiệu dự án](#1-giới-thiệu-dự)
   - [1.1. Công nghệ](#11-công-nghệ)
@@ -35,6 +35,7 @@ Taytrongbantay sử dụng nextjs để có thể chạy frontend và backend tr
 ### 2.2.1. Backend - Nextjs
 
 - [x] Đăng nhập - Đăng ký
+![taytrongbantay banner](./images/ttbt_cover.jpg)
 - [x] Đăng bài - Sửa bài - Xoá bài
 - [ ] Admin Panel
 - [ ] Bình luận
