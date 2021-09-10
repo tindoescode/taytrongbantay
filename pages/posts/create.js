@@ -45,7 +45,7 @@ export default function NewPost() {
 
   return (
     <>
-      <NewPostForm http://localhost:3000/={onPostSubmit} />
+      <NewPostForm onPostSubmit={onPostSubmit} />
     </>
   );
 }
