@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import FacebookLoading from "../components/FacebookLoading";
 import Title from "../components/Title";
 import Skeleton from "react-loading-skeleton";
+import tw, { styled } from "twin.macro";
 
 export default function Home() {
   let [categories, setCats] = useState();
@@ -27,10 +28,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <div className="md:grid grid-cols-3 gap-4">
-          <div className="rounded-md shadow-sm">
-            <div className="bg-gray-100 round-md shadow-md hover:shadow-xl transition ease-in-out duration-300">
-              <h2 className="text-xl p-2">Chuyên mục</h2>
+        <div tw="md:grid grid-cols-3 gap-4">
+          <div tw="rounded-md shadow-sm">
+            <div tw="bg-gray-100 rounded shadow-md hover:shadow-xl transition ease-in-out duration-300">
+              <h2 tw="text-xl p-2">Chuyên mục</h2>
               {categories &&
                 categories.map((category) => {
                   return (
@@ -39,7 +40,7 @@ export default function Home() {
                       href={`/category/${category.slug}`}
                     >
                       <a>
-                        <div className="p-2 hover:bg-gray-600 hover:text-white transition">
+                        <div tw="p-2 hover:bg-gray-600 hover:text-white transition">
                           {category.name}
                         </div>
                       </a>
@@ -50,18 +51,18 @@ export default function Home() {
               {!categories && <Skeleton count={3} height={50} />}
             </div>
 
-            <div className="bg-gray-100 round-md shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
-              <h2 className="text-xl p-2">Phím tắt</h2>
+            <div tw="bg-gray-100 rounded shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
+              <h2 tw="text-xl p-2">Phím tắt</h2>
               <Link href="/admin">
                 <a>
-                  <div className="p-2 hover:bg-gray-600 hover:text-white transition">
+                  <div tw="p-2 hover:bg-gray-600 hover:text-white transition">
                     Quản lý chuyên mục
                   </div>
                 </a>
               </Link>
               <Link href="/posts/create">
                 <a>
-                  <div className="p-2 hover:bg-gray-600 hover:text-white transition">
+                  <div tw="p-2 hover:bg-gray-600 hover:text-white transition">
                     Đăng bài
                   </div>
                 </a>
@@ -69,9 +70,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="col-span-2">
+          <div tw="col-span-2">
             <Title>Bài mới</Title>
-            <div className="rounded-md shadow-sm"></div>
+            <div tw="rounded-md shadow-sm"></div>
             <NewPosts />
           </div>
         </div>

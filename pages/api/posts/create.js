@@ -1,8 +1,9 @@
 import connectDB from "../../../middleware/mongodb";
-// import bcrypt from '../../middleware/bcrypt';
-// import User from '../../models/user';
+import mongoose from "mongoose";
+// import User from '../../models/user'; // use when populate user
 import requireAuth from "../../../middleware/requireAuth";
 import Post from "../../../models/post";
+import User from "../../../models/UserModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
 
@@ -12,13 +13,20 @@ const handler = async (req, res) => {
       var { content, title, tags, slug, thumbnail, description, category } =
         req.body;
 
-      if (!(content && title && tags && slug && description))
+      if (!(content && title && tags && slug && description && category))
         throw "Xin hãy nhập đủ các trường.";
 
       var token = readCookie(req.headers.cookie, "ttbt_token");
 
       console.log("debug", token, process.env.JWT_SECRET);
       const user = jwt.verify(token, process.env.JWT_SECRET);
+
+      const isAdmin = await User.findOne({
+        id: user.id,
+        admin: "admin",
+      }).lean();
+
+      if (!isAdmin) throw "Bạn không phải là admin";
 
       var post = await Post.create({
         content,

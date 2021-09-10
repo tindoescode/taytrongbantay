@@ -11,6 +11,8 @@ import { createNewCategory, fetchCategory } from "../../lib/admin";
 import axios from "axios";
 import Link from "next/link";
 import Modal from "../../components/Modal";
+import FacebookLoading from "../../components/FacebookLoading";
+import tw, { styled } from "twin.macro";
 
 const AdminPanel = () => {
   const [categories, setCat] = useState([]);
@@ -30,11 +32,11 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="AdminPanel md:grid grid-cols-6">
-      <div className="col-span-2">
+    <div className="AdminPanel" tw="md:grid grid-cols-6 md:gap-2">
+      <div tw="col-span-2">
         <Title>Tạo chuyên mục</Title>
         <ContentWrapper>
-          <Form onSubmit={createNewCategory(setCat)} className="flex flex-col">
+          <Form onSubmit={createNewCategory(setCat)} tw="flex flex-col">
             <label>Tên chuyên mục:</label>
             <Input placeholder="Thông báo" name="name" />
             <label>Slug (URL):</label>
@@ -46,9 +48,14 @@ const AdminPanel = () => {
         </ContentWrapper>
       </div>
 
-      <div className="col-span-2">
+      <div tw="col-span-2">
         <Title>Quản lý chuyên mục</Title>
         <ContentWrapper>
+          {!categories && (
+            <p tw="flex items-center justify-center text-lg">
+              Loading... <FacebookLoading />
+            </p>
+          )}
           {categories &&
             categories.map((category, index) => (
               <Item key={category.slug}>
@@ -62,7 +69,7 @@ const AdminPanel = () => {
                   onClick={openModal}
                   data-category={index}
                   data-action="edit"
-                  className="font-bold"
+                  tw="font-bold"
                 >
                   [Sửa]
                 </a>

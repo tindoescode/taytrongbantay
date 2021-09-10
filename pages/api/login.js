@@ -17,10 +17,10 @@ const handler = async (req, res) => {
       }).lean();
 
       if (!user) {
-        throw { error: "Nick name không tồn tại." };
+        throw { message: "Nick name không tồn tại." };
       }
       if (user.password == "0")
-        throw { error: "Tài khoản này chỉ có thể đăng nhập bằng facebook" };
+        throw { message: "Tài khoản này chỉ có thể đăng nhập bằng facebook" };
 
       if (!(await bcrypt.compare(password, user.password)))
         throw { message: "Mật khẩu không chính xác" };

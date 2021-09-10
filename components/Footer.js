@@ -1,39 +1,45 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React from "react";
+import { useEffect } from "react";
+import tw, { styled } from "twin.macro";
 
+const FooterWrapper = styled.div`
+  ${tw`w-screen bg-green-100 p-1 fixed bottom-0 italic font-light text-center`};
+`;
 function Footer() {
-    const loadFacebookSDK = () => {
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '575780820222948',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v11.0'
-        });
-          
-        FB.AppEvents.logPageView();   
-          
-      };
-    
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    } 
+  const loadFacebookSDK = () => {
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: "575780820222948",
+        cookie: true,
+        xfbml: true,
+        version: "v11.0",
+      });
 
-    useEffect(() => {
-      loadFacebookSDK();
-    }, [])
+      FB.AppEvents.logPageView();
+    };
 
-    return (
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  };
 
-        <div className="w-screen bg-green-100 p-1 fixed bottom-0 italic font-light text-center">
-            Taytrongbantay, bản thử nghiệm không chính thức 
-        </div>
-    )
+  useEffect(() => {
+    loadFacebookSDK();
+  }, []);
+
+  return (
+    <FooterWrapper>
+      Taytrongbantay, bản thử nghiệm không chính thức
+    </FooterWrapper>
+  );
 }
 
-export default Footer
+export default Footer;
