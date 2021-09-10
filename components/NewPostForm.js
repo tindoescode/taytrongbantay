@@ -12,17 +12,19 @@ const ItemWrapper = styled.div`
   }
 `;
 
-export default function NewPost({ onPostSubmit }) {
+export default function NewPostForm({ onPostSubmit, initialState }) {
   const titleRef = useRef();
   const descRef = useRef();
   const categoryRef = useRef();
   const [slug, setSlug] = useState("");
   const [category, setCategory] = useState("");
   const [categories, setCats] = useState([]);
+  const [tags, setTags] = useState([]);
   const [description, setDesc] = useState("");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
+  let old_slug = initialState.slug;
 
   useEffect(() => {
     axios.get("/api/category").then((res) => {
@@ -30,7 +32,16 @@ export default function NewPost({ onPostSubmit }) {
 
       if (res.data[0]) setCategory(res.data[0]._id);
     });
-  }, []);
+    if (initialState) {
+      setContent(initialState.content);
+      setTitle(initialState.title);
+      setTags(initialState.tags);
+      setThumbnail(initialState.thumbnail);
+      setDesc(initialState.description);
+      setCategory(initialState.category);
+      setSlug(initialState.slug);
+    }
+  }, [initialState]);
 
   const onTitleChange = (e) => {
     setSlug(convertToSlug(e.target.value));
@@ -60,6 +71,7 @@ export default function NewPost({ onPostSubmit }) {
           </label>
           <input
             onChange={onTitleChange}
+            value={title}
             id="title"
             ref={titleRef}
             tw="w-full shadow p-3 border border-green-400 block mb-2"
@@ -86,7 +98,8 @@ export default function NewPost({ onPostSubmit }) {
           <label htmlFor="slug" tw="p-2 bg-green-400 text-white font-bold">
             Thumbnail
           </label>
-          <div tw="shadow py-3 border border-green-400 mb-2 flex justify-center">
+          <div tw="shadow py-3 border border-green-400 mb-2 flex flex-col items-center p-2">
+            {thumbnail && <img src={thumbnail} tw="mb-3" />}
             <Widget
               publicKey="533d4b8f6a11de77ba81"
               onChange={uploadToClient}
@@ -102,6 +115,7 @@ export default function NewPost({ onPostSubmit }) {
           <select
             ref={categoryRef}
             tw="w-full bg-white shadow p-3 border border-green-400 block mb-2"
+            value={category}
             onChange={onCategoryChange}
           >
             {categories.map((category) => {
@@ -116,8 +130,12 @@ export default function NewPost({ onPostSubmit }) {
       </ItemWrapper>
 
       <ItemWrapper tw="md:col-span-2">
-        <label tw="p-2 bg-green-400 text-white font-bold">Nội dung</label>
-        <Editor setContent={setContent} />
+        <div>
+          <label tw="-mb-5 p-2 bg-green-400 text-white font-bold">
+            Nội dung
+          </label>
+        </div>
+        <Editor setContent={setContent} initialContent={content} />
 
         <div style={{ marginTop: "1rem" }}>
           <label
@@ -131,6 +149,7 @@ export default function NewPost({ onPostSubmit }) {
             ref={descRef}
             tw="shadow w-full p-3 border border-green-400 block mb-2"
             type="text"
+            value={description}
             placeholder="Một sự việc abc những tưởng không ai quan tâm nhưng thật sự quan trọng..."
             rows="4"
           ></textarea>
@@ -141,6 +160,7 @@ export default function NewPost({ onPostSubmit }) {
         <button
           tw="p-4 bg-green-500 text-white mt-3 hover:bg-green-700 transition ease-in rounded shadow-md"
           onClick={onPostSubmit({
+            old_slug,
             content,
             title,
             tags: "",

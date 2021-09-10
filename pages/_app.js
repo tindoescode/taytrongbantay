@@ -1,5 +1,5 @@
 // import '../styles/global.css'
-import { GlobalStyles } from "twin.macro";
+import GlobalStyles from "../styles/GlobalStyles";
 import Layout from "../components/Layout";
 import { Provider } from "react-redux";
 import { useStore } from "../store";

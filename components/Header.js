@@ -169,20 +169,20 @@ function Header() {
               ]}
             >
               {loginMenu && !user && (
-                <form>
-                  <div tw="flex items-center justify-end">
+                <form tw="">
+                  <div tw="grid grid-cols-3 items-center">
                     <label htmlFor="username" tw="text-black mr-2">
                       Tên đăng nhập
                     </label>
                     <input
                       ref={inputName}
                       name="username"
-                      tw="rounded p-2 mt-2 ring-1 ring-green-500 text-black"
+                      tw="col-span-2 rounded p-2 mt-2 ring-1 ring-green-500 text-black"
                       placeholder="Tên đăng nhập"
                     ></input>
                   </div>
 
-                  <div tw="flex items-center justify-end">
+                  <div tw="grid grid-cols-3 items-center">
                     <label htmlFor="username" tw="text-black mr-2">
                       Mật khẩu
                     </label>
@@ -190,7 +190,7 @@ function Header() {
                       ref={inputPassword}
                       name="password"
                       type="password"
-                      tw="rounded p-2 my-2 ring-1 ring-green-500 text-black"
+                      tw="col-span-2 rounded p-2 my-2 ring-1 ring-green-500 text-black"
                       placeholder="Mật khẩu"
                     ></input>
                   </div>
@@ -222,9 +222,7 @@ function Header() {
               )}
 
               {loginMenu && user && (
-                <div
-                  tw="flex items-center"
-                >
+                <div tw="flex items-center">
                   <img
                     src={user.avatar}
                     alt={user.name}

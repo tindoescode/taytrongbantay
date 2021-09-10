@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function Editor({ setContent }) {
+export default function Editor({ setContent, initialContent }) {
   const editorRef = useRef();
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { CKEditor, InlineEditor } = editorRef.current || {};
@@ -164,6 +164,10 @@ export default function Editor({ setContent }) {
             const data = editor.getData();
 
             setContent(data);
+
+            if (initialContent) {
+              setContent(initialContent);
+            }
           }}
           onChange={(event, editor) => {
             const data = editor.getData();

@@ -1,5 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Markup } from "interweave";
 // import Image from 'next/image'
@@ -7,10 +8,10 @@ import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import CommentForm from "../../components/posts/CommentForm";
-import { useSelector } from "react-redux";
 import FacebookLoading from "../../components/FacebookLoading";
 import { useState } from "react";
 import tw from "twin.macro";
+import { toast } from "react-toastify";
 
 const NewPostForm = dynamic(
   () => {
@@ -19,23 +20,44 @@ const NewPostForm = dynamic(
   { ssr: false }
 );
 
-export default function SinglePost({ data: { title, content, author } }) {
-  const user = useSelector((state) => state.user);
+export default function SinglePost({
+  data: {
+    title,
+    content,
+    author,
+    tags,
+    slug,
+    thumbnail,
+    description,
+    category,
+  },
+}) {
   const [modal, setModal] = useState(false);
+  const router = useRouter();
 
-  const openModal = () => {
+  const toggleModal = () => {
     setModal(!modal);
   };
 
   const onPostSubmit =
-    ({ content, title, tags, slug, thumbnail, description, category }) =>
+    ({
+      old_slug,
+      content,
+      title,
+      tags,
+      slug,
+      thumbnail,
+      description,
+      category,
+    }) =>
     (e) => {
       e.preventDefault();
 
       let tags = "none";
 
       axios
-        .post("/api/posts/create", {
+        .put("/api/posts/edit", {
+          old_slug,
           content,
           title,
           tags,
@@ -45,12 +67,13 @@ export default function SinglePost({ data: { title, content, author } }) {
           category,
         })
         .then((res) => {
-          if (res.data.title === title) {
-            toast("Bài viết đã lên sóng🤗");
+          if (!res.data.error?.message) {
+            toast("Bài viết đã được sửa🤗");
 
-            Router.push(`/posts/${slug}`);
+            toggleModal();
+            router.push(`/posts/${slug}`);
           } else {
-            toast(`Lỗi: ${res.data.error}`);
+            toast(`Lỗi: ${res.data.error.message}`);
           }
         });
     };
@@ -70,10 +93,22 @@ export default function SinglePost({ data: { title, content, author } }) {
       <main>
         {modal && (
           <Modal
-            onCancel={{ f: openModal, text: "Đóng" }}
+            noSubmitButton={true}
+            onCancel={{ f: toggleModal, text: "Đóng" }}
             title="Chỉnh sửa bài viết"
           >
-            <NewPostForm onPostSubmit={onPostSubmit}></NewPostForm>
+            <NewPostForm
+              onPostSubmit={onPostSubmit}
+              initialState={{
+                content,
+                title,
+                tags, // tag is unused now
+                slug,
+                thumbnail,
+                description,
+                category,
+              }}
+            ></NewPostForm>
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
@@ -107,7 +142,7 @@ export default function SinglePost({ data: { title, content, author } }) {
             </div>
           </div>
           <div tw="mt-2 flex justify-end">
-            <Button onClick={openModal}>Sửa</Button>
+            <Button onClick={toggleModal}>Sửa</Button>
             <Button>Xóa</Button>
           </div>
         </div>
