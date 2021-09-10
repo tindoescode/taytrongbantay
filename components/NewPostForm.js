@@ -24,7 +24,8 @@ export default function NewPostForm({ onPostSubmit, initialState }) {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState(null);
-  let old_slug = initialState.slug;
+
+  if (initialState && slug) var old_slug = initialState?.slug;
 
   useEffect(() => {
     axios.get("/api/category").then((res) => {
