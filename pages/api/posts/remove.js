@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
 
 const handler = async (req, res) => {
-  if (req.method === "PUT") {
+  if (req.method === "DELETE") {
     try {
       // Admin check
       var token = readCookie(req.headers.cookie, "ttbt_token");
@@ -24,40 +24,14 @@ const handler = async (req, res) => {
       if (!isAdmin) throw { message: "Bạn không phải là admin" };
 
       // Check for fields
-      var {
-        old_slug,
-        content,
-        title,
-        tags,
-        slug,
-        thumbnail,
-        description,
-        category,
-      } = req.body;
+      var { slug } = req.body;
 
-      if (!(old_slug && content && title && tags && slug && description))
-        throw "Xin hãy nhập đủ các trường.";
+      if (!slug) throw "Xin hãy nhập đủ các trường.";
 
-      const update = {
-        content,
-        title,
-        tags,
-        slug,
-        thumbnail,
-        description,
-        category,
-        lastEdited: {
-          by: user.id,
-          lastEdited: Date.now(),
-        },
-      };
+      var post = await Post.findOneAndDelete({ slug });
 
-      var post = await Post.findOneAndUpdate({ slug: old_slug }, update, {
-        new: true,
-      });
-
-      if (!post) throw { message: "Update fail" };
-      console.log(`[POST] Post ${title} editted.`, post);
+      if (!post) throw { message: "Delete fail" };
+      console.log(`[POST] Post ${title} delete.`, post);
     } catch (e) {
       var error = e;
       res.status(200).json({ error: e });

@@ -12,6 +12,7 @@ import FacebookLoading from "../../components/FacebookLoading";
 import { useState } from "react";
 import tw from "twin.macro";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const NewPostForm = dynamic(
   () => {
@@ -32,13 +33,18 @@ export default function SinglePost({
     category,
   },
 }) {
-  const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [removeModal, setRemoveModal] = useState(false);
   const router = useRouter();
+  const user = useSelector((state) => state.user);
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const toggleEditModal = () => {
+    setEditModal(!editModal);
   };
 
+  const toggleRemoveModal = () => {
+    setRemoveModal(!removeModal);
+  };
   const onPostSubmit =
     ({
       old_slug,
@@ -77,6 +83,27 @@ export default function SinglePost({
           }
         });
     };
+
+  const removePost = () => {
+    axios
+      .delete("/api/posts/remove", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          slug,
+        },
+      })
+      .then((res) => {
+        if (!res.data.error?.message) {
+          toast.success("Bài viết đã được xóa");
+
+          router.push("/");
+        } else {
+          toast.error(`Lỗi: ${res.data.error.message}`);
+        }
+      });
+  };
   if (!title)
     return (
       <p tw="flex items-center justify-center text-lg">
@@ -91,10 +118,10 @@ export default function SinglePost({
       </Head>
 
       <main>
-        {modal && (
+        {editModal && (
           <Modal
             noSubmitButton={true}
-            onCancel={{ f: toggleModal, text: "Đóng" }}
+            onCancel={{ f: toggleEditModal, text: "Đóng" }}
             title="Chỉnh sửa bài viết"
           >
             <NewPostForm
@@ -109,6 +136,18 @@ export default function SinglePost({
                 category,
               }}
             ></NewPostForm>
+          </Modal>
+        )}
+
+        {removeModal && (
+          <Modal
+            title="Xóa bài viết"
+            onCancel={{ f: toggleRemoveModal, text: "Đóng" }}
+            onProcess={{ f: removePost, text: "Xóa" }}
+          >
+            <p>
+              Bạn có chắc muốn xóa bài viết, bạn không thể hoàn tác tác vụ này.
+            </p>
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
@@ -141,10 +180,12 @@ export default function SinglePost({
               }
             </div>
           </div>
-          <div tw="mt-2 flex justify-end">
-            <Button onClick={toggleModal}>Sửa</Button>
-            <Button>Xóa</Button>
-          </div>
+          {user?.admin === "admin" && (
+            <div tw="mt-2 flex justify-end gap-1">
+              <Button onClick={toggleEditModal}>Sửa</Button>
+              <Button onClick={toggleRemoveModal}>Xóa</Button>
+            </div>
+          )}
         </div>
       </main>
 

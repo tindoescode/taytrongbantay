@@ -1,6 +1,6 @@
 import tw, { styled } from "twin.macro";
 
-const Button = ({ onClick = null, style = "green", children }) => {
+const Button = ({ onClick = null, children }) => {
   return (
     <button
       onClick={onClick}
