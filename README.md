@@ -1,4 +1,4 @@
-![alt text](https://github.com/tindoescode/taytrongbantay/blob/master/images/taytrongbantay.jpg?raw=true)
+![alt text](./images/ttbt_cover.jpg)
 
 - [1. Giới thiệu dự án](#1-giới-thiệu-dự)
   - [1.1. Công nghệ](#11-công-nghệ)
@@ -36,9 +36,7 @@ Taytrongbantay sử dụng nextjs để có thể chạy frontend và backend tr
 
 - [x] Đăng nhập - Đăng ký
 - [x] Đăng bài - Sửa bài - Xoá bài
-- [ ] Làng - COMING SOON
-  - [ ] Danh sách các nhóm nhỏ trong làng
-    - [ ] Hiển thị thông tin các nhóm nhỏ
-  - [ ] Tham gia các nhóm nhỏ
-    - [ ] Hiển thị danh sách thành viên các nhóm nhỏ
-- [ ] Cửa hàng - COMING SOON
+- [ ] Admin Panel
+- [ ] Bình luận
+- [ ] React
+- [ ] Xếp hạng thành viên
