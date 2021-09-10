@@ -3,7 +3,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Markup } from "interweave";
-// import Image from 'next/image'
 import Title from "../../components/Title";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";

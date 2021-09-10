@@ -13,9 +13,15 @@ import Link from "next/link";
 import Modal from "../../components/Modal";
 import FacebookLoading from "../../components/FacebookLoading";
 import tw, { styled } from "twin.macro";
+import { toast } from "react-toastify";
 
 const AdminPanel = () => {
+  // Creating Model
   const [categories, setCat] = useState([]);
+
+  // Edit model
+  const [editModal, setEditModal] = useState(false);
+  const [targetCat, setTargetCat] = useState();
 
   useEffect(() => {
     axios.get("/api/user/getdata").then((res) => {
@@ -25,14 +31,62 @@ const AdminPanel = () => {
     });
 
     fetchCategory(setCat);
-  }, []);
+  }, [categories]);
 
-  const openModal = (e) => {
-    console.log(e.target.dataset);
+  const toggleEditModal = (e) => {
+    setTargetCat({ ...categories[e?.target?.dataset?.category] });
+    console.log(targetCat);
+    setEditModal(!editModal);
   };
 
+  const editTargetCategory =
+    () =>
+    ({ id, name, slug, description }) => {
+      console.log(id, name, slug, description);
+
+      axios
+        .put("/api/category/edit", { id, name, slug, description })
+        .then((response) => {
+          if (!response.data.error?.message) {
+            toast.success("Chỉnh sửa bài viết thành công");
+            toggleEditModal();
+            setCat([]);
+            Router.push("/admin");
+          } else {
+            toast.error(response.data.error?.message);
+          }
+        });
+    };
+
   return (
-    <div className="AdminPanel" tw="md:grid grid-cols-6 md:gap-2">
+    <div className="AdminPanel" tw="md:(grid grid-cols-6 gap-3)">
+      {editModal && (
+        <Modal
+          title="Edit Category"
+          onCancel={{ f: toggleEditModal }}
+          noSubmitButton
+        >
+          <Form
+            defaultValues={{
+              id: targetCat._id,
+              name: targetCat.name,
+              slug: targetCat.slug,
+              description: targetCat.description,
+            }}
+            onSubmit={editTargetCategory(setCat)}
+            tw="flex flex-col gap-1"
+          >
+            <Input type="hidden" name="id" />
+            <label>Tên chuyên mục:</label>
+            <Input placeholder="Thông báo" name="name" />
+            <label>Slug (URL):</label>
+            <Input name="slug" />
+            <label>Mô tả:</label>
+            <TextArea name="description" />
+            <Button>Sửa</Button>
+          </Form>
+        </Modal>
+      )}
       <div tw="col-span-2">
         <Title>Tạo chuyên mục</Title>
         <ContentWrapper>
@@ -66,7 +120,7 @@ const AdminPanel = () => {
                 </Link>
                 &nbsp;
                 <a
-                  onClick={openModal}
+                  onClick={toggleEditModal}
                   data-category={index}
                   data-action="edit"
                   tw="font-bold"
