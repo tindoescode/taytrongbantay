@@ -1,7 +1,9 @@
-export default function Input({ style = "green", register, name, ...rest }) {
+import tw, { styled } from "twin.macro";
+
+export default function Input({ register, name, ...rest }) {
   return (
     <input
-      className={`my-1 rounded p-2 ring-1 ring-${style}-500 text-black`}
+      tw="my-1 rounded p-2 ring-1 ring-green-500 text-black"
       {...register(name)}
       {...rest}
     />

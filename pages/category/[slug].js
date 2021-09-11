@@ -1,10 +1,12 @@
 import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import Title from "../../components/Title";
+// import Title from "../../components/Title";
 import ContentWrapper from "../../components/ContentWrapper";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import FacebookLoading from "../../components/FacebookLoading";
+import tw, { styled } from "twin.macro";
 
 export default function CategoryView() {
   let [category, setCategory] = useState(null);
@@ -32,7 +34,7 @@ export default function CategoryView() {
 
   if (!category || !posts)
     return (
-      <p className="flex items-center justify-center text-lg">
+      <p tw="flex items-center justify-center text-lg">
         Loading... <FacebookLoading />
       </p>
     );
@@ -44,16 +46,14 @@ export default function CategoryView() {
       </Head>
 
       <main>
-        <div className="p-2 bg-green-100 text-center text-xl">
-          {category?.name}
-        </div>
+        <div tw="p-2 bg-green-100 text-center text-xl">{category?.name}</div>
         <ContentWrapper>
           {posts &&
             posts.map((post) => {
               return (
                 <Link key={post.slug} href={`/posts/${post.slug}`}>
                   <a>
-                    <div className="">{post.title}</div>
+                    <div tw="divide-y divide-yellow-500">{post.title}</div>
                   </a>
                 </Link>
               );

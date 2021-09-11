@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function Editor({ setContent }) {
+export default function Editor({ setContent, initialContent }) {
   const editorRef = useRef();
   const [editorLoaded, setEditorLoaded] = useState(false);
   const { CKEditor, InlineEditor } = editorRef.current || {};
@@ -161,19 +161,13 @@ export default function Editor({ setContent }) {
             language: "vn",
           }}
           onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            // console.log('Editor is ready to use!', editor)
             const data = editor.getData();
 
             setContent(data);
 
-            // editor.editing.view.change((writer) => {
-            //   writer.setStyle(
-            //     "min-height",
-            //     "120px",
-            //     editor.editing.view.document.getRoot()
-            //   );
-            // });
+            if (initialContent) {
+              setContent(initialContent);
+            }
           }}
           onChange={(event, editor) => {
             const data = editor.getData();

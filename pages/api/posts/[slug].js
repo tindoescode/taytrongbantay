@@ -2,7 +2,6 @@ import connectDB from "../../../middleware/mongodb";
 // import bcrypt from '../../middleware/bcrypt';
 import User from "../../../models/UserModel";
 import Post from "../../../models/post";
-import jwt from "jsonwebtoken";
 
 const handler = async (req, res) => {
   var { slug } = req.query;

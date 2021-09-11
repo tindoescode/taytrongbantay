@@ -1,6 +1,7 @@
 import connectdb from "../../../middleware/mongodb";
 import Post from "../../../models/post";
 import Category from "../../../models/category";
+import User from "../../../models/UserModel";
 
 const handler = async (req, res) => {
   if (req.method !== "GET") {
