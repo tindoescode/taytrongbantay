@@ -9,7 +9,7 @@ import Modal from "../../components/Modal";
 import CommentForm from "../../components/posts/CommentForm";
 import FacebookLoading from "../../components/FacebookLoading";
 import { useState } from "react";
-import tw from "twin.macro";
+import tw, { css } from "twin.macro";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
@@ -116,7 +116,13 @@ export default function SinglePost({
         <meta name="description" content="Taytrongbantay" />
       </Head>
 
-      <main>
+      <main
+        css={[
+          css`
+            animation: fadeIn 2s ease;
+          `,
+        ]}
+      >
         {editModal && (
           <Modal
             noSubmitButton={true}
@@ -150,7 +156,7 @@ export default function SinglePost({
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
-        <div className="ck-content" tw="shadow-md p-2">
+        <div className="ck-content" tw="mb-4 shadow-md p-2 pb-5">
           <div tw="md:grid grid-cols-6 gap-4">
             <div tw="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
               <img
@@ -169,7 +175,7 @@ export default function SinglePost({
                 {author.username}
               </h3>
             </div>
-            <div tw="col-span-5 p-5 mt-4 ring-1 ring-gray-400 rounded">
+            <div tw="col-span-5 p-5 mt-4 border-gray-300 shadow-md border-2 rounded">
               {
                 <Markup
                   content={content}
@@ -186,13 +192,12 @@ export default function SinglePost({
             </div>
           )}
         </div>
+        {/* Comment section */}
+        <Title>Bình luận</Title>
+        <div id="Comment">
+          <CommentForm />
+        </div>
       </main>
-
-      {/* Comment section */}
-      <Title>Bình luận</Title>
-      <div id="Comment">
-        <CommentForm />
-      </div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "nprogress/nprogress.css";
 import { useSelector } from "react-redux";
-import tw, { styled } from "twin.macro";
+import tw, { styled, css } from "twin.macro";
 
 const TopProgressBar = dynamic(
   () => {
@@ -43,7 +43,13 @@ const Layout = ({ children }) => {
       <Header />
 
       <Container>
-        <Alert>
+        <Alert
+          css={[
+            css`
+              animation: bounceInLeft 0.7s ease;
+            `,
+          ]}
+        >
           {(user && <p>Bạn đã đăng nhập với {user.username}</p>) || (
             <p>
               Bạn chưa đăng nhập, hãy chọn{" "}

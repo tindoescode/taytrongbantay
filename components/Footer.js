@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import tw, { styled } from "twin.macro";
 
 const FooterWrapper = styled.div`
-  ${tw`w-screen bg-green-100 p-1 fixed bottom-0 italic font-light text-center`};
+  ${tw`w-screen py-4 opacity-60 fixed bottom-0 italic font-light text-center`};
 `;
 function Footer() {
   const loadFacebookSDK = () => {
