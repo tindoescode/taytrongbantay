@@ -62,8 +62,6 @@ function Header() {
       .catch((error) => {
         console.log(error);
       });
-
-    console.log("page initial render");
   }, []);
 
   let loginBtnClicked = (e) => {
@@ -152,11 +150,12 @@ function Header() {
                 tw`box-border duration-200 h-0`,
                 tw`right-0 md:w-96`,
                 css`
-                  transition: height 0.6s ease;
+                  // transition: all 0.6s cubic-bezier(1, 0.01, 0.53, 1.72);
                   top: 3.1rem;
                 `,
                 loginMenu &&
                   css`
+                    animation: boxAnimate 0.6s ease;
                     height: fit-content;
                     padding: 0.5rem;
                   `,
