@@ -39,6 +39,14 @@ const customStyles = css`
       opacity: 1;
     }
   }
+  @keyframes flyFromLeft {
+    0% {
+      margin-left: -100vw;
+    }
+    to {
+      margin-left: 0;
+    }
+  }
   @keyframes bounceInLeft {
     0%,
     60%,

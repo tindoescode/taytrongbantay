@@ -31,7 +31,7 @@ const AdminPanel = () => {
     });
 
     fetchCategory(setCat);
-  }, [categories]);
+  }, []);
 
   const toggleEditModal = (e) => {
     setTargetCat({ ...categories[e?.target?.dataset?.category] });

@@ -156,7 +156,7 @@ export default function SinglePost({
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
-        <div className="ck-content" tw="mb-4 shadow-md p-2 pb-5">
+        <div className="ck-content" tw="mb-4 shadow-md p-2 pb-5 leading-7">
           <div tw="md:grid grid-cols-6 gap-4">
             <div tw="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
               <img

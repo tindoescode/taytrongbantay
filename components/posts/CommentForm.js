@@ -18,7 +18,7 @@ const CommentForm = () => {
       </div>
 
       <div
-        tw="ring-1 ring-green-300 ml-4 p-2"
+        tw="border border-yellow-500 before:bg-yellow-500 rounded shadow ml-4 p-2"
         className={`${styles.commentCursor}`}
       >
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
