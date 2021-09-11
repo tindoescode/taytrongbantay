@@ -198,7 +198,7 @@ function Header() {
                   <p tw="text-black leading-9">
                     Bạn chưa có tài khoản?{" "}
                     <Link href="/register">
-                      <a tw="font-bold hover:text-green-700 transition">
+                      <a tw="font-bold hover:(text-green-700 cursor-pointer) transition">
                         Đăng ký ngay!
                       </a>
                     </Link>

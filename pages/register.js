@@ -7,6 +7,10 @@ import onLogin from "../middleware/onLogin";
 import { useDispatch, useSelector } from "react-redux";
 import tw, { styled } from "twin.macro";
 import Router from "next/router";
+import Input from "../components/Input";
+import Select from "../components/Select";
+import Button from "../components/Button";
+import Form from "../components/Form";
 
 export default function Home() {
   const user = useSelector((state) => state.user);
@@ -16,25 +20,12 @@ export default function Home() {
   //   Router.push("/");
   // }
 
-  let inputName = useRef(null);
-  let inputPassword = useRef(null);
-  let inputRePassword = useRef(null);
-  let inputUsername = useRef(null);
-  let inputEmail = useRef(null);
-  let inputGender = useRef(null);
   let dispatch = useDispatch();
 
   let loginBtnClicked = (e) => {
     e.preventDefault();
 
     try {
-      let username = inputUsername.current.value;
-      let name = inputName.current.value;
-      let email = inputEmail.current.value;
-      let password = inputPassword.current.value;
-      let rePassword = inputRePassword.current.value;
-      let gender = inputGender.current.value;
-
       if (!(username && name && email && password && rePassword && gender))
         throw "Xin hãy điền đủ các trường.";
       if (password !== rePassword)
@@ -68,6 +59,12 @@ export default function Home() {
     }
   };
 
+  const onSubmit =
+    () =>
+    ({ username, name, email, password, re_password, gender }) => {
+      console.log(username, name, email, password, re_password, gender);
+    };
+
   return (
     <div>
       <Head>
@@ -75,70 +72,51 @@ export default function Home() {
         <meta name="description" content="Taytrongbantay" />
       </Head>
 
-      <main>
-        <form method="POST" tw="mt-2">
-          <Title>Đăng ký</Title>
-          <div tw="flex flex-col space-y-4 select-none shadow-md p-2">
-            <input
-              tw="p-2 ring-green-200 ring-1"
-              autoComplete="off"
+      <main tw="max-w-lg mx-auto shadow-lg">
+        <Title>Đăng ký</Title>
+        <div>
+          <Form tw="flex flex-col gap-1 p-2" onSubmit={onSubmit()}>
+            <Input
               name="username"
               placeholder="Nick name (ví dụ: anhhungxadieu555)"
-              type="text"
-              ref={inputUsername}
             />
-            <input
-              tw="p-2 ring-green-200 ring-1"
-              autoComplete="off"
+            <Input
               name="name"
+              required={true}
               placeholder="Họ và tên (ví dụ: Cô Cô)"
-              type="text"
-              ref={inputName}
             />
-            <input
-              tw="p-2 ring-green-200 ring-1"
-              autoComplete="off"
-              name="email"
-              placeholder="Email: "
-              type="text"
-              ref={inputEmail}
-            />
-            <input
-              tw="p-2 ring-green-200 ring-1"
-              autoComplete="off"
+            <Input name="email" required={true} placeholder="Email: " />
+            <Input
               name="password"
-              placeholder="Mật khẩu"
+              require={true}
               type="password"
-              ref={inputPassword}
+              placeholder="Password"
             />
-            <input
-              tw="p-2 ring-green-200 ring-1"
+            <Input
               autoComplete="off"
-              name="password"
+              name="re_password"
+              required={true}
               placeholder="Nhập lại mật khẩu"
               type="password"
-              ref={inputRePassword}
             />
-            <select ref={inputGender} tw="p-2 ring-green-200 ring-1">
+            <Select
+              tw="block p-2 border-green-200 border-2 rounded"
+              name="gender"
+              required={true}
+            >
               <option value="male">Nam</option>
               <option value="female">Nữ</option>
-            </select>
-            <div tw="flex items-center">
+            </Select>
+            {/* <div tw="flex items-center">
               <input type="checkbox" tw="mr-2" id="agree" required />
               <label htmlFor="agree" tw="">
                 Tớ đồng ý với những điều khoản của Taytrongbantay!
               </label>
-            </div>
+            </div> */}
 
-            <button
-              onClick={loginBtnClicked}
-              tw="bg-green-400 p-4 hover:bg-green-600 transition text-white"
-              type="submit"
-            >
-              Đăng ký
-            </button>
-          </div>
-        </form>
+            <Button>Đăng ký</Button>
+          </Form>
+        </div>
       </main>
     </div>
   );

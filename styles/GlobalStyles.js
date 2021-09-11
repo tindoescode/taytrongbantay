@@ -5,7 +5,7 @@ const customStyles = css`
   body {
     -webkit-tap-highlight-color: ${theme`colors.pink.300`};
     ${tw`antialiased`}
-    font-family: Inter;
+    font-family: "Inter", "Helvetica Neue", Helvetica, sans-serif;
   }
   body::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -41,10 +41,11 @@ const customStyles = css`
   }
   @keyframes flyFromLeft {
     0% {
-      margin-left: -100vw;
+      transform: translate3d(-100%, 0, 0);
     }
     to {
-      margin-left: 0;
+      transform: translate3d(100%, 0, 0);
+      transform: translateZ(-100%);
     }
   }
   @keyframes bounceInLeft {

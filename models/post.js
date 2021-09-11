@@ -44,7 +44,7 @@ var post = new Schema(
     },
     thumbnail: {
       type: String,
-      default: "/images/no-thumbnail-medium.png",
+      default: "/images/no-thumbnail-medium.jpg",
       validate: {
         validator: function isURL(str) {
           if (str == "/images/no-thumbnail-medium.png") return true;

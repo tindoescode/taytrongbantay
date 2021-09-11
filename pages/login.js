@@ -77,14 +77,10 @@ export default function Home() {
             Đăng nhập
           </button>
 
-          <p tw="text-black mt-5">
-            Bạn chưa có tài khoản?{" "}
-            <Link href="/register">
-              <a tw="font-bold hover:text-green-700 transition">
-                Đăng ký ngay!
-              </a>
-            </Link>
-          </p>
+          <p tw="text-black mt-5">Bạn chưa có tài khoản? </p>
+          <Link href="/register">
+            <a tw="font-bold hover:cursor-pointer">Đăng ký ngay!</a>
+          </Link>
         </form>
       </main>
     </div>

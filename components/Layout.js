@@ -18,8 +18,19 @@ const TopProgressBar = dynamic(
 );
 
 const Container = styled.div`
-  ${tw`max-w-6xl p-2 mx-auto my-12 bg-white rounded-md bg-opacity-20`};
+  ${tw`max-w-6xl p-2 mx-auto my-12 rounded-md bg-opacity-20`};
+  // bg-white
 `;
+
+const Cloud = styled.div`
+  background: url("./images/cloud.svg") no-repeat center;
+  animation: flyFromLeft 10s linear infinite;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+`;
+
 const Alert = styled.div`
   ${tw`rounded mb-4 flex justify-center p-2 bg-green-200`};
 `;
@@ -42,6 +53,7 @@ const Layout = ({ children }) => {
       <TopProgressBar />
       <Header />
 
+      <Cloud />
       <Container>
         <Alert
           css={[
@@ -64,7 +76,7 @@ const Layout = ({ children }) => {
                   <b>đăng ký</b>
                 </a>
               </Link>{" "}
-              để sử dụng hết tính năng của taytrongbantay nhé.
+              để sử dụng hết tính năng của taytrongbantay nhé! 😛
             </p>
           )}
         </Alert>
