@@ -30,13 +30,7 @@ const NavbarItem = styled.div`
   }
   ${tw`hover:bg-green-300 hover:text-white transition `};
 `;
-// .NavbarItem svg {
-//   min-height: 70%;
-// }
 
-// .Navbar--item::first-child {
-//   margin-right: 10px;
-// }
 function Header() {
   let [loginMenu, setLoginMenu] = useState(false);
   let user = useSelector((state) => state.user);
@@ -138,7 +132,7 @@ function Header() {
         </div>
 
         <Navbar>
-          <NavbarItem>
+          <NavbarItem tw="md:relative">
             <a onClick={() => toggleLoginMenu()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -153,36 +147,36 @@ function Header() {
             </a>
             <div
               css={[
-                tw`mx-1 md:mx-0 rounded-md flex absolute`,
-                tw`flex-col border bg-gray-200 shadow-sm select-none`,
+                tw`rounded-md absolute`,
+                tw`bg-gray-200 shadow-sm`,
                 tw`box-border duration-200 h-0`,
-                loginMenu &&
-                  css`
-                    height: fit-content;
-                    padding: 0.3rem;
-                  `,
-                tw`right-0`,
+                tw`right-0 md:w-96`,
                 css`
                   transition: height 0.6s ease;
                   top: 3.1rem;
                 `,
+                loginMenu &&
+                  css`
+                    height: fit-content;
+                    padding: 0.5rem;
+                  `,
               ]}
             >
               {loginMenu && !user && (
-                <form tw="">
-                  <div tw="grid grid-cols-3 items-center">
+                <form>
+                  <div tw="grid md:(grid-cols-3) items-center gap-0.5">
                     <label htmlFor="username" tw="text-black mr-2">
                       Tên đăng nhập
                     </label>
                     <input
                       ref={inputName}
                       name="username"
-                      tw="col-span-2 rounded p-2 mt-2 ring-1 ring-green-500 text-black"
+                      tw="col-span-2 rounded p-2 ring-1 ring-green-500 text-black"
                       placeholder="Tên đăng nhập"
                     ></input>
                   </div>
 
-                  <div tw="grid grid-cols-3 items-center">
+                  <div tw="grid mt-2 md:(grid-cols-3) items-center">
                     <label htmlFor="username" tw="text-black mr-2">
                       Mật khẩu
                     </label>
@@ -190,7 +184,7 @@ function Header() {
                       ref={inputPassword}
                       name="password"
                       type="password"
-                      tw="col-span-2 rounded p-2 my-2 ring-1 ring-green-500 text-black"
+                      tw="col-span-2 rounded p-2 mb-2 ring-1 ring-green-500 text-black"
                       placeholder="Mật khẩu"
                     ></input>
                   </div>
@@ -202,7 +196,7 @@ function Header() {
                     Đăng nhập
                   </button>
 
-                  <p tw="text-black">
+                  <p tw="text-black leading-9">
                     Bạn chưa có tài khoản?{" "}
                     <Link href="/register">
                       <a tw="font-bold hover:text-green-700 transition">
@@ -216,6 +210,15 @@ function Header() {
                     className="facebook"
                     onClick={facebookLoginButtonCLick}
                   >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      className="bi bi-person"
+                      tw="w-4 h-4 inline-block mr-2 mb-1"
+                      viewBox="0 0 50 50"
+                    >
+                      <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"></path>
+                    </svg>
                     Log In With Facebook
                   </button>
                 </form>
