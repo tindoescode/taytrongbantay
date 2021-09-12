@@ -48,7 +48,11 @@ export default function Home() {
                   );
                 })}
 
-              {!categories && <Skeleton count={3} height={50} />}
+              {!categories && (
+                <div tw="p-2">
+                  <Skeleton count={3} height={50} />
+                </div>
+              )}
             </div>
 
             <div tw="bg-gray-100 rounded shadow-md my-3 hover:shadow-xl transition ease-in-out duration-300">
