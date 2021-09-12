@@ -43,7 +43,14 @@ const CommentForm = () => {
 
   return (
     <>
-      <div tw="flex py-3 w-screen max-w-6xl justify-center">
+      <div
+        tw="flex py-3 px-1 justify-center"
+        css={[
+          css`
+            max-width: 72rem;
+          `,
+        ]}
+      >
         <div
           css={[
             css`
@@ -67,7 +74,7 @@ const CommentForm = () => {
         <div
           css={[
             tw`bg-white relative z-0 bg-opacity-70 before:(bg-yellow-500 bg-opacity-50)`,
-            tw`ml-4 flex-grow`,
+            tw`ml-3 flex-grow`,
             css`
               max-width: 80%;
             `,
