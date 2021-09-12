@@ -225,12 +225,15 @@ function Header() {
 
               {loginMenu && user && (
                 <div tw="flex items-center">
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    width={30}
-                    tw="mr-2 flex-shrink"
-                  ></img>
+                  <Link href={`/profile/${user.username}`}>
+                    <a>
+                      <img
+                        src={user.avatar}
+                        alt={user.name}
+                        tw="w-10 h-10 mr-2 flex-shrink"
+                      ></img>
+                    </a>
+                  </Link>
                   <div tw="text-black w-80">
                     <h2>
                       <svg
@@ -245,7 +248,11 @@ function Header() {
                           clipRule="evenodd"
                         />
                       </svg>
-                      {user.username} / {user.name}
+                      <Link href={`/profile/${user.username}`}>
+                        <a>
+                          {user.username} / {user.name}
+                        </a>
+                      </Link>
                     </h2>
                     <h2>
                       <svg
