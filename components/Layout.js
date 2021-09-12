@@ -68,8 +68,8 @@ const Layout = ({ children }) => {
       </Head>
 
       <TopProgressBar />
-      <Header />
       <Cloud />
+      <Header />
 
       <Container>
         <Alert
