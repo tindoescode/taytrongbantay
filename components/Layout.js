@@ -24,7 +24,7 @@ const Container = styled.div`
 `;
 
 const Alert = styled.div`
-  ${tw`rounded mb-4 flex justify-center p-2 bg-green-200`};
+  ${tw`rounded mb-4 flex justify-center p-2 bg-green-200 sticky top-12`};
 `;
 const Layout = ({ children }) => {
   var user = useSelector((state) => state.user);
