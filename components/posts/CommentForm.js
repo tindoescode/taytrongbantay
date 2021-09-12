@@ -43,7 +43,7 @@ const CommentForm = () => {
 
   return (
     <>
-      <div tw="flex -ml-4 py-3 w-screen max-w-6xl justify-center">
+      <div tw="flex py-3 w-screen max-w-6xl justify-center">
         <div
           css={[
             css`
