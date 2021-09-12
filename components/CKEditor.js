@@ -18,7 +18,7 @@ export default function Editor({ setContent, initialContent }) {
       {editorLoaded ? (
         <CKEditor
           editor={InlineEditor}
-          data="<p>Xin chào bạn thân mến🥰😘😍!</p>"
+          data=""
           config={{
             toolbar: {
               items: [
@@ -64,6 +64,7 @@ export default function Editor({ setContent, initialContent }) {
                 "redo",
               ],
             },
+            placeholder: "Bạn đang nghĩ gì...🥰😘😍",
             heading: {
               options: [
                 {
