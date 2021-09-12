@@ -9,13 +9,13 @@ const CloudTemplate = styled.div`
   z-index: -1;
   background-size: contain;
   background-position: 100% 100%;
-  width: 300px;
-  height: 131px;
+  width: 20rem;
+  height: 14rem;
   top: ${(props) => props.top}vh;
   margin-left: calc(${(props) => props.marginLeft}px - 200px);
 `;
 
-const Cloud = ({ duration = 30000 }) => {
+const Cloud = () => {
   let clouds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   return (
     <div id="Cloud">
@@ -24,7 +24,7 @@ const Cloud = ({ duration = 30000 }) => {
           <CloudTemplate
             key={index}
             number={getRndInteger(1, 7)}
-            duration={getRndInteger(10, 20)}
+            duration={getRndInteger(15, 30)}
             top={(index + 1) * 10}
             marginLeft={getRndInteger(-150, 150)}
           />

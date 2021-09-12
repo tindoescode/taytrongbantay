@@ -75,7 +75,7 @@ export default function SinglePost({
           if (!res.data.error?.message) {
             toast("Bài viết đã được sửa🤗");
 
-            toggleModal();
+            toggleEditModal();
             router.push(`/posts/${slug}`);
           } else {
             toast(`Lỗi: ${res.data.error.message}`);
@@ -191,7 +191,9 @@ export default function SinglePost({
           {user?.admin === "admin" && (
             <div tw="mt-2 flex justify-end gap-1">
               <Button onClick={toggleEditModal}>Sửa</Button>
-              <Button onClick={toggleRemoveModal}>Xóa</Button>
+              <Button onClick={toggleRemoveModal} error>
+                Xóa
+              </Button>
             </div>
           )}
         </div>

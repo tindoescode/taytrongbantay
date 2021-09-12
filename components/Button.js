@@ -1,25 +1,21 @@
 import tw, { styled } from "twin.macro";
 
-const Button = ({ onClick = null, children }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`Button`}
-      tw="rounded p-2 px-4 bg-green-300 hover:bg-green-500 text-white transition"
-    >
-      {children}
+const ButtonWrapper = styled.button`
+  ${tw`rounded p-2 px-4 text-white transition`}
+  ${(props) =>
+    props.error
+      ? tw`bg-red-400 hover:bg-red-300`
+      : tw`bg-green-400 hover:bg-green-300`}
+  & + & {
+    margin-left: 0.5rem;
+  }
+`;
 
-      <style jsx>
-        {`
-          .Button + .Button {
-            margin-left: 0.5    return (
-              <p tw="flex items-center justify-center text-lg">
-                Loading... <FacebookLoading />
-              </p>
-            );rem;
-        `}
-      </style>
-    </button>
+const Button = ({ onClick = null, children, ...props }) => {
+  return (
+    <ButtonWrapper onClick={onClick} {...props}>
+      {children}
+    </ButtonWrapper>
   );
 };
 

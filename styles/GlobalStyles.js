@@ -58,7 +58,7 @@ const customStyles = css`
   }
   @keyframes flyFromLeft {
     0% {
-      transform: translate3d(-10vw, 0, 0);
+      transform: translate3d(-300px, 0, 0);
     }
     to {
       transform: translate3d(120vw, 0, 0);

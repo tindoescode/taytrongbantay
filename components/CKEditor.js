@@ -161,12 +161,15 @@ export default function Editor({ setContent, initialContent }) {
             language: "vn",
           }}
           onReady={(editor) => {
-            const data = editor.getData();
+            const data = editor?.getData();
+
+            if (!data) return;
 
             setContent(data);
 
             if (initialContent) {
               setContent(initialContent);
+              editor.setData(initialContent);
             }
           }}
           onChange={(event, editor) => {
