@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "nprogress/nprogress.css";
 import { useSelector } from "react-redux";
 import tw, { styled, css } from "twin.macro";
-import Cloud from "./Cloud";
 import { useEffect, useState } from "react";
 
 const TopProgressBar = dynamic(
@@ -68,7 +67,6 @@ const Layout = ({ children }) => {
       </Head>
 
       <TopProgressBar />
-      <Cloud />
       <Header />
 
       <Container>

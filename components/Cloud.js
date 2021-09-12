@@ -1,6 +1,5 @@
 import tw, { styled } from "twin.macro";
 import { getRndInteger } from "../utils/";
-import { isMobile } from "react-device-detect";
 
 const CloudTemplate = styled.div`
   background-image: url("/images/cloud/${(props) => props.number}.svg");
@@ -19,11 +18,10 @@ const CloudWrapper = styled.div`
   height: 100%;
   top: 0;
 `;
-const Cloud = () => {
-  if (isMobile) return <div id="Cloud"></div>;
+const Cloud = ({ cloudNum = 5 }) => {
   return (
     <CloudWrapper>
-      {Array.from({ length: 10 }).map((cloud, index) => {
+      {Array.from({ length: cloudNum }).map((cloud, index) => {
         return (
           <CloudTemplate
             key={index}

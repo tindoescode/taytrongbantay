@@ -1,6 +1,5 @@
 import Head from "next/head";
 import axios from "axios";
-import { useRef } from "react";
 import { toast } from "react-toastify";
 import Title from "../components/Title";
 import onLogin from "../middleware/onLogin";
@@ -15,54 +14,54 @@ import Form from "../components/Form";
 export default function Home() {
   const user = useSelector((state) => state.user);
 
-  //TODO: Redirect logged in user to index
-  // if (user) {
-  //   Router.push("/");
-  // }
+  if (user) {
+    Router.push("/");
+  }
 
   let dispatch = useDispatch();
-
-  let loginBtnClicked = (e) => {
-    e.preventDefault();
-
-    try {
-      if (!(username && name && email && password && rePassword && gender))
-        throw "Xin hãy điền đủ các trường.";
-      if (password !== rePassword)
-        throw "Mật khẩu được nhập lại không chính xác!";
-
-      axios
-        .post("/api/register", { username, name, email, password, gender })
-        .then((res) => {
-          if (res.status == 200) {
-            if (res.data.code == 11000) {
-              if (Object.keys(res.data.keyValue)[0] == "email")
-                throw "Email đã được đăng ký";
-              if (Object.keys(res.data.keyValue)[0] == "username")
-                throw "Username đã được đăng ký";
-            }
-
-            toast.info("Đăng ký thành công, đang tự động đăng nhập...");
-          }
-        })
-        .then(() => {
-          // Automaticially login
-          axios
-            .post("/api/login", { username, password })
-            .then(onLogin(dispatch, () => {}));
-        })
-        .catch((error) => {
-          toast.error(error);
-        });
-    } catch (error) {
-      toast.error(error);
-    }
-  };
-
   const onSubmit =
     () =>
     ({ username, name, email, password, re_password, gender }) => {
-      console.log(username, name, email, password, re_password, gender);
+      // console.log(username, name, email, password, re_password, gender);
+
+      try {
+        if (!(username && name && email && password && re_password && gender))
+          throw "Xin hãy điền đủ các trường.";
+        if (password !== re_password)
+          throw "Mật khẩu được nhập lại không chính xác!";
+
+        axios
+          .post("/api/register", { username, name, email, password, gender })
+          .then((res) => {
+            if (res.status == 200) {
+              if (res.data.code == 11000) {
+                if (Object.keys(res.data.keyValue)[0] == "email")
+                  throw "Email đã được đăng ký";
+                if (Object.keys(res.data.keyValue)[0] == "username")
+                  throw "Username đã được đăng ký";
+              }
+              console.log(res.data);
+              if (res.data?.errors) {
+                throw res.data.message;
+              }
+
+              toast.info("Đăng ký thành công, đang tự động đăng nhập...");
+
+              // Automaticially login
+              axios
+                .post("/api/login", { username, password })
+                .then(onLogin(dispatch, () => {}));
+
+              Router.push("/");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error(error);
+          });
+      } catch (error) {
+        toast.error(error);
+      }
     };
 
   return (

@@ -194,7 +194,7 @@ export default function SinglePost({
               <Link href={`/profile/${author.username}`}>
                 <h3 tw="flex-grow md:flex-grow-0 flex items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
                   <a>
-                    <img
+                    {/* <img
                       css={[
                         css`
                           margin-left: -24px;
@@ -205,7 +205,7 @@ export default function SinglePost({
                       width="24px"
                       src="/images/level/50.png"
                       alt="level 50"
-                    ></img>
+                    ></img> */}
                     {author.username}
                   </a>
                 </h3>

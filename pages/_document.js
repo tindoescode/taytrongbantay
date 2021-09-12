@@ -1,5 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from "next/document"; // eslint-disable-line
 import { extractCritical } from "@emotion/server";
+import Cloud from "../components/Cloud";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -48,6 +49,7 @@ class MyDocument extends Document {
           />
         </Head>
         <body>
+          <Cloud />
           <Main />
           <NextScript />
         </body>

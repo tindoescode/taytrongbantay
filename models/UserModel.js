@@ -7,6 +7,12 @@ var user = new Schema(
       type: String,
       required: true,
       unique: true,
+      validate: {
+        validator: function usernameIsValid(username) {
+          return /^[0-9a-zA-Z_.-]+$/.test(username);
+        },
+        message: (props) => `${props.value} có chứa ký tự không hợp lệ`,
+      },
     },
     avatar: {
       type: String,
