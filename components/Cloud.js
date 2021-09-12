@@ -16,7 +16,8 @@ const CloudTemplate = styled.div`
 `;
 
 const Cloud = () => {
-  let clouds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  let clouds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
   return (
     <div id="Cloud">
       {clouds.map((cloud, index) => {
@@ -24,9 +25,9 @@ const Cloud = () => {
           <CloudTemplate
             key={index}
             number={getRndInteger(1, 7)}
-            duration={getRndInteger(15, 30)}
-            top={(index + 1) * 10}
-            marginLeft={getRndInteger(-150, 150)}
+            duration={getRndInteger(15, 40)}
+            top={getRndInteger(index * 10, (index + 1) * 10)}
+            marginLeft={getRndInteger(-150, 200)}
           />
         );
       })}
