@@ -109,7 +109,7 @@ const CommentForm = () => {
           comments.map((cmt, index) => {
             return (
               <div key={index} tw="flex p-1 mx-1 gap-2">
-                <div tw="relative">
+                <div>
                   <div
                     css={[
                       css`
