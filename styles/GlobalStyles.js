@@ -7,17 +7,17 @@ const customStyles = css`
     ${tw`antialiased`}
     font-family: "Inter", "Helvetica Neue", Helvetica, sans-serif;
   }
-  body::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
 
-  body::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 6px;
     background-color: #f5f5f5;
   }
 
-  body::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background-color: #000000;
   }
 
@@ -58,10 +58,10 @@ const customStyles = css`
   }
   @keyframes flyFromLeft {
     0% {
-      transform: translate3d(-300px, 0, 0);
+      transform: translate3d(-100vw, 0, 0);
     }
     to {
-      transform: translate3d(120vw, 0, 0);
+      transform: translate3d(190vw, 0, 0);
     }
   }
   @keyframes bounceInLeft {

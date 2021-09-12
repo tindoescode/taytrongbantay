@@ -123,7 +123,7 @@ const AdminPanel = () => {
                   onClick={toggleEditModal}
                   data-category={index}
                   data-action="edit"
-                  tw="font-bold"
+                  tw="font-bold hover:cursor-pointer"
                 >
                   [Sửa]
                 </a>

@@ -21,10 +21,10 @@ export default function Modal({
     <>
       <div
         onClick={onModalCancel}
-        tw="z-10 fixed h-screen left-0 right-0 top-0 bottom-0 bg-pink-500 opacity-90"
+        tw="z-10 fixed h-screen left-0 right-0 top-0 bottom-0 bg-pink-400 opacity-90"
       ></div>
       <div
-        id="Modal"
+        id={styles.Modal}
         css={[
           tw`w-screen p-3 overflow-y-auto md:w-11/12`,
           css`

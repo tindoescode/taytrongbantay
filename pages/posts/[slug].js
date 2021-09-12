@@ -12,6 +12,7 @@ import { useState } from "react";
 import tw, { css } from "twin.macro";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+// import Image from "next/image";
 
 const NewPostForm = dynamic(
   () => {
@@ -156,7 +157,7 @@ export default function SinglePost({
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
-        <div tw="mb-4 shadow-md p-2 pb-5 leading-7">
+        <div tw="mb-4 p-3 pb-5 leading-7">
           <div tw="md:grid grid-cols-6 gap-4">
             <div tw="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
               <img
@@ -177,8 +178,21 @@ export default function SinglePost({
             </div>
             <div
               className="ck-content"
-              tw="bg-white bg-opacity-80 col-span-5 p-5 mt-4 border-gray-300 shadow-md border-2 rounded"
+              tw="bg-white bg-opacity-80 col-span-5 p-3 mt-4 border-gray-300 shadow-md border-2 rounded"
             >
+              {/* {thumbnail && (
+                <>
+                  <Image
+                    src={thumbnail}
+                    layout="responsive"
+                    objectFit="contain"
+                    width="100%"
+                    height="60%"
+                    alt="Post Thumbnail"
+                  />
+                  <div tw="mt-2" />
+                </>
+              )} */}
               {
                 <Markup
                   content={content}
