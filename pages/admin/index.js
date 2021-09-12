@@ -24,7 +24,7 @@ const AdminPanel = () => {
   const [targetCat, setTargetCat] = useState();
 
   useEffect(() => {
-    axios.get("/api/user/getdata").then((res) => {
+    axios.get("/api/user/get_login_session").then((res) => {
       if (!res.data.isLoggedIn || res.data?.admin != "admin") {
         Router.push("/");
       }

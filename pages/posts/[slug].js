@@ -1,5 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Markup } from "interweave";
@@ -124,6 +126,25 @@ export default function SinglePost({
           `,
         ]}
       >
+        <Button
+          tw="mb-2 px-2 sticky top-14 bg-opacity-50"
+          onClick={() => {
+            window.history.back();
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            tw="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Button>
         {editModal && (
           <Modal
             noSubmitButton={true}
@@ -160,21 +181,35 @@ export default function SinglePost({
         <div tw="mb-4 p-3 pb-5 leading-7">
           <div tw="md:grid grid-cols-6 gap-4">
             <div tw="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
-              <img
-                tw="w-20 md:w-60 rounded shadow-xl"
-                alt={"Ảnh của " + author.username}
-                src={author.avatar}
-              />
+              <Link href={`/profile/${author.username}`}>
+                <a>
+                  <img
+                    tw="w-20 md:w-60 rounded shadow-xl"
+                    alt={"Ảnh của " + author.username}
+                    src={author.avatar}
+                  />
+                </a>
+              </Link>
 
-              <h3 tw="flex-grow md:flex-grow-0 flex items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
-                <img
-                  tw="inline-block"
-                  width="30"
-                  src="/images/level/50.png"
-                  alt="level 50"
-                ></img>
-                {author.username}
-              </h3>
+              <Link href={`/profile/${author.username}`}>
+                <h3 tw="flex-grow md:flex-grow-0 flex items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
+                  <a>
+                    <img
+                      css={[
+                        css`
+                          margin-left: -24px;
+                          margin-right: 2px;
+                        `,
+                      ]}
+                      tw="inline-block"
+                      width="24px"
+                      src="/images/level/50.png"
+                      alt="level 50"
+                    ></img>
+                    {author.username}
+                  </a>
+                </h3>
+              </Link>
             </div>
             <div
               className="ck-content"

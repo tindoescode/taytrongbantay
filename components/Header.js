@@ -46,7 +46,7 @@ function Header() {
   useEffect(() => {
     // TODO: Check the cookie
     axios
-      .get("/api/user/getdata")
+      .get("/api/user/get_login_session")
       .then((res) => {
         if (!res.data.isLoggedIn) throw "Chưa đăng nhập";
 

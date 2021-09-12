@@ -101,11 +101,11 @@ const Layout = ({ children }) => {
       </Container>
 
       {isVisible && (
-        <div tw="fixed bottom-2 animate-bounce right-2 rounded bg-green-300 text-white p-1 text-2xl z-50">
+        <div tw="fixed bottom-6 animate-bounce right-4 rounded bg-green-300 text-white p-1 text-2xl z-50">
           <div onClick={scrollToTop}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              tw="h-6 w-6 hover:(cursor-pointer opacity-60)"
+              tw="h-10 w-10 hover:(cursor-pointer opacity-60)"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

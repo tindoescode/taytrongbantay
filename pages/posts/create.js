@@ -9,7 +9,7 @@ import FacebookLoading from "../../components/FacebookLoading";
 export default function NewPost() {
   let user = useSelector((state) => state.user);
   useEffect(() => {
-    axios.get("/api/user/getdata").then((res) => {
+    axios.get("/api/user/get_login_session").then((res) => {
       if (!res.data.isLoggedIn || !["admin", "mod"].includes(res.data?.admin)) {
         Router.push("/");
       }
