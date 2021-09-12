@@ -10,6 +10,7 @@ import "nprogress/nprogress.css";
 import { useSelector } from "react-redux";
 import tw, { styled, css } from "twin.macro";
 import Cloud from "./Cloud";
+import { useEffect, useState } from "react";
 
 const TopProgressBar = dynamic(
   () => {
@@ -28,6 +29,30 @@ const Alert = styled.div`
 `;
 const Layout = ({ children }) => {
   var user = useSelector((state) => state.user);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    // Button is displayed after scrolling for 500 pixels
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 500) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  });
+
   return (
     <>
       <Head>
@@ -75,6 +100,26 @@ const Layout = ({ children }) => {
         {children}
       </Container>
 
+      {isVisible && (
+        <div tw="fixed bottom-2 animate-bounce right-2 rounded bg-green-300 text-white p-1 text-2xl z-50">
+          <div onClick={scrollToTop}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              tw="h-6 w-6 hover:(cursor-pointer opacity-60)"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
       <Footer />
       <ToastContainer />
     </>
