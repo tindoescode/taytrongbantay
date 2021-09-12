@@ -21,6 +21,23 @@ const customStyles = css`
     background-color: #000000;
   }
 
+  :root {
+    --ck-color-image-caption-background: hsl(0, 0%, 97%);
+    --ck-color-image-caption-text: hsl(0, 0%, 20%);
+    --ck-color-mention-background: hsla(341, 100%, 30%, 0.1);
+    --ck-color-mention-text: hsl(341, 100%, 30%);
+    --ck-color-table-caption-background: hsl(0, 0%, 97%);
+    --ck-color-table-caption-text: hsl(0, 0%, 20%);
+    --ck-highlight-marker-blue: hsl(201, 97%, 72%);
+    --ck-highlight-marker-green: hsl(120, 93%, 68%);
+    --ck-highlight-marker-pink: hsl(345, 96%, 73%);
+    --ck-highlight-marker-yellow: hsl(60, 97%, 73%);
+    --ck-highlight-pen-green: hsl(112, 100%, 27%);
+    --ck-highlight-pen-red: hsl(0, 85%, 49%);
+    --ck-image-style-spacing: 1.5em;
+    --ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
+    --ck-todo-list-checkmark-size: 16px;
+  }
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -41,11 +58,10 @@ const customStyles = css`
   }
   @keyframes flyFromLeft {
     0% {
-      transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-10vw, 0, 0);
     }
     to {
-      transform: translate3d(100%, 0, 0);
-      transform: translateZ(-100%);
+      transform: translate3d(120vw, 0, 0);
     }
   }
   @keyframes bounceInLeft {

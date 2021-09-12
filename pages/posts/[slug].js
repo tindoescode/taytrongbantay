@@ -156,7 +156,7 @@ export default function SinglePost({
           </Modal>
         )}
         <div tw="p-2 bg-green-100 text-center text-xl">{title}</div>
-        <div className="ck-content" tw="mb-4 shadow-md p-2 pb-5 leading-7">
+        <div tw="mb-4 shadow-md p-2 pb-5 leading-7">
           <div tw="md:grid grid-cols-6 gap-4">
             <div tw="flex md:flex-col divide-y-reverse md:divide-y-2 divide-yellow-500">
               <img
@@ -175,7 +175,10 @@ export default function SinglePost({
                 {author.username}
               </h3>
             </div>
-            <div tw="col-span-5 p-5 mt-4 border-gray-300 shadow-md border-2 rounded">
+            <div
+              className="ck-content"
+              tw="bg-white bg-opacity-80 col-span-5 p-5 mt-4 border-gray-300 shadow-md border-2 rounded"
+            >
               {
                 <Markup
                   content={content}

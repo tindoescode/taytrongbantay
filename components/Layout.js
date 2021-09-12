@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "nprogress/nprogress.css";
 import { useSelector } from "react-redux";
 import tw, { styled, css } from "twin.macro";
+import Cloud from "./Cloud";
 
 const TopProgressBar = dynamic(
   () => {
@@ -20,15 +21,6 @@ const TopProgressBar = dynamic(
 const Container = styled.div`
   ${tw`max-w-6xl p-2 mx-auto my-12 rounded-md bg-opacity-20`};
   // bg-white
-`;
-
-const Cloud = styled.div`
-  background: url("./images/cloud.svg") no-repeat center;
-  animation: flyFromLeft 10s linear infinite;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  z-index: -1;
 `;
 
 const Alert = styled.div`
@@ -52,8 +44,8 @@ const Layout = ({ children }) => {
 
       <TopProgressBar />
       <Header />
-
       <Cloud />
+
       <Container>
         <Alert
           css={[

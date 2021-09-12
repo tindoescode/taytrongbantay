@@ -1,5 +1,6 @@
 // import '../styles/global.css'
 import GlobalStyles from "../styles/GlobalStyles";
+import "../styles/ckeditor.css";
 import Layout from "../components/Layout";
 import { Provider } from "react-redux";
 import { useStore } from "../store";

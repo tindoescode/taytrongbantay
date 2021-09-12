@@ -1,97 +1,105 @@
 // Register with facebook
 
-import connectDB from '../../../middleware/mongodb';
-import User from '../../../models/UserModel';
-import axios from 'axios'
-import jwt from 'jsonwebtoken'
-import { setCookie } from 'nookies'
-
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) ) + min;
-}
+import connectDB from "../../../middleware/mongodb";
+import User from "../../../models/UserModel";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+import { setCookie } from "nookies";
+import { getRndInteger } from "../../../utils";
 
 const handler = async (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     let { token } = req.body;
-  
-    if(!token) {
-      res.status(403).json('Unauthorized');
+
+    if (!token) {
+      res.status(403).json("Unauthorized");
       return;
     }
 
-    var result = await axios.get(`https://graph.facebook.com/v11.0/me?fields=id%2Cname%2Cemail%2Cgender&access_token=${token}`);
+    var result = await axios.get(
+      `https://graph.facebook.com/v11.0/me?fields=id%2Cname%2Cemail%2Cgender&access_token=${token}`
+    );
 
     let { gender, name, id, email } = result.data;
 
-    if(id.length < 5) throw "Unauthorized";
+    if (id.length < 5) throw "Unauthorized";
 
     const existUser = await User.findOne({ facebookId: id }).lean();
-    console.log(existUser)
+    console.log(existUser);
 
     // Login
-    if(existUser) {
+    if (existUser) {
       // Chuyển sang đăng nhập
-      const ttbt_token = jwt.sign({ id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
+      const ttbt_token = jwt.sign(
+        { id: existUser._id, username: existUser.username },
+        process.env.JWT_SECRET
+      );
 
-      setCookie({res}, 'ttbt_token', ttbt_token, {
+      setCookie({ res }, "ttbt_token", ttbt_token, {
         maxAge: 60 * 60 * 24 * 7,
-        path: '/',
+        path: "/",
       });
 
       console.log(`[LOGIN] Người dùng ${existUser.username} đã đăng nhập`);
-      
-      var result = {status: 'ok', ttbt_token, user: existUser};
+
+      var result = { status: "ok", ttbt_token, user: existUser };
 
       delete result.user.password;
-      
+
       res.status(200).json(result);
 
-      return 
+      return;
     }
-    
+
     //  Register
-    let username = name.replace(' ', '').toLowerCase() + getRndInteger(100, 999).toString();
+    let username =
+      name.replace(" ", "").toLowerCase() + getRndInteger(100, 999).toString();
 
     if (username && name && email && gender) {
-        try {
-          // Create new user
-          var user = await User.create({
-            name,
-            username: username.toLowerCase(),
-            email,
-            avatar: `https://graph.facebook.com/${id}/picture?type=large`,
-            facebookId: id,
-            password: '0',
-            gender,
-            avatar: gender == 'male' ? 'https://i.imgur.com/b51E0eg.jpg' : 'https://i.imgur.com/StTiSj8.jpg'
-          });
+      try {
+        // Create new user
+        var user = await User.create({
+          name,
+          username: username.toLowerCase(),
+          email,
+          avatar: `https://graph.facebook.com/${id}/picture?type=large`,
+          facebookId: id,
+          password: "0",
+          gender,
+          avatar:
+            gender == "male"
+              ? "https://i.imgur.com/b51E0eg.jpg"
+              : "https://i.imgur.com/StTiSj8.jpg",
+        });
 
-          const ttbt_token = jwt.sign({ id: user._id, username: user.username }, process.env.JWT_SECRET);
+        const ttbt_token = jwt.sign(
+          { id: user._id, username: user.username },
+          process.env.JWT_SECRET
+        );
 
-          setCookie({res}, 'ttbt_token', ttbt_token, {
-            maxAge: 60 * 60 * 24 * 7,
-            path: '/',
-          });
+        setCookie({ res }, "ttbt_token", ttbt_token, {
+          maxAge: 60 * 60 * 24 * 7,
+          path: "/",
+        });
 
-          console.log(`[NEW USER] User ${name} đã được tạo (with facebook).`);
-          
-          let rs = {status: 'ok', ttbt_token, user};
+        console.log(`[NEW USER] User ${name} đã được tạo (with facebook).`);
 
-          delete rs.user.password;
-          
-          return res.status(200).json(rs);
+        let rs = { status: "ok", ttbt_token, user };
 
-        } catch (error) {
-          // Handle error when field duplicate
+        delete rs.user.password;
 
-          console.log(error.message);
-          return res.status(200).send(error);
-        }
-      } else {
-        res.status(422).send({error: 'data_incomplete'});
+        return res.status(200).json(rs);
+      } catch (error) {
+        // Handle error when field duplicate
+
+        console.log(error.message);
+        return res.status(200).send(error);
       }
+    } else {
+      res.status(422).send({ error: "data_incomplete" });
+    }
   } else {
-    res.status(422).send({error: 'req_method_not_supported'});
+    res.status(422).send({ error: "req_method_not_supported" });
   }
 };
 
