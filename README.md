@@ -20,7 +20,7 @@
 
 # 1. Giới thiệu dự án
 
-Website live: https://taytrongbantay.vercel.app
+Website live: https://taytrongbantay.herokuapp.com (Chuyển nhà vì vercel không hỗ trợ socketio)
 
 ## 1. <a name='Cngngh'></a>Công nghệ
 
@@ -60,7 +60,7 @@ Taytrongbantay sử dụng nextjs để có thể chạy frontend và backend tr
 
 - [x] Đăng nhập - Đăng ký
 - [x] Đăng bài - Sửa bài - Xoá bài
-- [ ] Admin Panel
-- [ ] Bình luận
+- [x] Admin Panel
+- [x] Bình luận
 - [ ] React
 - [ ] Xếp hạng thành viên
