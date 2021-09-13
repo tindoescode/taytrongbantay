@@ -1,11 +1,11 @@
 import connectDB from "../../../middleware/mongodb";
 import User from "../../../models/UserModel"; // use when populate user
-import Post from "../../../models/PostModel";
+import Comment from "../../../models/CommentModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
 
 const handler = async (req, res) => {
-  if (req.method === "PUT") {
+  if (req.method === "DELETE") {
     try {
       // Admin check
       var token = readCookie(req.headers.cookie, "ttbt_token");
@@ -24,45 +24,22 @@ const handler = async (req, res) => {
       if (!isAdmin) throw { message: "Bạn không phải là admin" };
 
       // Check for fields
-      var {
-        old_slug,
-        content,
-        title,
-        tags,
-        slug,
-        thumbnail,
-        description,
-        category,
-      } = req.body;
+      var { comment_id } = req.body;
 
-      if (!(old_slug && content && title && tags && slug && description))
-        throw "Xin hãy nhập đủ các trường.";
+      if (!comment_id) throw "missing_parameter";
 
-      const update = {
-        content,
-        title,
-        tags,
-        slug,
-        thumbnail,
-        description,
-        category,
-        lastEdited: {
-          by: user.id,
-          lastEdited: Date.now(),
-        },
-      };
+      // TODO: limit comment that a user can delete
+      //or limit 'admin' account.
+      var comment = await Comment.findByIdAndDelete(comment_id);
 
-      var post = await Post.findOneAndUpdate({ slug: old_slug }, update, {
-        new: true,
-      });
+      if (!comment) throw { message: "Delete fail" };
 
-      if (!post) throw { message: "Update fail" };
-      console.log(`[POST] Post ${title} editted.`, post);
+      console.log(`[COMMENT] Comment deleted.`, comment);
     } catch (e) {
       var error = e;
-      res.status(200).json({ error: e });
+      res.status(200).json({ success: false, error: e });
     } finally {
-      if (!error) res.status(200).json(post);
+      if (!error) res.status(200).json({ success: true, ...comment });
     }
   } else res.status(200).json({ error: "wrong_method" });
 };

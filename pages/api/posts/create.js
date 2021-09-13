@@ -2,7 +2,7 @@ import connectDB from "../../../middleware/mongodb";
 import mongoose from "mongoose";
 // import User from '../../models/user'; // use when populate user
 import requireAuth from "../../../middleware/requireAuth";
-import Post from "../../../models/post";
+import Post from "../../../models/PostModel";
 import User from "../../../models/UserModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";

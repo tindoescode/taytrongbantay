@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/mongodb";
 import User from "../../../models/UserModel"; // use when populate user
-import Category from "../../../models/category";
+import Category from "../../../models/CategoryModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
 

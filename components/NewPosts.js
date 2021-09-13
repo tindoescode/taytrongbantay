@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
+import Card2 from "./Card2";
 import axios from "axios";
 import Skeleton from "react-loading-skeleton";
 import tw, { styled } from "twin.macro";
@@ -27,7 +28,7 @@ export default function NewPosts() {
         {posts &&
           posts.map((post, index) => {
             return (
-              <Card
+              <Card2
                 thumbnail={post.thumbnail}
                 key={index}
                 href={"/posts/" + post.slug}

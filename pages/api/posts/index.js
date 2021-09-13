@@ -1,6 +1,6 @@
 import connectdb from "../../../middleware/mongodb";
-import Post from "../../../models/post";
-import Category from "../../../models/category";
+import Post from "../../../models/PostModel";
+import Category from "../../../models/CategoryModel";
 import User from "../../../models/UserModel";
 
 const handler = async (req, res) => {

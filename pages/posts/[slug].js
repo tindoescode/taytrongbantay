@@ -25,6 +25,7 @@ const NewPostForm = dynamic(
 
 export default function SinglePost({
   data: {
+    _id: id,
     title,
     content,
     author,
@@ -184,7 +185,7 @@ export default function SinglePost({
               <Link href={`/profile/${author.username}`}>
                 <a>
                   <img
-                    tw="w-20 md:w-60 rounded shadow-xl"
+                    tw="w-20 md:w-60 rounded shadow-md cursor-pointer"
                     alt={"Ảnh của " + author.username}
                     src={author.avatar}
                   />
@@ -192,7 +193,7 @@ export default function SinglePost({
               </Link>
 
               <Link href={`/profile/${author.username}`}>
-                <h3 tw="flex-grow md:flex-grow-0 flex items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
+                <h3 tw="flex-grow md:flex-grow-0 flex cursor-pointer items-center flex-col justify-center text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
                   <a>
                     {/* <img
                       css={[
@@ -249,7 +250,7 @@ export default function SinglePost({
         {/* Comment section */}
         <Title>Bình luận</Title>
         <div id="Comment">
-          <CommentForm />
+          <CommentForm id={id} />
         </div>
       </main>
     </div>

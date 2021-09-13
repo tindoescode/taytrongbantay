@@ -1,46 +1,77 @@
-import React from "react";
 import Image from "next/image";
 import tw, { styled, css } from "twin.macro";
 import Editor from "../CKEditor";
 import Button from "../Button";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { Markup } from "interweave";
+import FacebookLoading from "../FacebookLoading";
 
-const CommentForm = () => {
+const CommentForm = ({ id }) => {
   const [content, setContent] = useState("");
+  const [comments, setComments] = useState(null);
+  const user = useSelector((state) => state.user);
 
-  const comments = [
-    {
-      avatar:
-        "https://store-images.s-microsoft.com/image/apps.28411.13510798887593857.411c7070-8254-4bc7-9822-93212e9b3eaa.d5650289-0ad1-4560-ac30-38a18a1847bb?mode=scale&q=90&h=200&w=200&background=%230078D7",
-      name: "yasuo",
-      content: "Death is like the wind, always by my side",
-    },
-    {
-      avatar:
-        "https://store-images.s-microsoft.com/image/apps.28411.13510798887593857.411c7070-8254-4bc7-9822-93212e9b3eaa.d5650289-0ad1-4560-ac30-38a18a1847bb?mode=scale&q=90&h=200&w=200&background=%230078D7",
-      name: "yasuo",
-      content: "Death is like the wind, always by my side",
-    },
-    {
-      avatar:
-        "https://store-images.s-microsoft.com/image/apps.28411.13510798887593857.411c7070-8254-4bc7-9822-93212e9b3eaa.d5650289-0ad1-4560-ac30-38a18a1847bb?mode=scale&q=90&h=200&w=200&background=%230078D7",
-      name: "yasuo",
-      content: "Death is like the wind, always by my side",
-    },
-    {
-      avatar:
-        "https://store-images.s-microsoft.com/image/apps.28411.13510798887593857.411c7070-8254-4bc7-9822-93212e9b3eaa.d5650289-0ad1-4560-ac30-38a18a1847bb?mode=scale&q=90&h=200&w=200&background=%230078D7",
-      name: "yasuo",
-      content: "Death is like the wind, always by my side",
-    },
-    {
-      avatar:
-        "https://store-images.s-microsoft.com/image/apps.28411.13510798887593857.411c7070-8254-4bc7-9822-93212e9b3eaa.d5650289-0ad1-4560-ac30-38a18a1847bb?mode=scale&q=90&h=200&w=200&background=%230078D7",
-      name: "yasuo",
-      content: "Death is like the wind, always by my side",
-    },
-  ];
+  const fetchData = async () => {
+    axios
+      .get("/api/comment/get_comment", { params: { post_id: id } })
+      .then((res) => {
+        setComments(res.data.comments);
+      });
+  };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!user) return <></>;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("/api/comment/add_comment", { parentPost: id, content })
+      .then((res) => {
+        console.log(res.data);
+        const { success } = res.data;
+
+        if (success) {
+          toast.success("Bình luận đã gửi");
+          fetchData();
+        } else {
+          let { message } =
+            res.data.error.errors[Object.keys(res.data.error.errors)[0]];
+          console.log(message);
+          toast.error(message);
+        }
+      });
+  };
+
+  const deleteComment = (commentId) => (e) => {
+    e.preventDefault();
+
+    axios
+      .delete("/api/comment/delete_comment", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: { comment_id: commentId },
+      })
+      .then((res) => {
+        const { data } = res;
+
+        if (data.success) {
+          toast.success("Xóa bình luận thành công");
+
+          fetchData();
+        } else {
+          toast.error("Xóa bình luận thất bại");
+        }
+      });
+  };
   return (
     <>
       <div
@@ -88,7 +119,6 @@ const CommentForm = () => {
                 height: 10px;
                 top: 1.4rem;
                 left: -10px;
-                /* clip-path: polygon(100% 0, 100% 100%, 0 50%); */
                 clip-path: polygon(
                   36% 33%,
                   65% 22%,
@@ -107,7 +137,9 @@ const CommentForm = () => {
           ]}
         >
           <Editor setContent={setContent} />
-          <Button tw="mt-2 px-10">Gửi</Button>
+          <Button onClick={onSubmit} tw="mt-2 px-10">
+            Gửi
+          </Button>
         </div>
       </div>
 
@@ -120,7 +152,8 @@ const CommentForm = () => {
                   <div
                     css={[
                       css`
-                        background: url(${cmt.avatar}) no-repeat center / cover;
+                        background: url(${cmt.author.avatar}) no-repeat center /
+                          cover;
                       `,
                       tw`w-20 h-20 rounded-2xl`,
                     ]}
@@ -132,14 +165,36 @@ const CommentForm = () => {
                     tw`bg-white bg-opacity-20`,
                   ]}
                 >
-                  <a href="">
-                    <strong>{cmt.name}</strong> - Admin
-                  </a>
-                  <p tw="text-justify">{cmt.content}</p>
+                  <div tw="flex justify-between items-center">
+                    <a href="">
+                      <b tw="font-mono">{cmt.author.username}</b> -{" "}
+                      {cmt.author.admin}
+                    </a>
+                    {user.admin && (
+                      <div>
+                        <Button
+                          onClick={deleteComment(cmt._id)}
+                          type="sm"
+                          error
+                        >
+                          Xóa
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                  <p tw="text-justify">
+                    <Markup content={cmt.content} />
+                  </p>
                 </div>
               </div>
             );
           })}
+        {!comments && (
+          <p tw="flex items-center justify-center text-lg">
+            Loading... <FacebookLoading />
+          </p>
+        )}
+        {!comments?.length && <p tw="text-center mb-5">Không có comment nào</p>}
       </div>
     </>
   );

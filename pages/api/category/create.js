@@ -1,9 +1,7 @@
 import connectDB from "../../../middleware/mongodb";
 import mongoose from "mongoose";
-// import bcrypt from '../../middleware/bcrypt';
-// import User from '../../models/user';
 import requireAuth from "../../../middleware/requireAuth";
-import Category from "../../../models/category";
+import Category from "../../../models/CategoryModel";
 import User from "../../../models/UserModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
@@ -32,7 +30,7 @@ const handler = async (req, res) => {
       console.log(`[CATEGORY] Cat ${name} created.`, cat);
     } catch (e) {
       var error = e;
-      console.log('category error', e);
+      console.log("category error", e);
       res.status(200).json({ error: e });
     } finally {
       if (!error) res.status(200).json(cat);

@@ -1,5 +1,5 @@
 import connectdb from "../../../middleware/mongodb";
-import Category from "../../../models/category";
+import Category from "../../../models/CategoryModel";
 
 const handler = async (req, res) => {
   if (req.method !== "GET") {

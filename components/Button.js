@@ -6,6 +6,9 @@ const ButtonWrapper = styled.button`
     props.error
       ? tw`bg-red-400 hover:bg-red-300`
       : tw`bg-green-400 hover:bg-green-300`}
+  ${(props) => {
+    return props.type == "sm" ? tw`p-1 font-extralight` : "";
+  }}
   & + & {
     margin-left: 0.5rem;
   }

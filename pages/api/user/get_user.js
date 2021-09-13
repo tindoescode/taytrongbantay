@@ -21,7 +21,6 @@ const handler = async (req, res) => {
       },
       "status avatar cover username name"
     );
-    console.log(user._doc);
 
     const result = { isFound: true, ...user._doc };
 

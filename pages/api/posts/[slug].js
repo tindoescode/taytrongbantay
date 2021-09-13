@@ -1,7 +1,6 @@
 import connectDB from "../../../middleware/mongodb";
-// import bcrypt from '../../middleware/bcrypt';
 import User from "../../../models/UserModel";
-import Post from "../../../models/post";
+import Post from "../../../models/PostModel";
 
 const handler = async (req, res) => {
   var { slug } = req.query;

@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/mongodb";
 import User from "../../../models/UserModel"; // use when populate user
-import Post from "../../../models/post";
+import Post from "../../../models/PostModel";
 import jwt from "jsonwebtoken";
 import readCookie from "../../../utils/readCookie";
 
