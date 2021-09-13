@@ -14,7 +14,6 @@ import Modal from "../../components/Modal";
 import FacebookLoading from "../../components/FacebookLoading";
 import tw, { styled } from "twin.macro";
 import { toast } from "react-toastify";
-
 const AdminPanel = () => {
   // Creating Model
   const [categories, setCat] = useState([]);

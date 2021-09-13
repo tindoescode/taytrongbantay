@@ -2,23 +2,22 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import NewPosts from "../components/NewPosts";
-import { useEffect, useState } from "react";
-import FacebookLoading from "../components/FacebookLoading";
+import { useEffect } from "react";
 import Title from "../components/Title";
 import ChatBox from "../components/ChatBox";
 import Skeleton from "react-loading-skeleton";
 import tw, { styled } from "twin.macro";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Home() {
-  let [categories, setCats] = useState();
+  let categories = useSelector((state) => state.categories);
+  let dispatch = useDispatch();
 
   useEffect(() => {
-    // setTimeout(() => {
-
-    // }, 30000)
-    axios.get("/api/category/").then((res) => {
-      setCats(res.data);
-    });
+    if (!categories)
+      axios.get("/api/category/").then((res) => {
+        dispatch({ type: "LOAD_CATEGORIES", categories: res.data });
+      });
   }, []);
 
   return (

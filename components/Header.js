@@ -285,7 +285,7 @@ function Header() {
                       <a>Đổi mật khẩu</a>
                     </Link>{" "}
                     |{" "}
-                    <Link href="#">
+                    <Link href="/profile/settings">
                       <a>Cài đặt</a>
                     </Link>{" "}
                     | <button onClick={handleLogoutBtn}>Đăng xuất</button>

@@ -15,40 +15,26 @@ const handler = async (req, res) => {
 
       if (!user) return res.status(403).json({ message: "Not authorized" });
 
-      const isAdmin = await User.findOne({
-        // username: user.username,
-        _id: user.id,
-        admin: "admin",
-      });
-
-      if (!isAdmin) throw { message: "Bạn không phải là admin" };
-
       // Check for fields
-      var { id, description, name, slug } = req.body;
+      var { avatarUrl } = req.body;
 
-      if (!(id && slug && name)) throw "Xin hãy nhập đủ các trường.";
+      if (!avatarUrl) throw "missing_parameter";
 
       const update = {
-        description,
-        name,
-        slug,
-        lastEdited: {
-          by: user.id,
-          lastEdited: Date.now(),
-        },
+        avatar: avatarUrl,
       };
 
-      var cat = await Category.findByIdAndUpdate(id, update, {
+      var cat = await User.findByIdAndUpdate(user.id, update, {
         new: true,
       });
 
       if (!cat) throw { message: "Update fail" };
-      console.log(`[CATEGORY] Category ${title} editted.`, cat);
+      console.log(`[USER] User ${user.username} changed profile picture.`, cat);
     } catch (e) {
       var error = e;
-      res.status(200).json({ error: e });
+      res.status(200).json({ success: false, error: e });
     } finally {
-      if (!error) res.status(200).json(cat);
+      if (!error) res.status(200).json({ success: true });
     }
   } else res.status(200).json({ error: "wrong_method" });
 };

@@ -6,9 +6,7 @@ let store;
 
 const initialState = {
   user: null,
-  modal: {
-    isOpen: false,
-  },
+  categories: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,16 +22,10 @@ const reducer = (state = initialState, action) => {
         user: null,
       };
     }
-    case "OPEN_MODAL": {
+    case "LOAD_CATEGORIES": {
       return {
         ...state,
-        modal: { ...state.modal, isOpen: true },
-      };
-    }
-    case "CLOSE_MODAL": {
-      return {
-        ...state,
-        modal: { ...state.modal, isOpen: false },
+        categories: action.categories,
       };
     }
     default:
