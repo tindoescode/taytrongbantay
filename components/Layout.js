@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
+import Alert from "./Alert";
 import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,9 +24,6 @@ const Container = styled.div`
   // bg-white
 `;
 
-const Alert = styled.div`
-  ${tw`rounded mb-4 flex justify-center p-2 bg-green-200`};
-`;
 const Layout = ({ children }) => {
   var user = useSelector((state) => state.user);
   const [isVisible, setIsVisible] = useState(false);

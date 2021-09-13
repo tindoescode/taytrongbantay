@@ -1,5 +1,5 @@
 import Image from "next/image";
-import tw, { styled, css } from "twin.macro";
+import tw, { css } from "twin.macro";
 import Editor from "../CKEditor";
 import Button from "../Button";
 import { useState } from "react";
@@ -26,8 +26,6 @@ const CommentForm = ({ id }) => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  if (!user) return <></>;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -74,75 +72,78 @@ const CommentForm = ({ id }) => {
   };
   return (
     <>
-      <div
-        tw="flex py-3 px-1 justify-center"
-        css={[
-          css`
-            max-width: 72rem;
-          `,
-        ]}
-      >
+      {user && (
         <div
+          tw="flex py-3 px-1 justify-center"
           css={[
             css`
-              & img {
-                ${tw`shadow-2xl`}
-                border-radius: 10px;
-              }
-            `,
-          ]}
-          tw="relative w-12 h-12 md:w-28 md:h-28"
-        >
-          <Image
-            src="https://placekitten.com/300/300"
-            layout="fill"
-            objectFit="cover"
-            // tw={`rounded`}
-            alt="avatar"
-          />
-        </div>
-
-        <div
-          css={[
-            tw`bg-white relative z-0 bg-opacity-70 before:(bg-yellow-500 bg-opacity-50)`,
-            tw`ml-3 flex-grow`,
-            css`
-              max-width: 80%;
-            `,
-
-            css`
-              &:before {
-                content: "";
-                position: absolute;
-                border: 1px rgb(152 220 169);
-                width: 10px;
-                height: 10px;
-                top: 1.4rem;
-                left: -10px;
-                clip-path: polygon(
-                  36% 33%,
-                  65% 22%,
-                  83% 13%,
-                  100% 0,
-                  100% 100%,
-                  0 33%
-                );
-              }
-
-              & {
-                --ck-color-toolbar-border: #fcd34d;
-                --ck-color-base-border: #fcd34d;
-              }
+              max-width: 72rem;
             `,
           ]}
         >
-          <Editor setContent={setContent} />
-          <Button onClick={onSubmit} tw="mt-2 px-10">
-            Gửi
-          </Button>
-        </div>
-      </div>
+          <div
+            css={[
+              css`
+                & img {
+                  ${tw`shadow-2xl`}
+                  border-radius: 10px;
+                }
+              `,
+            ]}
+            tw="relative w-12 h-12 md:w-28 md:h-28"
+          >
+            <Image
+              src={`${user.avatar || "https://placekitten.com/300/300"}`}
+              layout="fill"
+              objectFit="cover"
+              // tw={`rounded`}
+              alt="avatar"
+            />
+          </div>
 
+          <div
+            css={[
+              tw`bg-white relative z-0 bg-opacity-70 before:(bg-yellow-500 bg-opacity-50)`,
+              tw`ml-3 flex-grow`,
+              css`
+                max-width: 80%;
+              `,
+
+              css`
+                &:before {
+                  content: "";
+                  position: absolute;
+                  border: 1px rgb(152 220 169);
+                  width: 10px;
+                  height: 10px;
+                  top: 1.4rem;
+                  left: -10px;
+                  clip-path: polygon(
+                    36% 33%,
+                    65% 22%,
+                    83% 13%,
+                    100% 0,
+                    100% 100%,
+                    0 33%
+                  );
+                }
+
+                & {
+                  --ck-color-toolbar-border: #fcd34d;
+                  --ck-color-base-border: #fcd34d;
+                }
+              `,
+            ]}
+          >
+            <Editor setContent={setContent} />
+            <Button onClick={onSubmit} tw="mt-2 px-10">
+              Gửi
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {!user && <p tw="text-center p-2">Hãy đăng nhập để bình luận.</p>}
       <div>
         {comments &&
           comments.map((cmt, index) => {
@@ -170,7 +171,7 @@ const CommentForm = ({ id }) => {
                       <b tw="font-mono">{cmt.author.username}</b> -{" "}
                       {cmt.author.admin}
                     </a>
-                    {user.admin && (
+                    {user?.admin && (
                       <div>
                         <Button
                           onClick={deleteComment(cmt._id)}
