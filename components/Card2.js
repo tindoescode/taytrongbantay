@@ -22,7 +22,7 @@ const Card2 = ({
     <Link href={href}>
       <a>
         <CardWrapper thumbnail={thumbnail}>
-          <div tw="absolut,e left-0 right-0 mx-auto bottom-0 bg-opacity-90 bg-white m-2 p-2 rounded shadow-xl">
+          <div tw="absolute left-0 right-0 mx-auto bottom-0 bg-opacity-90 bg-white m-2 p-2 rounded shadow-xl">
             <a tw="" href="#">
               <div tw="flex items-center justify-between">
                 <h2 tw="font-light">{title}</h2>
