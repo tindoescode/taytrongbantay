@@ -20,7 +20,7 @@ export default function ChatBox() {
 
   useEffect(() => {
     const socket = io();
-    fetch("/api/socketio").finally(() => {
+    axios.get("/api/socketio").finally(() => {
       socket.on("chat message", function (content, username, avatar) {
         addMessage({
           avatar,
@@ -32,7 +32,6 @@ export default function ChatBox() {
 
     axios.get("/api/message/get_message").then(({ data }) => {
       if (data.success) {
-        console.log(data);
         setMessage(
           data.messages.map((message) => {
             return {

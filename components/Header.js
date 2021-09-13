@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import onLogin from "../middleware/onLogin";
 import tw, { styled, css } from "twin.macro";
 import dynamic from "next/dynamic";
-import ChatBox from "../components/ChatBox";
+// import ChatBox from "../components/ChatBox";
 
 const HeaderWrapper = styled.div`
   ${tw`flex items-center shadow-md px-3 justify-between md:justify-around fixed w-screen top-0 bg-white z-50`};
@@ -330,7 +330,7 @@ function Header() {
           }
         `}</style>
       </HeaderWrapper>
-      <ChatBox />
+      {/* <ChatBox /> */}
     </>
   );
 }
