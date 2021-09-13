@@ -4,7 +4,6 @@ import Link from "next/link";
 import NewPosts from "../components/NewPosts";
 import { useEffect } from "react";
 import Title from "../components/Title";
-import ChatBox from "../components/ChatBox";
 import Skeleton from "react-loading-skeleton";
 import tw, { styled } from "twin.macro";
 import { useSelector, useDispatch } from "react-redux";
@@ -72,8 +71,6 @@ export default function Home() {
                 </a>
               </Link>
             </div>
-
-            <ChatBox></ChatBox>
           </div>
 
           <div tw="col-span-2">

@@ -1,5 +1,5 @@
 import connectdb from "../../../middleware/mongodb";
-import Comment from "../../../models/CommentModel";
+import Message from "../../../models/MessageModel";
 import User from "../../../models/UserModel";
 
 const handler = async (req, res) => {
@@ -11,13 +11,8 @@ const handler = async (req, res) => {
 
   let { limit = 10, post_id } = req.query;
   try {
-    if (!post_id) {
-      throw { message: "missing_parameter" };
-    }
-
-    let searchString = { parentPost: post_id };
-    var comments = await Comment.find(
-      searchString
+    var messages = await Message.find(
+      {}
       // "title author thumbnail description slug parent category"
     )
       .sort({ time: "desc" })
@@ -29,7 +24,7 @@ const handler = async (req, res) => {
         },
       ]);
 
-    res.status(200).json({ success: true, comments });
+    res.status(200).json({ success: true, messages });
   } catch (e) {
     res.status(200).json({ success: false, error: e.message });
   }

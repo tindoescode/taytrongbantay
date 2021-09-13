@@ -13,12 +13,12 @@ var message = new Schema(
       type: String,
       required: true,
 
-      validate: {
-        validator: function (str) {
-          return str.length > 20;
-        },
-        message: () => `Nội dung cần tối thiểu 20 ký tự`,
-      },
+      // validate: {
+      //   validator: function (str) {
+      //     return str.length > 20;
+      //   },
+      //   message: () => `Nội dung cần tối thiểu 20 ký tự`,
+      // },
     },
     time: {
       type: Date,

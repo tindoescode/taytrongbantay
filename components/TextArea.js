@@ -9,7 +9,7 @@ export default function TextArea({
 }) {
   return (
     <textarea
-      tw="my-1 rounded p-2 ring-1 ring-green-500 text-black"
+      tw="my-1 rounded p-2 ring-1 ring-green-500 text-black overflow-y-auto"
       rows={rows}
       {...register(name)}
       {...rest}
