@@ -7,21 +7,22 @@ import dynamic from "next/dynamic";
 import { Markup } from "interweave";
 import Title from "../../components/Title";
 import Button from "../../components/Button";
-import Modal from "../../components/Modal";
-import CommentForm from "../../components/posts/CommentForm";
 import FacebookLoading from "../../components/FacebookLoading";
 import { useState } from "react";
 import tw, { css } from "twin.macro";
 import { toast } from "react-toastify";
+import useInView from "react-cool-inview";
 import { useSelector } from "react-redux";
 // import Image from "next/image";
 
+const CommentForm = dynamic(() => import("../../components/posts/CommentForm"));
 const NewPostForm = dynamic(
   () => {
     return import("../../components/NewPostForm");
   },
   { ssr: false }
 );
+const Modal = dynamic(() => import("../../components/Modal"));
 
 export default function SinglePost({
   data: {
@@ -36,6 +37,10 @@ export default function SinglePost({
     category,
   },
 }) {
+  const { observe, inView } = useInView({
+    onEnter: ({ unobserve }) => unobserve(), // only run once
+  });
+
   const [editModal, setEditModal] = useState(false);
   const [removeModal, setRemoveModal] = useState(false);
   const router = useRouter();
@@ -247,10 +252,15 @@ export default function SinglePost({
             </div>
           )}
         </div>
-        {/* Comment section */}
-        <Title>Bình luận</Title>
-        <div id="Comment">
-          <CommentForm id={id} />
+        <div ref={observe}>
+        {inView && (
+          <>
+            <Title>Bình luận</Title>
+            <div id="Comment">
+              <CommentForm id={id} />
+            </div>
+          </>
+        )}
         </div>
       </main>
     </div>

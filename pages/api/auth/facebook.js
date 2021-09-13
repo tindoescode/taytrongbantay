@@ -66,10 +66,10 @@ const handler = async (req, res) => {
           facebookId: id,
           password: "0",
           gender,
-          avatar:
-            gender == "male"
-              ? "https://i.imgur.com/b51E0eg.jpg"
-              : "https://i.imgur.com/StTiSj8.jpg",
+          // avatar:
+          //   gender == "male"
+          //     ? "https://i.imgur.com/b51E0eg.jpg"
+          //     : "https://i.imgur.com/StTiSj8.jpg",
         });
 
         const ttbt_token = jwt.sign(
