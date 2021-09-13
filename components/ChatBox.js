@@ -38,6 +38,7 @@ export default function ChatBox() {
         !chat &&
           css`
             max-height: 2.4rem;
+            overflow: hidden;
           `,
       ]}
     >
