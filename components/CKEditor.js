@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import FacebookLoading from "./FacebookLoading";
 
 export default function Editor({ setContent, initialContent }) {
   const editorRef = useRef();
@@ -180,7 +181,9 @@ export default function Editor({ setContent, initialContent }) {
           }}
         />
       ) : (
-        <div>Editor loading</div>
+        <p tw="flex items-center justify-center text-lg">
+          Đang tải Editor... <FacebookLoading />
+        </p>
       )}
     </>
   );

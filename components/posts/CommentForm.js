@@ -153,8 +153,9 @@ const CommentForm = ({ id }) => {
                   <div
                     css={[
                       css`
-                        background: url(${cmt.author.avatar}) no-repeat center /
-                          cover;
+                        background: url(${cmt.author?.avatar ||
+                          "/images/banned.png"})
+                          no-repeat center / cover;
                       `,
                       tw`w-20 h-20 rounded-2xl`,
                     ]}
@@ -168,8 +169,10 @@ const CommentForm = ({ id }) => {
                 >
                   <div tw="flex justify-between items-center">
                     <a href="">
-                      <b tw="font-mono">{cmt.author.username}</b> -{" "}
-                      {cmt.author.admin}
+                      <b tw="font-mono">
+                        {cmt.author?.username || "Không ai biết"}
+                      </b>{" "}
+                      - {cmt.author?.admin || "Đảo xa"}
                     </a>
                     {user?.admin && (
                       <div>

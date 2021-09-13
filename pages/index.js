@@ -5,6 +5,7 @@ import NewPosts from "../components/NewPosts";
 import { useEffect, useState } from "react";
 import FacebookLoading from "../components/FacebookLoading";
 import Title from "../components/Title";
+import ChatBox from "../components/ChatBox";
 import Skeleton from "react-loading-skeleton";
 import tw, { styled } from "twin.macro";
 
@@ -72,6 +73,8 @@ export default function Home() {
                 </a>
               </Link>
             </div>
+
+            <ChatBox></ChatBox>
           </div>
 
           <div tw="col-span-2">

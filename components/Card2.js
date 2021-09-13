@@ -4,9 +4,9 @@ import Link from "next/link";
 const CardWrapper = styled.div`
   background: url(${(props) => props.thumbnail}) no-repeat center center / cover;
   background-position: center;
-  transition: transform 0.4s;
+  transition: all 2s ease;
   &:hover {
-    transform: scale(1.05);
+    background-position: 75% 100%;
   }
   ${tw`relative mb-3 bg-red-200 rounded-xl h-52 md:h-80 left-0 right-0 mx-auto shadow-2xl`}
 `;
@@ -17,14 +17,15 @@ const Card2 = ({
   category = {},
   thumbnail = "https://taxreform.dof.gov.ph/wp-content/uploads/2019/07/no-thumbnail-medium.png",
 }) => {
+  console.log(category);
   return (
     <Link href={href}>
       <a>
         <CardWrapper thumbnail={thumbnail}>
-          <div tw="absolute left-0 right-0 mx-auto bottom-0 bg-opacity-90 bg-white m-2 p-2 rounded shadow-xl">
+          <div tw="absolut,e left-0 right-0 mx-auto bottom-0 bg-opacity-90 bg-white m-2 p-2 rounded shadow-xl">
             <a tw="" href="#">
               <div tw="flex items-center justify-between">
-                <h2 tw="font-medium">{title}</h2>
+                <h2 tw="font-light">{title}</h2>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   tw="block text-gray-500 h-10 w-10 hover:opacity-80"
@@ -56,7 +57,7 @@ const Card2 = ({
                 <span tw="font-semibold">4</span>
               </span>
 
-              <span>
+              <span tw="flex-grow">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   tw="inline h-5 w-5"
@@ -70,6 +71,10 @@ const Card2 = ({
                   />
                 </svg>
                 <span tw="font-semibold">15</span>
+              </span>
+
+              <span tw="p-1 bg-green-300 text-white rounded-md px-2">
+                {category?.name}
               </span>
             </div>
 

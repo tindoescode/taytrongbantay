@@ -9,6 +9,7 @@ module.exports = {
       "localhost",
       "taxreform.dof.gov.ph",
       "ucarecdn.com",
+      "graph.facebook.com",
     ],
   },
 };
