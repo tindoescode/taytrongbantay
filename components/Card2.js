@@ -17,7 +17,6 @@ const Card2 = ({
   category = {},
   thumbnail = "https://taxreform.dof.gov.ph/wp-content/uploads/2019/07/no-thumbnail-medium.png",
 }) => {
-  console.log(category);
   return (
     <Link href={href}>
       <a>

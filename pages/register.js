@@ -40,7 +40,6 @@ export default function Home() {
                 if (Object.keys(res.data.keyValue)[0] == "username")
                   throw "Username đã được đăng ký";
               }
-              console.log(res.data);
               if (res.data?.errors) {
                 throw res.data.message;
               }
