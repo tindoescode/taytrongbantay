@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { Markup } from "interweave";
 import FacebookLoading from "../FacebookLoading";
+import Link from "next/link";
 
 const CommentForm = ({ id }) => {
   const [content, setContent] = useState("");
@@ -150,16 +151,27 @@ const CommentForm = ({ id }) => {
             return (
               <div key={index} tw="flex p-1 mx-1 gap-2">
                 <div>
-                  <div
-                    css={[
-                      css`
-                        background: url(${cmt.author?.avatar ||
-                          "/images/banned.png"})
-                          no-repeat center / cover;
-                      `,
-                      tw`w-20 h-20 rounded-2xl`,
-                    ]}
-                  ></div>
+                  {" "}
+                  <Link
+                    href={
+                      cmt.author?.username
+                        ? `/profile/${cmt.author.username}`
+                        : "#"
+                    }
+                  >
+                    <a>
+                      <div
+                        css={[
+                          css`
+                            background: url(${cmt.author?.avatar ||
+                              "/images/banned.png"})
+                              no-repeat center / cover;
+                          `,
+                          tw`w-20 h-20 rounded-2xl`,
+                        ]}
+                      />
+                    </a>
+                  </Link>
                 </div>
                 <div
                   css={[
@@ -168,12 +180,20 @@ const CommentForm = ({ id }) => {
                   ]}
                 >
                   <div tw="flex justify-between items-center">
-                    <a href="">
-                      <b tw="font-mono">
-                        {cmt.author?.username || "Không ai biết"}
-                      </b>{" "}
-                      - {cmt.author?.admin || "Đảo xa"}
-                    </a>
+                    <Link
+                      href={
+                        cmt.author?.username
+                          ? `/profile/${cmt.author.username}`
+                          : "#"
+                      }
+                    >
+                      <a href="">
+                        <b tw="font-mono">
+                          {cmt.author?.username || "Không ai biết"}
+                        </b>{" "}
+                        - {cmt.author?.admin || "Đảo xa"}
+                      </a>
+                    </Link>
                     {user?.admin && (
                       <div>
                         <Button

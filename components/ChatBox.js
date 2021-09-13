@@ -11,14 +11,12 @@ import { parseCookies } from "nookies";
 import { useSelector } from "react-redux";
 
 export default function ChatBox() {
-  let [chat, toggleChat] = useToggle(true);
+  let [chat, toggleChat] = useToggle(false);
   let [message, setMessage] = useState([]);
   let user = useSelector((state) => state.user);
 
   const addMessage = (newMessage) =>
     setMessage((state) => [newMessage, ...state]);
-
-  let rendered = false;
 
   useEffect(() => {
     const socket = io();
@@ -30,7 +28,6 @@ export default function ChatBox() {
           content,
         });
       });
-      rendered = true;
     });
 
     axios.get("/api/message/get_message").then(({ data }) => {

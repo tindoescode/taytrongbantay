@@ -20,23 +20,25 @@ const Card2 = ({
   return (
     <CardWrapper thumbnail={thumbnail}>
       <div tw="absolute left-0 right-0 mx-auto bottom-0 bg-opacity-90 bg-white m-2 p-2 rounded shadow-xl">
-        <a tw="" href="#">
-          <div tw="flex items-center justify-between">
-            <h2 tw="font-light">{title}</h2>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              tw="block text-gray-500 h-10 w-10 hover:opacity-80"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-        </a>
+        <Link href={href}>
+          <a tw="" href="#">
+            <div tw="flex items-center justify-between">
+              <h2 tw="font-light">{title}</h2>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                tw="block text-gray-500 h-10 w-10 hover:opacity-80"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </a>
+        </Link>
         <div tw="mt-2 flex gap-2 text-yellow-700">
           <span>
             <svg

@@ -61,12 +61,7 @@ const UserProfile = () => {
         <Avatar url={targetUser.avatar} />
       </Cover>
       <MainInfo>
-        <div tw="flex items-center justify-center gap-2 -ml-10">
-          <img
-            src={`/images/level/${targetUser.level || "1"}.png`}
-            alt="Level"
-            tw="w-9 h-9 inline"
-          />
+        <div tw="flex items-center justify-center gap-2">
           <h2 tw="inline text-2xl text-white">{targetUser.username}</h2>
         </div>
         <p tw="text-center text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-300 to-red-600">
