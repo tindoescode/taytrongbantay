@@ -89,7 +89,7 @@ function Header() {
       token: accessToken,
     });
 
-    console.log(response);
+    // console.log(response);
     console.log("fbID", response.data.user.facebookId);
     if (authResponse.userID == response.data.user.facebookId) {
       onLogin(dispatch, toggleLoginMenu)(response);

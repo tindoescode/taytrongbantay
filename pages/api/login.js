@@ -44,7 +44,7 @@ const handler = async (req, res) => {
 
       return res.status(200).json(result);
     } catch (error) {
-      res.status(200).json({ error: error.message });
+      res.status(200).json({ message: error.message });
     }
   }
 };
