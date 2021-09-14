@@ -75,7 +75,7 @@ export default function ChatBox() {
             max-height: 2.4rem;
             overflow: hidden;
           `,
-        tw`md:w-6/12`,
+        tw`md:w-1/3`,
       ]}
     >
       <Title onClick={toggleChat} tw="cursor-pointer">

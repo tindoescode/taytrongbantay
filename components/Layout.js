@@ -20,7 +20,7 @@ const TopProgressBar = dynamic(
 );
 
 const Container = styled.div`
-  ${tw`max-w-6xl p-2 mx-auto my-12 rounded-md bg-opacity-20`};
+  ${tw`max-w-5xl p-2 mx-auto my-12 rounded-md bg-opacity-20`};
   // bg-white
 `;
 
