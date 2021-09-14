@@ -3,10 +3,11 @@ import Link from "next/link";
 
 const CardWrapper = styled.div`
   background: url(${(props) => props.thumbnail}) no-repeat center center / cover;
-  background-position: center;
+  background-position: 100% 14%;
   transition: all 2s ease;
   &:hover {
-    background-position: 75% 100%;
+    // background-position: 75% 100%;
+    background-position: bottom;
   }
   ${tw`relative mb-3 bg-red-200 rounded-xl h-52 md:h-80 left-0 right-0 mx-auto shadow-2xl`}
 `;

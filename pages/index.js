@@ -75,7 +75,7 @@ export default function Home() {
           </div>
 
           <div tw="col-span-2">
-            <ChiBoCau />
+            {/* <ChiBoCau /> */}
             <Title>Bài mới</Title>
             <div tw="rounded-md shadow-sm"></div>
             <NewPosts />
