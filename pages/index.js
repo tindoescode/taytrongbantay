@@ -7,6 +7,7 @@ import Title from "../components/Title";
 import Skeleton from "react-loading-skeleton";
 import tw, { styled } from "twin.macro";
 import { useSelector, useDispatch } from "react-redux";
+import ChiBoCau from "../components/ChiBoCau";
 
 export default function Home() {
   let categories = useSelector((state) => state.categories);
@@ -74,6 +75,7 @@ export default function Home() {
           </div>
 
           <div tw="col-span-2">
+            <ChiBoCau />
             <Title>Bài mới</Title>
             <div tw="rounded-md shadow-sm"></div>
             <NewPosts />

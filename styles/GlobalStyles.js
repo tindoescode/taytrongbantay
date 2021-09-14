@@ -38,6 +38,16 @@ const customStyles = css`
     --ck-inline-image-style-spacing: calc(var(--ck-image-style-spacing) / 2);
     --ck-todo-list-checkmark-size: 16px;
   }
+
+  @keyframes topThenDown {
+    0%, 33% {
+      transform: translate3D(9rem, 10rem, 0) scale(2);
+    }
+    66%, 100% {
+      transform: translate3D(9rem, -6rem, 0) scale(2);
+    }
+  }
+
   @keyframes fadeInDown {
     0% {
       opacity: 0;

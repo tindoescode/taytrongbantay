@@ -7,6 +7,7 @@ let store;
 const initialState = {
   user: null,
   categories: null,
+  cbcPosts: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,6 +27,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.categories,
+      };
+    }
+    case "LOAD_CBC_POST": {
+      return {
+        ...state,
+        cbcPosts: action.posts,
       };
     }
     default:
