@@ -55,8 +55,8 @@ const handler = async (req, res) => {
     let username =
       name.replace(" ", "").toLowerCase() + getRndInteger(100, 999).toString();
 
-    console.log(username, name, gender);
-    if (username && name && gender) {
+    console.log(username, name, email);
+    if (username && name && email) {
       try {
         // Create new user
         var user = await User.create({
@@ -66,7 +66,7 @@ const handler = async (req, res) => {
           avatar: `https://graph.facebook.com/${id}/picture?width=400&height=400`,
           facebookId: id,
           password: "0",
-          gender,
+          gender: null,
           // avatar:
           //   gender == "male"
           //     ? "https://i.imgur.com/b51E0eg.jpg"

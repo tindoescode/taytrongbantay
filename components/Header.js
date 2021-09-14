@@ -101,9 +101,18 @@ function Header() {
   const facebookLoginButtonCLick = async (e) => {
     e.preventDefault();
 
-    const { authResponse } = await new Promise(window.FB.login);
-
-    console.log(authResponse);
+    const { authResponse } = await new Promise((resolve, reject) => {
+      window.FB.login(
+        (res) => {
+          if (res.status == "connected") {
+            resolve(res);
+          } else {
+            reject(res);
+          }
+        },
+        { scope: "public_profile,email" }
+      );
+    });
 
     checkLoginState(authResponse);
   };
