@@ -7,6 +7,7 @@ import onLogin from "../middleware/onLogin";
 import tw, { styled, css } from "twin.macro";
 import dynamic from "next/dynamic";
 import ChatBox from "../components/ChatBox";
+import useToggle from "../hooks/useToggle.js";
 
 const HeaderWrapper = styled.div`
   ${tw`flex items-center shadow-md px-3 justify-between md:justify-around fixed w-screen top-0 bg-white z-50`};
@@ -34,39 +35,38 @@ const NavbarItem = styled.div`
 `;
 
 function Header() {
-  let [loginMenu, setLoginMenu] = useState(false);
+  let [loginMenu, toggleLoginMenu] = useToggle(false);
   let user = useSelector((state) => state.user);
   let inputName = useRef(null);
   let inputPassword = useRef(null);
 
   const dispatch = useDispatch();
 
-  let toggleLoginMenu = () => {
-    setLoginMenu(!loginMenu);
-  };
-
   useEffect(() => {
-    // TODO: Check the cookie
-    axios
-      .get("/api/user/get_login_session")
-      .then((res) => {
-        if (!res.data.isLoggedIn) throw "Chưa đăng nhập";
+    const checkLogin = async () => {
+      // TODO: Check the cookie
+      axios
+        .get("/api/user/get_login_session")
+        .then((res) => {
+          if (!res.data.isLoggedIn) throw "Chưa đăng nhập";
 
-        let user = res.data;
-        dispatch({
-          type: "ON_LOGIN",
-          user,
+          let user = res.data;
+          dispatch({
+            type: "ON_LOGIN",
+            user,
+          });
+        })
+        .then(() => {
+          console.log("user loaded");
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .then(() => {
-        console.log("user loaded");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    };
+    checkLogin();
   }, []);
 
-  let loginBtnClicked = (e) => {
+  let loginBtnClicked = async (e) => {
     e.preventDefault();
     let username = inputName.current.value;
     let password = inputPassword.current.value;
@@ -105,7 +105,7 @@ function Header() {
 
     console.log(authResponse);
 
-    await checkLoginState(authResponse);
+    checkLoginState(authResponse);
   };
 
   const handleLogoutBtn = async (e) => {
@@ -133,7 +133,7 @@ function Header() {
 
         <Navbar>
           <NavbarItem tw="md:relative">
-            <a onClick={() => toggleLoginMenu()}>
+            <a onClick={toggleLoginMenu}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"

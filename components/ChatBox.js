@@ -9,6 +9,7 @@ import Form from "./Form";
 import axios from "axios";
 import { parseCookies } from "nookies";
 import { useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
 
 export default function ChatBox() {
   let [chat, toggleChat] = useToggle(false);
@@ -77,7 +78,7 @@ export default function ChatBox() {
         tw`md:w-6/12`,
       ]}
     >
-      <Title onClick={toggleChat}>
+      <Title onClick={toggleChat} tw="cursor-pointer">
         {(chat && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -113,6 +114,7 @@ export default function ChatBox() {
           <Button tw="mx-12">Gửi</Button>
         </Form>
       )}
+      {!message && <Skeleton count={3} height={50} />}
       {message &&
         message.map((msg, index) => {
           return (
