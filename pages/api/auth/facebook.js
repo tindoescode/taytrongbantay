@@ -55,7 +55,8 @@ const handler = async (req, res) => {
     let username =
       name.replace(" ", "").toLowerCase() + getRndInteger(100, 999).toString();
 
-    if (username && name && email && gender) {
+    console.log(username, name, gender);
+    if (username && name && gender) {
       try {
         // Create new user
         var user = await User.create({
