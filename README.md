@@ -14,7 +14,7 @@
 
 # 1. Giới thiệu dự án
 
-Website live: https://taytrongbantay.herokuapp.com
+Website live: https://taytrongbantay.herokuapp.com (https://tinnguyen.xyz nếu mạng chập chờn)
 
 ## 1.1. <a name='Cngngh'></a>Công nghệ
 
