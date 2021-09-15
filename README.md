@@ -14,7 +14,7 @@
 
 # 1. Giới thiệu dự án
 
-Website live: https://taytrongbantay.vercel.app
+Website live: https://taytrongbantay.herokuapp.com
 
 ## 1.1. <a name='Cngngh'></a>Công nghệ
 
