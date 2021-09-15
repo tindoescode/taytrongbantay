@@ -74,7 +74,7 @@ Tạo file `.env.local` với nội dung:
 ```
 mongodburl=<url database mongodb>
 JWT_SECRET=<JWT Secret>
-baseUrl=<ex: https://taytrongbantay.vercel.app>
+baseUrl=<ex: https://taytrongbantay.heroku.app | localhost:3000>
 ```
 
 Chởi chạy server:
